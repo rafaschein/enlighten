@@ -29,5 +29,8 @@ bundle install
 
 # run tests
 rake
-```
 
+# create database and execute migrations (needs an accessible postgresql server)
+rake db:create
+rake db:migrate
+```

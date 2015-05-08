@@ -1,27 +1,6 @@
 h1 Listing projects
 
-table
-  thead
-    tr
-      th Name
-      th Description
-      th Scm type
-      th Scm reference
-      th
-      th
-      th
-
-  tbody
-    - @projects.each do |project|
-      tr
-        td = project.name
-        td = project.description
-        td = project.scm_type
-        td = project.scm_reference
-        td = link_to 'Show', project
-        td = link_to 'Edit', edit_project_path(project)
-        td = link_to 'Destroy', project, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Project', new_project_path
+ul.projects
+  - @projects.each do |project|
+    li = link_to project do 
+      = project.name

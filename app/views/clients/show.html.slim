@@ -1,0 +1,10 @@
+.row
+  = link_to 'Destroy', @client, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+  = link_to 'Edit', edit_client_path(@client), class: 'tiny secondary button right'
+  = link_to 'Back', clients_path, class: 'tiny secondary button right'
+  h1 = @client.name
+
+.panel
+  dl
+    dt Website:
+    dd = link_to @client.website, @client.website

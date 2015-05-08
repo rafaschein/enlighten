@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :people
+  resources :clients
   devise_for :users
 end

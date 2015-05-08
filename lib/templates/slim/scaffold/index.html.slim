@@ -1,0 +1,6 @@
+h1 Listing <%= plural_table_name %>
+
+ul
+  - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+    li = link_to <%= singular_table_name %> do
+      = <%= singular_table_name %>

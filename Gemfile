@@ -48,6 +48,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'awesome_print'
 gem 'irbtools', require: 'irbtools/binding'
 
+# Heroku gem
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -74,3 +76,5 @@ group :development, :test do
   # silence assets from rails logs
   gem 'quiet_assets'
 end
+
+ruby "2.2.2"

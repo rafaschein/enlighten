@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :projects
   resources :people
   resources :clients
+  resources :technologies
   devise_for :users
 end

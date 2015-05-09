@@ -67,9 +67,6 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  # Generates fake test data
-  gem 'faker'
-
   gem 'i18n-debug'
 
   gem 'pry'
@@ -81,6 +78,13 @@ group :development, :test do
 
   # silence assets from rails logs
   gem 'quiet_assets'
+
+  # unit testing
+  gem 'rspec-rails', '~> 3.0'
+
+  # Generates test data
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
 end
 
 ruby "2.2.2"

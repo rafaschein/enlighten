@@ -1,0 +1,11 @@
+= simple_form_for(@<%= singular_table_name %>) do |f|
+  = f.error_notification
+  
+<%- attributes.each do |attribute| -%>
+  .row
+    .small-12.columns
+      = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+
+<%- end -%>
+  .row
+    = f.button :submit

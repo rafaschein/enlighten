@@ -1,0 +1,13 @@
+.row
+  = link_to 'Destroy', @<%= singular_table_name %>, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+  = link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'tiny secondary button right'
+  = link_to 'Back', <%= index_helper %>_path, class: 'tiny secondary button right'
+  h1 = @<%= singular_table_name %>
+
+.panel
+<% attributes.each do |attribute| -%>
+  dl
+    dt <%= attribute.human_name %>:
+    dd = @<%= singular_table_name %>.<%= attribute.name %>
+
+<% end -%>

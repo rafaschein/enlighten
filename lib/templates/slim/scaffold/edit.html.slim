@@ -1,0 +1,6 @@
+.row
+  = link_to 'Show', @<%= singular_table_name %>, class: 'tiny secondary button right'
+  = link_to 'Back', <%= index_helper %>_path, class: 'tiny secondary button right'
+  h1 Editing <%= singular_table_name %>
+
+== render 'form'

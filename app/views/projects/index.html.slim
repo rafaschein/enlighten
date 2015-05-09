@@ -1,0 +1,6 @@
+h1 Listing projects
+
+ul.projects
+  - @projects.each do |project|
+    li = link_to project do 
+      = project.name

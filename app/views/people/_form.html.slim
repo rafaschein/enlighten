@@ -1,0 +1,22 @@
+= simple_form_for(@person) do |f|
+  = f.error_notification
+
+  .row
+    .small-12.columns
+      = f.association :user
+
+  .row
+    .small-12.columns
+      = f.input :name
+
+  .row
+    .small-12.columns
+      = f.input :github_account
+
+  .row
+    .small-12.columns
+      = f.input :twitter_account
+
+
+  .row
+    = f.button :submit

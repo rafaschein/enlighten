@@ -1,0 +1,17 @@
+.row
+  = link_to 'Destroy', @project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+  = link_to 'Edit', edit_project_path(@project), class: 'tiny secondary button right'
+  = link_to 'Voltar', projects_path, class: 'tiny secondary button right'
+  
+  h1 = @project.name
+
+.panel
+  dl
+    dt Description:
+    dd = @project.description
+
+    dt Scm type:
+    dd = @project.scm_type
+
+    dt Scm reference:
+    dd = @project.scm_reference

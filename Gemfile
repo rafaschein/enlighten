@@ -67,8 +67,13 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  # Annottate models with the current schema calling "annotate" on the cli
+  gem 'annotate', '~> 2.6.6'
+
+  # Logs all not found i18n tags
   gem 'i18n-debug'
 
+  # Command line debugging, just add "binding.pry" anywhere on the code
   gem 'pry'
   gem 'pry-nav'
   gem 'pry-stack_explorer'
@@ -85,6 +90,12 @@ group :development, :test do
   # Generates test data
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
+
+  # Lots of matchers for acive records
+  gem 'shoulda-matchers'
+
+  # Calculates code coverage
+  gem 'simplecov', :require => false
 end
 
 ruby "2.2.2"

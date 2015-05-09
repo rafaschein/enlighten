@@ -1,5 +1,5 @@
 # enlighten
-This project aims to enhance organisational culture by providing a platform to disseminate great attitudes, technologies and ideas between projects and teams of an organisation.
+This project aims to enhance organizational culture by providing a platform to disseminate great attitudes, technologies and ideas between projects and teams of an organization.
 
 # Technologies
 * Framework: [Ruby on Rails](http://guides.rubyonrails.org/)

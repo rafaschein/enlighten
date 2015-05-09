@@ -9,5 +9,9 @@
 #  updated_at :datetime         not null
 #
 
-class Client < ActiveRecord::Base
+FactoryGirl.define do
+  factory :client do
+    
+  end
+
 end

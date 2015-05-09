@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: clients
+# Table name: technologies
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -9,5 +9,9 @@
 #  updated_at :datetime         not null
 #
 
-class Client < ActiveRecord::Base
+FactoryGirl.define do
+  factory :technology do
+    
+  end
+
 end

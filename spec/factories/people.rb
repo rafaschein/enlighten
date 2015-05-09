@@ -11,6 +11,9 @@
 #  updated_at      :datetime         not null
 #
 
-class Person < ActiveRecord::Base
-  belongs_to :user
+FactoryGirl.define do
+  factory :person do
+    
+  end
+
 end

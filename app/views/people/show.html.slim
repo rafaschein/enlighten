@@ -5,6 +5,8 @@
   h1 = @person.name
 
 .panel
+  = image_tag attachment_url(@person, :image, :fill, 300, 300, format: 'jpg')
+
   dl
     dt Name:
     dd = @person.name

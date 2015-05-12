@@ -1,6 +1,10 @@
 = simple_form_for(@client) do |f|
   = f.error_notification
-  
+
+  .row
+    .small-12.columns
+      = f.attachment_field :image
+
   .row
     .small-12.columns
       = f.input :name

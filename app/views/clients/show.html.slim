@@ -4,7 +4,10 @@
   = link_to 'Back', clients_path, class: 'tiny secondary button right'
   h1 = @client.name
 
+
 .panel
+  = image_tag attachment_url(@client, :image, :fill, 300, 300, format: 'jpg')
+
   dl
     dt Website:
     dd = link_to @client.website, @client.website

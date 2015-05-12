@@ -5,6 +5,8 @@
   h1 = @technology.name
 
 .panel
+  = image_tag attachment_url(@client, :image, :fill, 300, 300, format: 'jpg')
+
   dl
     dt Website:
     dd = link_to @technology.website, @technology.website

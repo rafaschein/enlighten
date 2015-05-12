@@ -61,6 +61,9 @@ gem 'mini_magick'
 gem 'refile', require: ['refile/rails', 'refile/image_processing']
 gem 'aws-sdk', '< 2'
 
+# Code quality
+gem 'rubocop', require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -100,9 +103,6 @@ group :development, :test do
 
   # Calculates code coverage
   gem 'simplecov', require: false
-
-  # Code quality
-  gem 'rubocop', require: false
 end
 
 ruby '2.2.2'

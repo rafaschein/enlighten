@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 gem 'rails-i18n', '~> 4.0.0'
@@ -95,7 +94,10 @@ group :development, :test do
   gem 'shoulda-matchers'
 
   # Calculates code coverage
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
+
+  # Code quality
+  gem 'rubocop', require: false
 end
 
-ruby "2.2.2"
+ruby '2.2.2'

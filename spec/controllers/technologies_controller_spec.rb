@@ -134,7 +134,7 @@ RSpec.describe TechnologiesController, type: :controller do
     end
 
     it 'deletes the technology' do
-      expect{ delete :destroy, id: @technology.id }.to change(Technology, :count).by(-1)
+      expect { delete :destroy, id: @technology.id }.to change(Technology, :count).by(-1)
     end
 
     it 'redirects to technology index' do

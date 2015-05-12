@@ -134,7 +134,7 @@ RSpec.describe ClientsController, type: :controller do
     end
 
     it 'deletes the client' do
-      expect{ delete :destroy, id: @client.id }.to change(Client, :count).by(-1)
+      expect { delete :destroy, id: @client.id }.to change(Client, :count).by(-1)
     end
 
     it 'redirects to client index' do

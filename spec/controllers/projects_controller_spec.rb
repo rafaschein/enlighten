@@ -134,7 +134,7 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     it 'deletes the project' do
-      expect{ delete :destroy, id: @project.id }.to change(Project, :count).by(-1)
+      expect { delete :destroy, id: @project.id }.to change(Project, :count).by(-1)
     end
 
     it 'redirects to project index' do

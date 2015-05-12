@@ -10,8 +10,13 @@
 #
 
 FactoryGirl.define do
-  factory :technology do
-    
+  factory :technology, class: Technology do
+    name { Faker::Lorem.word }
+    website { Faker::Internet.url }
   end
 
+  factory :invalid_technology, class: Technology do
+    name ''
+    website ''
+  end
 end

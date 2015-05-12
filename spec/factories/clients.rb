@@ -10,8 +10,13 @@
 #
 
 FactoryGirl.define do
-  factory :client do
-    
+  factory :client, class: Client do
+    name { Faker::Company.name }
+    website { Faker::Internet.url }
   end
 
+  factory :invalid_client, class: Client do
+    name ''
+    website ''
+  end
 end

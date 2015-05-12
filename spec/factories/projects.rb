@@ -12,11 +12,17 @@
 #
 
 FactoryGirl.define do
-  factory :project do
-    name "MyString"
-description "MyString"
-scm_type "MyString"
-scm_reference "MyString"
+  factory :project, class: Project do
+    name { Faker::App.name }
+    description { Faker::Lorem.paragraph(3) }
+    scm_type 'git'
+    scm_reference 'https://github.com/xxx/yyy'
   end
 
+  factory :invalid_project, class: Project do
+    name ''
+    description ''
+    scm_type ''
+    scm_reference ''
+  end
 end

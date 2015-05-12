@@ -13,4 +13,5 @@
 
 class Project < ActiveRecord::Base
   validates :name, presence: true
+  attachment :image
 end

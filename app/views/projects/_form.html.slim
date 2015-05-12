@@ -3,6 +3,10 @@
 
   .row
     .small-12.columns
+      = f.attachment_field :image
+
+  .row
+    .small-12.columns
       = f.input :name, autofocus: true
 
   .row
@@ -12,7 +16,7 @@
   .row
     .small-12.columns
       = f.input :scm_type
-      
+
   .row
     .small-12.columns
       = f.input :scm_reference

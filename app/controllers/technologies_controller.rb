@@ -62,13 +62,14 @@ class TechnologiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_technology
-      @technology = Technology.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def technology_params
-      params.require(:technology).permit(:name, :website)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_technology
+    @technology = Technology.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def technology_params
+    params.require(:technology).permit(:name, :website)
+  end
 end

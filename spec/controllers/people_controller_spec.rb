@@ -134,7 +134,7 @@ RSpec.describe PeopleController, type: :controller do
     end
 
     it 'deletes the person' do
-      expect{ delete :destroy, id: @person.id }.to change(Person, :count).by(-1)
+      expect { delete :destroy, id: @person.id }.to change(Person, :count).by(-1)
     end
 
     it 'redirects to person index' do

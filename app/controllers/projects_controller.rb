@@ -72,6 +72,7 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(
       :name,
+      :client_id,
       :description,
       :scm_type,
       :scm_reference,

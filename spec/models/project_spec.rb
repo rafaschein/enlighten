@@ -16,6 +16,7 @@ require 'rails_helper'
 
 RSpec.describe Project, type: :model do
   it { expect(subject).to have_db_column(:id) }
+  it { expect(subject).to have_db_column(:client_id) }
   it { expect(subject).to have_db_column(:name) }
   it { expect(subject).to have_db_column(:description) }
   it { expect(subject).to have_db_column(:scm_type) }
@@ -23,6 +24,7 @@ RSpec.describe Project, type: :model do
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
 
+  it { expect(subject).to belong_to(:client) }
   it { expect(subject).to have_many(:members) }
   it { expect(subject).to have_and_belong_to_many(:technologies) }
 
@@ -38,7 +40,6 @@ RSpec.describe Project, type: :model do
       expect(project.members).to eq [member]
     end
   end
-
 
   describe '#technologies' do
     it 'associates project technologies' do

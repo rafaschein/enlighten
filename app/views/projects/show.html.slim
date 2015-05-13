@@ -5,6 +5,10 @@
 
   h1 = @project.name
 
+  -  if @project.client.present?
+    h3 = link_to @project.client do
+      = @project.client.name
+
 .panel
   = image_tag attachment_url(@project, :image, :fill, 300, 300, format: 'jpg')
 

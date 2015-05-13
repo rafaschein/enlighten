@@ -11,3 +11,12 @@
   dl
     dt Website:
     dd = link_to @client.website, @client.website
+  
+    dt Projects:
+    dd 
+      ul
+        - @client.projects.each do |project|
+          li = link_to project do 
+            = project.name
+    
+    

@@ -13,6 +13,7 @@
 #
 
 class Project < ActiveRecord::Base
+  belongs_to :client
   has_many :members, class_name: ProjectMember.name
   has_and_belongs_to_many :technologies,
                           join_table: :project_technologies,

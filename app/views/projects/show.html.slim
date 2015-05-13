@@ -17,3 +17,10 @@
 
     dt Scm reference:
     dd = @project.scm_reference
+    
+    dt Members:
+    dd 
+      ul
+        - @project.members.each do |member|
+          li = link_to member.person do 
+            = member.person.name

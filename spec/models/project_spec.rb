@@ -21,4 +21,19 @@ RSpec.describe Project, type: :model do
   it { expect(subject).to have_db_column(:scm_reference) }
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
+
+  it { expect(subject).to have_many(:members) }
+
+  describe '#members' do
+    it 'associates project members' do
+      project = create :project
+      member = create :project_member, person: create(:person)
+
+      project.members << member
+      project.save
+      project.reload
+
+      expect(project.members).to eq [member]
+    end
+  end
 end

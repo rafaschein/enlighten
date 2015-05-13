@@ -24,6 +24,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Forms
 gem 'simple_form'
+gem 'cocoon'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

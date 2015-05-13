@@ -21,4 +21,20 @@ RSpec.describe Person, type: :model do
   it { expect(subject).to have_db_column(:twitter_account) }
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
+
+  it { expect(subject).to have_many(:memberships) }
+
+  describe '#projects' do
+    it 'associates person projects' do
+      person = create :person
+      membership = create :project_member, project: create(:project)
+
+      person.memberships << membership
+      person.save
+      person.reload
+
+      expect(person.memberships).to eq [membership]
+    end
+  end
+
 end

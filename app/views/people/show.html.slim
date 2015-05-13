@@ -11,15 +11,19 @@
     dt Name:
     dd = @person.name
 
-  - if @person.user.present?
-    dl
+    - if @person.user.present?
       dt Email:
       dd = @person.user.email
 
-  dl
     dt Github account:
     dd = @person.github_account
 
-  dl
     dt Twitter account:
     dd = @person.twitter_account
+    
+    dt Projects:
+    dd 
+      ul
+        - @person.memberships.each do |membership|
+          li = link_to membership.project do 
+            = membership.project.name

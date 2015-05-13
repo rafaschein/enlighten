@@ -22,18 +22,18 @@ RSpec.describe Person, type: :model do
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
 
-  it { expect(subject).to have_and_belong_to_many(:projects) }
+  it { expect(subject).to have_many(:memberships) }
 
   describe '#projects' do
     it 'associates person projects' do
       person = create :person
-      project = create :project
+      membership = create :project_member, project: create(:project)
 
-      person.projects << project
+      person.memberships << membership
       person.save
       person.reload
 
-      expect(person.projects).to eq [project]
+      expect(person.memberships).to eq [membership]
     end
   end
 

@@ -21,9 +21,16 @@
     .small-12.columns
       = f.input :scm_reference
 
-  .row
-    .small-12.columns
-      = f.association :members, as: :check_boxes
+  fieldset
+    legend Members
+
+    .row
+      .small-12.columns
+        #telephones
+          = f.simple_fields_for :members do |member|
+            = render 'member_fields', :f => member
+          .links
+            = link_to_add_association 'add member', f, :members
 
   .row
     = f.button :submit, class: 'right'

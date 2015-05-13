@@ -5,8 +5,15 @@
   h1 = @technology.name
 
 .panel
-  = image_tag attachment_url(@client, :image, :fill, 300, 300, format: 'jpg')
+  = image_tag attachment_url(@technology, :image, :fill, 300, 300, format: 'jpg')
 
   dl
     dt Website:
     dd = link_to @technology.website, @technology.website
+    
+    dt Projects:
+    dd 
+      ul
+        - @technology.projects.each do |projects|
+          li = link_to projects do 
+            = projects.name

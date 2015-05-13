@@ -18,6 +18,13 @@
     dt Scm reference:
     dd = @project.scm_reference
     
+    dt Technologies:
+    dd 
+      ul
+        - @project.technologies.each do |technology|
+          li = link_to technology do 
+            = technology.name
+    
     dt Members:
     dd 
       ul

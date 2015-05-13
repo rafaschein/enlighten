@@ -9,6 +9,7 @@
 #  scm_reference :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  image_id      :string
 #
 
 FactoryGirl.define do

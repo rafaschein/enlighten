@@ -12,6 +12,10 @@
 #
 
 class Project < ActiveRecord::Base
+  has_and_belongs_to_many :members,
+                          join_table: :project_members,
+                          foreign_key: :person_id,
+                          class_name: Person.name
   validates :name, presence: true
   attachment :image
 end

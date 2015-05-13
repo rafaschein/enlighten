@@ -2,8 +2,8 @@
  .row.collapse.small-4.columns
    .small-10.columns
      = f.input :person_id, collection: Person.all, label_method: :name
-     = f.input :period_start
-     = f.input :period_end
+     = f.input :period_start, as: :string, input_html: { type: 'date' }
+     = f.input :period_end, as: :string, input_html: { type: 'date' }
      = f.input :function
    .small-2.columns
       = link_to_remove_association '-', f, class: 'button info postfix', tabindex: '-1'

@@ -24,6 +24,7 @@ RSpec.describe Project, type: :model do
   it { expect(subject).to have_db_column(:updated_at) }
 
   it { expect(subject).to have_many(:members) }
+  it { expect(subject).to have_and_belong_to_many(:technologies) }
 
   describe '#members' do
     it 'associates project members' do
@@ -35,6 +36,20 @@ RSpec.describe Project, type: :model do
       project.reload
 
       expect(project.members).to eq [member]
+    end
+  end
+
+
+  describe '#technologies' do
+    it 'associates project technologies' do
+      project = create :project
+      technology = create :technology
+
+      project.technologies << technology
+      project.save
+      project.reload
+
+      expect(project.technologies).to eq [technology]
     end
   end
 end

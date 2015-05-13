@@ -76,6 +76,7 @@ class ProjectsController < ApplicationController
       :scm_type,
       :scm_reference,
       :image,
+      technology_ids: [],
       members_attributes: [ :id, :person_id, :period_start, :period_end, :function, :_destroy ])
   end
 end

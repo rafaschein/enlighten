@@ -107,7 +107,7 @@ group :development, :test do
   gem 'simplecov', require: false
 
   # Reports coverage to clode climate
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 ruby '2.2.2'

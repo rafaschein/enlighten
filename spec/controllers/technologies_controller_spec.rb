@@ -59,9 +59,11 @@ RSpec.describe TechnologiesController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'saves the new technology in the database' do
         expect do
-          post :create, technology: attributes_for(:technology)
+          post :create, technology: attributes_for(:technology, image: image_file)
         end.to change(Technology, :count).by(1)
       end
 
@@ -91,19 +93,21 @@ RSpec.describe TechnologiesController, type: :controller do
     end
 
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'assigns the requested technology to @technology' do
-        put :update, id: @technology.id, technology: attributes_for(:technology)
+        put :update, id: @technology.id, technology: attributes_for(:technology, image: image_file)
         expect(assigns(:technology)).to eq(@technology)
       end
 
       it 'changes the @technology attributes' do
-        put :update, id: @technology, technology: attributes_for(:technology, name: 'updated-name')
+        put :update, id: @technology, technology: attributes_for(:technology, name: 'updated-name', image: image_file)
         @technology.reload
         expect(@technology.name).to eq 'updated-name'
       end
 
       it 'redirects to the updated technology' do
-        put :update, id: @technology, technology: attributes_for(:technology, name: 'updated-name')
+        put :update, id: @technology, technology: attributes_for(:technology, name: 'updated-name', image: image_file)
         expect(response).to redirect_to(@technology)
       end
     end

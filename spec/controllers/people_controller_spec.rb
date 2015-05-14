@@ -59,9 +59,11 @@ RSpec.describe PeopleController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'saves the new person in the database' do
         expect do
-          post :create, person: attributes_for(:person)
+          post :create, person: attributes_for(:person, image: image_file)
         end.to change(Person, :count).by(1)
       end
 
@@ -91,19 +93,21 @@ RSpec.describe PeopleController, type: :controller do
     end
 
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'assigns the requested person to @person' do
-        put :update, id: @person.id, person: attributes_for(:person)
+        put :update, id: @person.id, person: attributes_for(:person, image: image_file)
         expect(assigns(:person)).to eq(@person)
       end
 
       it 'changes the @person attributes' do
-        put :update, id: @person, person: attributes_for(:person, name: 'updated-name')
+        put :update, id: @person, person: attributes_for(:person, name: 'updated-name', image: image_file)
         @person.reload
         expect(@person.name).to eq 'updated-name'
       end
 
       it 'redirects to the updated person' do
-        put :update, id: @person, person: attributes_for(:person, name: 'updated-name')
+        put :update, id: @person, person: attributes_for(:person, name: 'updated-name', image: image_file)
         expect(response).to redirect_to(@person)
       end
     end

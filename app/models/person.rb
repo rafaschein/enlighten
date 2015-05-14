@@ -15,6 +15,7 @@
 class Person < ActiveRecord::Base
   belongs_to :user
   has_many :memberships, class_name: ProjectMember.name
+  has_many :technologies, class_name: PersonTechnology.name
   validates :name, presence: true
   attachment :image
 end

@@ -33,4 +33,17 @@ RSpec.describe Technology, type: :model do
       expect(technology.projects).to eq [project]
     end
   end
+
+  describe '#skilled_people' do
+    it 'associates person with technology' do
+      technology = create :technology
+      person_technology = create :person_technology, person: create(:person)
+
+      technology.skilled_people << person_technology
+      technology.save
+      technology.reload
+
+      expect(technology.skilled_people).to eq [person_technology]
+    end
+  end
 end

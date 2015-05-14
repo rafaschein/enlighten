@@ -70,6 +70,12 @@ class PeopleController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def person_params
-    params.require(:person).permit(:user_id, :name, :github_account, :twitter_account, :image)
+    params.require(:person).permit(
+      :user_id,
+      :name,
+      :github_account,
+      :twitter_account,
+      :image,
+      technologies_attributes: [:id, :technology_id, :skill_rating, :_destroy])
   end
 end

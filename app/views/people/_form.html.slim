@@ -21,6 +21,16 @@
     .small-12.columns
       = f.input :twitter_account
 
+  fieldset
+    legend Technologies
+
+    .row
+      .small-12.columns
+        #technologies
+          = f.simple_fields_for :technologies do |technology|
+            = render 'technology_fields', :f => technology
+          .links
+            = link_to_add_association 'add technology', f, :technologies
 
   .row
     = f.button :submit

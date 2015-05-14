@@ -20,10 +20,17 @@
 
     dt Twitter account:
     dd = @person.twitter_account
-    
+
     dt Projects:
-    dd 
+    dd
       ul
         - @person.memberships.each do |membership|
-          li = link_to membership.project do 
+          li = link_to membership.project do
             = membership.project.name
+
+    dt Technologies:
+    dd
+      ul
+        - @person.technologies.each do |person_technology|
+          li = link_to person_technology.technology do
+            = "#{person_technology.technology.name} (#{person_technology.skill_rating})"

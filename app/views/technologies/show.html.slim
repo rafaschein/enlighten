@@ -10,10 +10,17 @@
   dl
     dt Website:
     dd = link_to @technology.website, @technology.website
-    
+
     dt Projects:
-    dd 
+    dd
       ul
         - @technology.projects.each do |projects|
-          li = link_to projects do 
+          li = link_to projects do
             = projects.name
+
+    dt Skilled people:
+    dd
+      ul
+        - @technology.skilled_people.each do |skilled_person|
+          li = link_to skilled_person.person do
+            = "#{skilled_person.person.name} (#{skilled_person.skill_rating})"

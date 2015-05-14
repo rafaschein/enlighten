@@ -12,5 +12,5 @@ class PersonTechnology < ActiveRecord::Base
   belongs_to :person
   belongs_to :technology
 
-  validates :skill_rating, presence: true, inclusion: {in: 1..5}
+  validates :skill_rating, presence: true, inclusion: { in: 1..5 }
 end

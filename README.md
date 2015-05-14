@@ -24,8 +24,9 @@ This project aims to enhance organizational culture by providing a platform to d
 
 [![Stories in Ready](https://badge.waffle.io/CWISoftware/enlighten.png?label=ready&title=Ready)](https://waffle.io/CWISoftware/enlighten)
 
+## Development environment setup
 
-## Unix
+### Unix
 ```
 # install postgres
 brew install...
@@ -51,4 +52,10 @@ rake
 # create database and execute migrations (needs an accessible postgresql server)
 rake db:create
 rake db:migrate
+```
+
+### Windows
+
+```
+TODO
 ```

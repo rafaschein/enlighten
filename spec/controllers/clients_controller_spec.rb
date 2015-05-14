@@ -59,9 +59,11 @@ RSpec.describe ClientsController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'saves the new client in the database' do
         expect do
-          post :create, client: attributes_for(:client)
+          post :create, client: attributes_for(:client, image: image_file)
         end.to change(Client, :count).by(1)
       end
 
@@ -91,19 +93,21 @@ RSpec.describe ClientsController, type: :controller do
     end
 
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'assigns the requested client to @client' do
-        put :update, id: @client.id, client: attributes_for(:client)
+        put :update, id: @client.id, client: attributes_for(:client, image: image_file)
         expect(assigns(:client)).to eq(@client)
       end
 
       it 'changes the @client attributes' do
-        put :update, id: @client, client: attributes_for(:client, name: 'updated-name')
+        put :update, id: @client, client: attributes_for(:client, name: 'updated-name', image: image_file)
         @client.reload
         expect(@client.name).to eq 'updated-name'
       end
 
       it 'redirects to the updated client' do
-        put :update, id: @client, client: attributes_for(:client, name: 'updated-name')
+        put :update, id: @client, client: attributes_for(:client, name: 'updated-name', image: image_file)
         expect(response).to redirect_to(@client)
       end
     end

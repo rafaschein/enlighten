@@ -59,9 +59,11 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'saves the new project in the database' do
         expect do
-          post :create, project: attributes_for(:project)
+          post :create, project: attributes_for(:project, image: image_file)
         end.to change(Project, :count).by(1)
       end
 
@@ -91,19 +93,21 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     context 'with valid attributes' do
+      let(:image_file) { fixture_file_upload('files/300x300.gif', 'image/gif') }
+
       it 'assigns the requested project to @project' do
-        put :update, id: @project.id, project: attributes_for(:project)
+        put :update, id: @project.id, project: attributes_for(:project, image: image_file)
         expect(assigns(:project)).to eq(@project)
       end
 
       it 'changes the @project attributes' do
-        put :update, id: @project, project: attributes_for(:project, name: 'updated-name')
+        put :update, id: @project, project: attributes_for(:project, name: 'updated-name', image: image_file)
         @project.reload
         expect(@project.name).to eq 'updated-name'
       end
 
       it 'redirects to the updated project' do
-        put :update, id: @project, project: attributes_for(:project, name: 'updated-name')
+        put :update, id: @project, project: attributes_for(:project, name: 'updated-name', image: image_file)
         expect(response).to redirect_to(@project)
       end
     end

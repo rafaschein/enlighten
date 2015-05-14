@@ -5,8 +5,8 @@
 #  id           :integer          not null, primary key
 #  project_id   :integer
 #  person_id    :integer
-#  period_start :datetime
-#  period_end   :datetime
+#  period_start :date
+#  period_end   :date
 #  function     :string
 #
 

@@ -16,6 +16,7 @@ class Person < ActiveRecord::Base
   belongs_to :user
   has_many :memberships, class_name: ProjectMember.name
   has_many :technologies, class_name: PersonTechnology.name
+  accepts_nested_attributes_for :technologies
   validates :name, presence: true
   attachment :image
 end

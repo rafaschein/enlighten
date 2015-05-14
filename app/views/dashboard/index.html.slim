@@ -1,0 +1,35 @@
+h1 Dashboard
+
+h3 Projects
+
+ul.projects
+  - @projects.each do |project|
+    li = link_to project do
+      = project.name
+
+hr
+
+h3 People
+
+ul
+  - @people.each do |person|
+    li = link_to person do
+      = person.name
+
+hr
+
+h3 Technologies
+
+ul
+  - @technologies.each do |technology|
+    li = link_to technology do
+      = technology.name
+
+hr
+
+h3 Clients
+
+ul
+  - @clients.each do |client|
+    li = link_to client do
+      = client.name

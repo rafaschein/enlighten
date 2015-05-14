@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/CWISoftware/enlighten.png?label=ready&title=Ready)](https://waffle.io/CWISoftware/enlighten)
 # enlighten
 
 [![Join the chat at https://gitter.im/CWISoftware/enlighten](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CWISoftware/enlighten?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/CWISoftware/enlighten.svg?branch=master)](https://travis-ci.org/CWISoftware/enlighten)
 [![Code Climate](https://codeclimate.com/github/CWISoftware/enlighten/badges/gpa.svg)](https://codeclimate.com/github/CWISoftware/enlighten)
 [![Test Coverage](https://codeclimate.com/github/CWISoftware/enlighten/badges/coverage.svg)](https://codeclimate.com/github/CWISoftware/enlighten/coverage)
+[![Dependency Status](https://gemnasium.com/CWISoftware/enlighten.svg)](https://gemnasium.com/CWISoftware/enlighten)
 
 
 This project aims to enhance organizational culture by providing a platform to disseminate great attitudes, technologies and ideas between projects and teams of an organization.

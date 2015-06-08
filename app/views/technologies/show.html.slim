@@ -1,12 +1,11 @@
-.row
-  = link_to 'Destroy', @technology, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
-  = link_to 'Edit', edit_technology_path(@technology), class: 'tiny secondary button right'
-  = link_to 'Back', technologies_path, class: 'tiny secondary button right'
-  h1 = @technology.name
+= link_to 'Destroy', @technology, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+= link_to 'Edit', edit_technology_path(@technology), class: 'tiny secondary button right'
+= link_to 'Back', technologies_path, class: 'tiny secondary button right'
+
+= render partial: 'components/head', locals: { main_model: @technology, secondary_model: nil }
+
 
 .panel
-  = image_tag attachment_url(@technology, :image, :fill, 300, 300, format: 'jpg')
-
   dl
     dt Website:
     dd = link_to @technology.website, @technology.website

@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  name          :string
-#  description   :string
+#  description   :text
 #  scm_type      :string
 #  scm_reference :string
 #  created_at    :datetime         not null

@@ -1,0 +1,28 @@
+.picture {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  padding-bottom: 100%;
+
+  .picture-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 4px;
+    background: $smoke;
+    @include background-size(cover);
+    @include box-shadow(rgba(0, 0, 0, 0.5) 0px 1px 2px);
+  }
+
+  .picture-secondary {
+    position: absolute;
+    top: 68%; left: 70%;
+    width: 35%;
+    padding-bottom: 35%;
+    border-radius: 4px;
+    background: $smoke;
+    @include background-size(cover);
+    @include box-shadow(rgba(0, 0, 0, 0.5) 0px 1px 2px);
+  }
+}

@@ -1,0 +1,7 @@
+.picture
+  = link_to main_model do
+    .picture-main style="background-image: url(#{attachment_url(main_model, :image, :fill, 300, 300, format: 'jpg')})"
+
+  - if secondary_model.present?
+    = link_to secondary_model do
+      .picture-secondary style="background-image: url(#{attachment_url(secondary_model, :image, :fill, 300, 300, format: 'jpg')})"

@@ -66,7 +66,7 @@ gem 'rails_12factor', group: :production
 # Send files
 gem 'mini_magick'
 gem 'refile', require: ['refile/rails', 'refile/image_processing']
-gem 'aws-sdk', '< 2'
+gem 'refile-s3'
 
 # Code quality
 gem 'rubocop', require: false

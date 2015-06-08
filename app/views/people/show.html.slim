@@ -1,16 +1,11 @@
-.row
-  = link_to 'Destroy', @person, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
-  = link_to 'Edit', edit_person_path(@person), class: 'tiny secondary button right', class: 'tiny secondary button right'
-  = link_to 'Back', people_path, class: 'tiny secondary button right', class: 'tiny secondary button right'
-  h1 = @person.name
+= link_to 'Destroy', @person, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+= link_to 'Edit', edit_person_path(@person), class: 'tiny secondary button right', class: 'tiny secondary button right'
+= link_to 'Back', people_path, class: 'tiny secondary button right', class: 'tiny secondary button right'
+
+= render partial: 'components/head', locals: { main_model: @person, secondary_model: nil }
 
 .panel
-  = image_tag attachment_url(@person, :image, :fill, 300, 300, format: 'jpg')
-
   dl
-    dt Name:
-    dd = @person.name
-
     - if @person.user.present?
       dt Email:
       dd = @person.user.email
@@ -22,15 +17,7 @@
     dd = @person.twitter_account
 
     dt Projects:
-    dd
-      ul
-        - @person.memberships.each do |membership|
-          li = link_to membership.project do
-            = membership.project.name
+    dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map { |m| m.project } }
 
     dt Technologies:
-    dd
-      ul
-        - @person.technologies.each do |person_technology|
-          li = link_to person_technology.technology do
-            = "#{person_technology.technology.name} (#{person_technology.skill_rating})"
+    dd = render partial: 'components/image_list', locals: { model_list: @person.technologies.map { |m| m.technology } }

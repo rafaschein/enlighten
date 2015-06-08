@@ -1,37 +1,34 @@
+= link_to 'Destroy', @project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+= link_to 'Edit', edit_project_path(@project), class: 'tiny secondary button right'
+= link_to 'Voltar', projects_path, class: 'tiny secondary button right'
+
+= render partial: 'components/head', locals: { main_model: @project, secondary_model: @project.client }
+
+.row.markdown
+  = render_markdown @project.description
+
 .row
-  = link_to 'Destroy', @project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
-  = link_to 'Edit', edit_project_path(@project), class: 'tiny secondary button right'
-  = link_to 'Voltar', projects_path, class: 'tiny secondary button right'
+  .attributes-container.small-4.columns
+    dl
+      dt Scm:
+      dd
+        = "(#{@project.scm_type})"
+        = link_to @project.scm_reference do
+          = @project.scm_reference
 
-  h1 = @project.name
+      dt Technologies:
+      dd
+        ul
+          - @project.technologies.each do |technology|
+            li = link_to technology do
+              = technology.name
 
-  -  if @project.client.present?
-    h3 = link_to @project.client do
-      = @project.client.name
+      dt Members:
+      dd
+        ul
+          - @project.members.each do |member|
+            li = link_to member.person do
+              = member.person.name
 
-.panel
-  = image_tag attachment_url(@project, :image, :fill, 300, 300, format: 'jpg')
-
-  dl
-    dt Description:
-    dd = @project.description
-
-    dt Scm type:
-    dd = @project.scm_type
-
-    dt Scm reference:
-    dd = @project.scm_reference
-    
-    dt Technologies:
-    dd 
-      ul
-        - @project.technologies.each do |technology|
-          li = link_to technology do 
-            = technology.name
-    
-    dt Members:
-    dd 
-      ul
-        - @project.members.each do |member|
-          li = link_to member.person do 
-            = member.person.name
+  .small-8.columns
+    | Timeline

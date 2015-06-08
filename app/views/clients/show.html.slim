@@ -1,22 +1,17 @@
-.row
-  = link_to 'Destroy', @client, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
-  = link_to 'Edit', edit_client_path(@client), class: 'tiny secondary button right'
-  = link_to 'Back', clients_path, class: 'tiny secondary button right'
-  h1 = @client.name
+= link_to 'Destroy', @client, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+= link_to 'Edit', edit_client_path(@client), class: 'tiny secondary button right'
+= link_to 'Back', clients_path, class: 'tiny secondary button right'
 
+= render partial: 'components/head', locals: { main_model: @client, secondary_model: nil }
 
 .panel
-  = image_tag attachment_url(@client, :image, :fill, 300, 300, format: 'jpg')
-
   dl
     dt Website:
     dd = link_to @client.website, @client.website
-  
+
     dt Projects:
-    dd 
+    dd
       ul
         - @client.projects.each do |project|
-          li = link_to project do 
+          li = link_to project do
             = project.name
-    
-    

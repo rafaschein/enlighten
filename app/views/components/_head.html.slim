@@ -1,0 +1,10 @@
+.row.entity-head
+  .small-2.columns
+    = render partial: 'components/head_image', locals: { main_model: main_model, secondary_model: secondary_model }
+
+  .small-10.columns
+    h1 = main_model.name
+
+    - if secondary_model.present?
+      span.client = link_to secondary_model do
+        = secondary_model.name

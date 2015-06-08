@@ -1,4 +1,9 @@
+@import 'compass';
 @import 'foundation_and_overrides';
+
+@import 'components/picture';
+@import 'components/picture_list';
+@import 'components/markdown';
 
 /* GENERIC */
 
@@ -17,4 +22,21 @@
   font-style: italic;
   color: #999;
   margin: 0;
+}
+
+.entity-head {
+  margin-bottom: 20px;
+}
+
+.attributes-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+
+  * {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

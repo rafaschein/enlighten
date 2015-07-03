@@ -111,8 +111,9 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
 
-  # Lots of matchers for acive records
+  # Test matchers
   gem 'shoulda-matchers'
+  gem 'rspec-collection_matchers'
 
   # Calculates code coverage
   gem 'simplecov', require: false

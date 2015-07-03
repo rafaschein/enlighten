@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514222825) do
+ActiveRecord::Schema.define(version: 20150703003713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "activity_owner_id"
+    t.string   "activity_owner_type"
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "activities", ["activity_owner_type", "activity_owner_id"], name: "index_activities_on_activity_owner_type_and_activity_owner_id", using: :btree
+  add_index "activities", ["item_type", "item_id"], name: "index_activities_on_item_type_and_item_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +56,12 @@ ActiveRecord::Schema.define(version: 20150514222825) do
 
   add_index "person_technologies", ["person_id"], name: "index_person_technologies_on_person_id", using: :btree
   add_index "person_technologies", ["technology_id"], name: "index_person_technologies_on_technology_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "project_members", force: :cascade do |t|
     t.integer "project_id"

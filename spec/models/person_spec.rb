@@ -50,4 +50,21 @@ RSpec.describe Person, type: :model do
       expect(person.technologies).to eq [person_technology]
     end
   end
+
+  describe '#activities' do
+    let(:person) { create :person }
+
+    it 'associates person activities in decrescent publish order' do
+      posts_a = create(:post)
+      posts_b = create(:post)
+
+      person.activities.create item: posts_a
+      person.activities.create item: posts_b
+
+      expect(person.activities).to have(2).items
+
+      expect(person.activities.first.item).to eq posts_b
+      expect(person.activities.second.item).to eq posts_a
+    end
+  end
 end

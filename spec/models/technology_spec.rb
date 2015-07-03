@@ -46,4 +46,21 @@ RSpec.describe Technology, type: :model do
       expect(technology.skilled_people).to eq [person_technology]
     end
   end
+
+  describe '#activities' do
+    let(:technology) { create :technology }
+
+    it 'associates person activities in decrescent publish order' do
+      posts_a = create(:post)
+      posts_b = create(:post)
+
+      technology.activities.create item: posts_a
+      technology.activities.create item: posts_b
+
+      expect(technology.activities).to have(2).items
+
+      expect(technology.activities.first.item).to eq posts_b
+      expect(technology.activities.second.item).to eq posts_a
+    end
+  end
 end

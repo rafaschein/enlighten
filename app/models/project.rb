@@ -19,7 +19,11 @@ class Project < ActiveRecord::Base
                           join_table: :project_technologies,
                           class_name: Technology.name
   has_many :members, class_name: ProjectMember.name
+  has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
+
   accepts_nested_attributes_for :members
+
   validates :name, presence: true
+
   attachment :image
 end

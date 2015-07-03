@@ -54,4 +54,21 @@ RSpec.describe Project, type: :model do
       expect(project.technologies).to eq [technology]
     end
   end
+
+  describe '#activities' do
+    let(:project) { create :project }
+
+    it 'associates person activities in decrescent publish order' do
+      posts_a = create(:post)
+      posts_b = create(:post)
+
+      project.activities.create item: posts_a
+      project.activities.create item: posts_b
+
+      expect(project.activities).to have(2).items
+
+      expect(project.activities.first.item).to eq posts_b
+      expect(project.activities.second.item).to eq posts_a
+    end
+  end
 end

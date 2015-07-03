@@ -18,6 +18,6 @@ class Technology < ActiveRecord::Base
   has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
 
   validates :name, presence: true
-  
+
   attachment :image
 end

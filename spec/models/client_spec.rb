@@ -20,4 +20,6 @@ RSpec.describe Client, type: :model do
   it { expect(subject).to have_db_column(:updated_at) }
 
   it { expect(subject).to have_many(:projects) }
+
+  it { expect(subject).to validate_presence_of(:name) }
 end

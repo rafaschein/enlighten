@@ -25,6 +25,8 @@ RSpec.describe Person, type: :model do
 
   it { expect(subject).to have_many(:memberships) }
 
+  it { expect(subject).to validate_presence_of(:name) }
+
   describe '#projects' do
     it 'associates person projects' do
       person = create :person

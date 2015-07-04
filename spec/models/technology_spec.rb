@@ -21,6 +21,8 @@ RSpec.describe Technology, type: :model do
 
   it { expect(subject).to have_and_belong_to_many(:projects) }
 
+  it { expect(subject).to validate_presence_of(:name) }
+
   describe '#projects' do
     it 'associates technology projects' do
       technology = create :technology

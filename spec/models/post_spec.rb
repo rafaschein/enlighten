@@ -14,4 +14,6 @@ RSpec.describe Post, type: :model do
   it { expect(subject).to have_db_column(:body) }
 
   it { expect(subject).to have_one(:activity) }
+
+  it { expect(subject).to validate_presence_of(:body) }
 end

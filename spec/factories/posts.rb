@@ -10,7 +10,7 @@
 
 FactoryGirl.define do
   factory :post do
-    body { Faker::Lorem.paragraphs(2) }
+    body { Faker::Lorem.paragraph }
   end
 
 end

@@ -14,4 +14,7 @@
 class Activity < ActiveRecord::Base
   belongs_to :activity_owner, polymorphic: true
   belongs_to :item, polymorphic: true
+
+  validates :activity_owner, presence: true
+  validates :item, presence: true
 end

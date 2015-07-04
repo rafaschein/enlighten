@@ -23,4 +23,7 @@ RSpec.describe Activity, type: :model do
 
   it { expect(subject).to belong_to(:activity_owner) }
   it { expect(subject).to belong_to(:item) }
+
+  it { expect(subject).to validate_presence_of(:activity_owner) }
+  it { expect(subject).to validate_presence_of(:item) }
 end

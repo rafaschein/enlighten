@@ -64,8 +64,10 @@ RSpec.describe Project, type: :model do
       posts_a = create(:post)
       posts_b = create(:post)
 
-      project.activities.create item: posts_a
-      project.activities.create item: posts_b
+      project.activities.create item: posts_a, user: create(:user)
+      project.activities.create item: posts_b, user: create(:user)
+
+      project.reload
 
       expect(project.activities).to have(2).items
 

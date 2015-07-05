@@ -5,6 +5,7 @@ RSpec.describe ActivitiesController, type: :controller do
 
   before do
     allow(controller).to receive(:authenticate_user!).and_return true
+    allow(controller).to receive(:current_user).and_return create(:user)
   end
 
   shared_examples 'create activity' do

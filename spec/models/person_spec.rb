@@ -60,8 +60,10 @@ RSpec.describe Person, type: :model do
       posts_a = create(:post)
       posts_b = create(:post)
 
-      person.activities.create item: posts_a
-      person.activities.create item: posts_b
+      person.activities.create item: posts_a, user: create(:user)
+      person.activities.create item: posts_b, user: create(:user)
+
+      person.reload
 
       expect(person.activities).to have(2).items
 

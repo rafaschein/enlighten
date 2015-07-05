@@ -9,12 +9,15 @@
 #  item_type           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  user_id             :integer
 #
 
 class Activity < ActiveRecord::Base
   belongs_to :activity_owner, polymorphic: true
   belongs_to :item, polymorphic: true
+  belongs_to :user
 
   validates :activity_owner, presence: true
   validates :item, presence: true
+  validates :user, presence: true
 end

@@ -56,8 +56,10 @@ RSpec.describe Technology, type: :model do
       posts_a = create(:post)
       posts_b = create(:post)
 
-      technology.activities.create item: posts_a
-      technology.activities.create item: posts_b
+      technology.activities.create item: posts_a, user: create(:user)
+      technology.activities.create item: posts_b, user: create(:user)
+
+      technology.reload
 
       expect(technology.activities).to have(2).items
 

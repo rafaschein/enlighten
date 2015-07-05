@@ -9,6 +9,7 @@
 #  item_type           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  user_id             :integer
 #
 
 require 'rails_helper'
@@ -23,7 +24,9 @@ RSpec.describe Activity, type: :model do
 
   it { expect(subject).to belong_to(:activity_owner) }
   it { expect(subject).to belong_to(:item) }
+  it { expect(subject).to belong_to(:user) }
 
   it { expect(subject).to validate_presence_of(:activity_owner) }
   it { expect(subject).to validate_presence_of(:item) }
+  it { expect(subject).to validate_presence_of(:user) }
 end

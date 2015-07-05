@@ -37,6 +37,7 @@ class ActivitiesController < ApplicationController
     activity = owner.activities.build
     activity_item = type.new(activity_params)
 
+    activity.user = current_user
     activity.item = activity_item if activity_item.valid?
 
     activity

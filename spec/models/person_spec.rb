@@ -83,8 +83,8 @@ RSpec.describe Person, type: :model do
         user_activity_d = person.activities.create item: create(:post), user: create(:user)
 
         expect(person.all_activities).to have(4).items
-        expect(person.all_activities).to eq([user_activity_a, user_activity_b,
-                                             user_activity_c, user_activity_d])
+        expect(person.all_activities).to eq([user_activity_d, user_activity_c,
+                                             user_activity_b, user_activity_a])
       end
     end
 

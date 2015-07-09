@@ -30,5 +30,12 @@
             li = link_to member.person do
               = member.person.name
 
-  .small-8.columns
-    | Timeline
+  .timeline.small-8.columns
+    = simple_form_for(Post.new, url: project_activities_path(project_id: @project.id, type: :post), html: { class: 'activity-form' } ) do |f|
+      .row
+        = f.text_field :body, autofocus: true
+      .row
+        = f.button :submit, class: 'right'
+
+    #activities
+      = render partial: 'shared/activity', collection: @project.activities

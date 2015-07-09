@@ -22,4 +22,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :rememberable, :trackable
+
+  has_one :person
 end

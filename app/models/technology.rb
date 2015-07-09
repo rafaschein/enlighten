@@ -15,6 +15,9 @@ class Technology < ActiveRecord::Base
                           join_table: :project_technologies,
                           class_name: Project.name
   has_many :skilled_people, class_name: PersonTechnology.name
+  has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
+
   validates :name, presence: true
+
   attachment :image
 end

@@ -5,11 +5,11 @@ SimpleCov.start 'rails'
 
 MIN_COVERAGE = 100
 SimpleCov.at_exit do
+  SimpleCov.result.format!
+
   if SimpleCov.result.covered_percent < MIN_COVERAGE
     fail "Coverage has dropped below #{MIN_COVERAGE} to #{SimpleCov.result.covered_percent}"
   end
-
-  SimpleCov.result.format!
 end
 
 CodeClimate::TestReporter.start
@@ -90,6 +90,14 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = :random
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce

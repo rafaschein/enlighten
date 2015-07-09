@@ -4,20 +4,31 @@
 
 = render partial: 'components/head', locals: { main_model: @person, secondary_model: nil }
 
-.panel
-  dl
-    - if @person.user.present?
-      dt Email:
-      dd = @person.user.email
+.row
+  .attributes-container.small-4.columns
+    dl
+      - if @person.user.present?
+        dt Email:
+        dd = @person.user.email
 
-    dt Github account:
-    dd = @person.github_account
+      dt Github account:
+      dd = @person.github_account
 
-    dt Twitter account:
-    dd = @person.twitter_account
+      dt Twitter account:
+      dd = @person.twitter_account
 
-    dt Projects:
-    dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map { |m| m.project } }
+      dt Projects:
+      dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map { |m| m.project } }
 
-    dt Technologies:
-    dd = render partial: 'components/image_list', locals: { model_list: @person.technologies.map { |m| m.technology } }
+      dt Technologies:
+      dd = render partial: 'components/image_list', locals: { model_list: @person.technologies.map { |m| m.technology } }
+
+  .timeline.small-8.columns
+    = simple_form_for(Post.new, url: person_activities_path(person_id: @person.id, type: :post), html: { class: 'activity-form' } ) do |f|
+      .row
+        = f.text_field :body, autofocus: true
+      .row
+        = f.button :submit, class: 'right'
+
+    #activities
+      = render partial: 'shared/activity', collection: @person.activities

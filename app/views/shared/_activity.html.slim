@@ -1,0 +1,7 @@
+- if activity.item.is_a? Post
+  article.activity-item.post.row
+    .small-2.columns
+      .activity-person tooltip=activity.user.person.name = link_to activity.user.person do
+        = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'jpg')
+    .small-10.columns
+      = activity.item.body

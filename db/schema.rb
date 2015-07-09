@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514222825) do
+ActiveRecord::Schema.define(version: 20150705213458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "activity_owner_id"
+    t.string   "activity_owner_type"
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "user_id"
+  end
+
+  add_index "activities", ["activity_owner_type", "activity_owner_id"], name: "index_activities_on_activity_owner_type_and_activity_owner_id", using: :btree
+  add_index "activities", ["item_type", "item_id"], name: "index_activities_on_item_type_and_item_id", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +58,12 @@ ActiveRecord::Schema.define(version: 20150514222825) do
 
   add_index "person_technologies", ["person_id"], name: "index_person_technologies_on_person_id", using: :btree
   add_index "person_technologies", ["technology_id"], name: "index_person_technologies_on_technology_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "project_members", force: :cascade do |t|
     t.integer "project_id"
@@ -103,6 +123,7 @@ ActiveRecord::Schema.define(version: 20150514222825) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "activities", "users"
   add_foreign_key "people", "users"
   add_foreign_key "projects", "clients"
 end

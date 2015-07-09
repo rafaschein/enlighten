@@ -29,6 +29,8 @@ RSpec.describe Project, type: :model do
   it { expect(subject).to have_many(:members) }
   it { expect(subject).to have_and_belong_to_many(:technologies) }
 
+  it { expect(subject).to validate_presence_of(:name) }
+
   describe '#members' do
     it 'associates project members' do
       project = create :project
@@ -52,6 +54,25 @@ RSpec.describe Project, type: :model do
       project.reload
 
       expect(project.technologies).to eq [technology]
+    end
+  end
+
+  describe '#activities' do
+    let(:project) { create :project }
+
+    it 'associates person activities in decrescent publish order' do
+      posts_a = create(:post)
+      posts_b = create(:post)
+
+      project.activities.create item: posts_a, user: create(:user)
+      project.activities.create item: posts_b, user: create(:user)
+
+      project.reload
+
+      expect(project.activities).to have(2).items
+
+      expect(project.activities.first.item).to eq posts_b
+      expect(project.activities.second.item).to eq posts_a
     end
   end
 end

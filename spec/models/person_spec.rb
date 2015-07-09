@@ -25,6 +25,8 @@ RSpec.describe Person, type: :model do
 
   it { expect(subject).to have_many(:memberships) }
 
+  it { expect(subject).to validate_presence_of(:name) }
+
   describe '#projects' do
     it 'associates person projects' do
       person = create :person
@@ -48,6 +50,25 @@ RSpec.describe Person, type: :model do
       person.reload
 
       expect(person.technologies).to eq [person_technology]
+    end
+  end
+
+  describe '#activities' do
+    let(:person) { create :person }
+
+    it 'associates person activities in decrescent publish order' do
+      posts_a = create(:post)
+      posts_b = create(:post)
+
+      person.activities.create item: posts_a, user: create(:user)
+      person.activities.create item: posts_b, user: create(:user)
+
+      person.reload
+
+      expect(person.activities).to have(2).items
+
+      expect(person.activities.first.item).to eq posts_b
+      expect(person.activities.second.item).to eq posts_a
     end
   end
 end

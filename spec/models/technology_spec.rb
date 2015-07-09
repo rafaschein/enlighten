@@ -21,6 +21,8 @@ RSpec.describe Technology, type: :model do
 
   it { expect(subject).to have_and_belong_to_many(:projects) }
 
+  it { expect(subject).to validate_presence_of(:name) }
+
   describe '#projects' do
     it 'associates technology projects' do
       technology = create :technology
@@ -44,6 +46,25 @@ RSpec.describe Technology, type: :model do
       technology.reload
 
       expect(technology.skilled_people).to eq [person_technology]
+    end
+  end
+
+  describe '#activities' do
+    let(:technology) { create :technology }
+
+    it 'associates person activities in decrescent publish order' do
+      posts_a = create(:post)
+      posts_b = create(:post)
+
+      technology.activities.create item: posts_a, user: create(:user)
+      technology.activities.create item: posts_b, user: create(:user)
+
+      technology.reload
+
+      expect(technology.activities).to have(2).items
+
+      expect(technology.activities.first.item).to eq posts_b
+      expect(technology.activities.second.item).to eq posts_a
     end
   end
 end

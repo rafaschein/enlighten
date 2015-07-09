@@ -32,20 +32,10 @@
 
   .timeline.small-8.columns
     = simple_form_for(Post.new, url: project_activities_path(project_id: @project.id, type: :post), html: { class: 'activity-form' } ) do |f|
-
       .row
         = f.text_field :body, autofocus: true
-
       .row
         = f.button :submit, class: 'right'
 
-
     #activities
-      - @project.activities.each do |activity|
-        - if activity.item.is_a? Post
-          article.activity-item.post.row
-            .small-2.columns
-              .activity-person tooltip=activity.user.person.name = link_to activity.user.person do
-                = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'jpg')
-            .small-10.columns
-              = activity.item.body
+      = render partial: 'shared/activity', collection: @project.activities

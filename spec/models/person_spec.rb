@@ -71,4 +71,27 @@ RSpec.describe Person, type: :model do
       expect(person.activities.second.item).to eq posts_a
     end
   end
+
+  describe '#all_activities' do
+    context 'when person have user' do
+      let(:person) { create :person }
+
+      it 'lists the activities posted on the person timeline and activities posted by the person' do
+        user_activity_a = create(:project).activities.create(item: create(:post), user: person.user)
+        user_activity_b = create(:project).activities.create(item: create(:post), user: person.user)
+        user_activity_c = person.activities.create item: create(:post), user: create(:user)
+        user_activity_d = person.activities.create item: create(:post), user: create(:user)
+
+        expect(person.all_activities).to have(4).items
+        expect(person.all_activities).to eq([user_activity_a, user_activity_b,
+                                             user_activity_c, user_activity_d])
+      end
+    end
+
+    context 'when person does not have user' do
+      let(:person) { create :person, user_id: nil }
+
+      it { expect { person.all_activities }.not_to raise_exception }
+    end
+  end
 end

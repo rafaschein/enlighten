@@ -112,6 +112,50 @@ ActiveRecord::Schema.define(version: 20150715224051) do
     t.string   "image_id"
   end
 
+  create_table "user_followed_projects", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_followed_projects", ["project_id"], name: "index_user_followed_projects_on_project_id", using: :btree
+  add_index "user_followed_projects", ["user_id", "project_id"], name: "index_user_followed_projects_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "user_followed_projects", ["user_id"], name: "index_user_followed_projects_on_user_id", using: :btree
+
+  create_table "user_followed_technologies", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "technology_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_followed_technologies", ["technology_id"], name: "index_user_followed_technologies_on_technology_id", using: :btree
+  add_index "user_followed_technologies", ["user_id", "technology_id"], name: "index_user_followed_technologies_on_user_id_and_technology_id", unique: true, using: :btree
+  add_index "user_followed_technologies", ["user_id"], name: "index_user_followed_technologies_on_user_id", using: :btree
+
+  create_table "user_liked_projects", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_liked_projects", ["project_id"], name: "index_user_liked_projects_on_project_id", using: :btree
+  add_index "user_liked_projects", ["user_id", "project_id"], name: "index_user_liked_projects_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "user_liked_projects", ["user_id"], name: "index_user_liked_projects_on_user_id", using: :btree
+
+  create_table "user_liked_technologies", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "technology_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_liked_technologies", ["technology_id"], name: "index_user_liked_technologies_on_technology_id", using: :btree
+  add_index "user_liked_technologies", ["user_id", "technology_id"], name: "index_user_liked_technologies_on_user_id_and_technology_id", unique: true, using: :btree
+  add_index "user_liked_technologies", ["user_id"], name: "index_user_liked_technologies_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -134,4 +178,12 @@ ActiveRecord::Schema.define(version: 20150715224051) do
   add_foreign_key "people", "users"
   add_foreign_key "project_members", "roles"
   add_foreign_key "projects", "clients"
+  add_foreign_key "user_followed_projects", "projects"
+  add_foreign_key "user_followed_projects", "users"
+  add_foreign_key "user_followed_technologies", "technologies"
+  add_foreign_key "user_followed_technologies", "users"
+  add_foreign_key "user_liked_projects", "projects"
+  add_foreign_key "user_liked_projects", "users"
+  add_foreign_key "user_liked_technologies", "technologies"
+  add_foreign_key "user_liked_technologies", "users"
 end

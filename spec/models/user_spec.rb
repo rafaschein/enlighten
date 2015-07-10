@@ -35,4 +35,56 @@ RSpec.describe User, type: :model do
   it { expect(subject).to have_db_column(:updated_at) }
 
   it { expect(subject).to have_one(:person) }
+  it { expect(subject).to have_and_belong_to_many(:followed_technologies) }
+  it { expect(subject).to have_and_belong_to_many(:followed_projects) }
+  it { expect(subject).to have_and_belong_to_many(:liked_technologies) }
+  it { expect(subject).to have_and_belong_to_many(:liked_projects) }
+
+  describe '#projects' do
+    let(:project) { create :project }
+
+    it 'user followed projects' do
+      user = create :user
+
+      user.followed_projects << project
+      user.save
+      user.reload
+
+      expect(user.followed_projects).to eq [project]
+    end
+
+    it 'user liked projects' do
+      user = create :user
+
+      user.liked_projects << project
+      user.save
+      user.reload
+
+      expect(user.liked_projects).to eq [project]
+    end
+  end
+
+  describe '#technologies' do
+    let(:technology) { create :technology }
+
+    it 'user followed technologies' do
+      user = create :user
+
+      user.followed_technologies << technology
+      user.save
+      user.reload
+
+      expect(user.followed_technologies).to eq [technology]
+    end
+
+    it 'user liked technologies' do
+      user = create :user
+
+      user.liked_technologies << technology
+      user.save
+      user.reload
+
+      expect(user.liked_technologies).to eq [technology]
+    end
+  end
 end

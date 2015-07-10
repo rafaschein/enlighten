@@ -6,7 +6,7 @@
           = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'jpg')
     
       .small-10.columns
-          = activity.item.body
+          = render_markdown activity.item.body
 
     .row
       span.small-12.columns

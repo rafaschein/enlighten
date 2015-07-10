@@ -23,4 +23,15 @@ class Person < ActiveRecord::Base
   validates :name, presence: true
 
   attachment :image
+
+  # Returns the activities posted on the persons's timeline and posted by the
+  # person's user on other timelines.
+  def all_activities
+    if user.present?
+      Activity.where('(activity_owner_id = :activity_owner_id and activity_owner_type = :activity_owner_type) or user_id = :user_id',
+                     activity_owner_id: id, activity_owner_type: self.class.name, user_id: user.id).order(created_at: :desc)
+    else
+      activities
+    end
+  end
 end

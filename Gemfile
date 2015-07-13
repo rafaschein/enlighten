@@ -12,6 +12,7 @@ gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
+gem 'compass-rails'
 
 # CSS framework
 gem 'foundation-rails'

@@ -11,7 +11,6 @@ gem 'slim-rails'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
 gem 'compass-rails'
 
 # CSS framework
@@ -64,8 +63,8 @@ gem 'irbtools', require: 'irbtools/binding'
 gem 'rails_12factor', group: :production
 
 # Send files
-gem 'mini_magick'
 gem 'refile', require: ['refile/rails', 'refile/image_processing']
+gem 'refile-mini_magick'
 gem 'refile-s3'
 
 # Code quality

@@ -29,10 +29,13 @@ This project aims to enhance organizational culture by providing a platform to d
 
 ### Unix
 ```
+# install ImageMagick
+brew install imagemagick # OS X
+sudo apt-get install imagemagick # Ubuntu
+
 # install postgres
-brew install...
-apt-get...
-yum...
+brew install postgresql # OS X
+apt-get...  # Ubuntu
 
 # install rvm (ruby version manager)
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3

@@ -56,6 +56,14 @@ rake
 # create database and execute migrations (needs an accessible postgresql server)
 rake db:create
 rake db:migrate
+
+# create seed records on the database
+rake db:seed
+
+# execute development server
+rails s
+
+# access localhost:3000 on you browser
 ```
 
 ### Windows

@@ -13,22 +13,22 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
-#  followed_technologies  :join_table Technology
-#  followed_projects      :join_table Project
-#  liked_technologies     :join_table Technology
-#  liked_projects         :join_table Project
 #  created_at             :datetime
 #  updated_at             :datetime
+#
 
 class User < ActiveRecord::Base
+  include HasAndBelongsToMany
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :rememberable, :trackable
 
   has_one :person
-  has_and_belongs_to_many :followed_technologies, class_name: Technology.name,  join_table: :user_followed_technologies
-  has_and_belongs_to_many :followed_projects,     class_name: Project.name,     join_table: :user_followed_projects
-  has_and_belongs_to_many :liked_technologies,    class_name: Technology.name,  join_table: :user_liked_technologies
-  has_and_belongs_to_many :liked_projects,        class_name: Project.name,     join_table: :user_liked_projects
+
+  has_and_belongs_to_many_followed_projects :following
+  has_and_belongs_to_many_followed_technologies :following
+  has_and_belongs_to_many_liked_projects :liking
+  has_and_belongs_to_many_liked_technologies :liking
 end

@@ -49,6 +49,13 @@ puts 'Creating technologies...'
   end
 
   t.save
+
+  Person.all.sample(5).each do |person|
+    skill_rating = (1..6).to_a.sample
+    person.technologies.create(person: person,
+                               skill_rating: skill_rating,
+                               technology: t)
+  end
   print '.'
 end
 

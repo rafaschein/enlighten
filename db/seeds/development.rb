@@ -60,6 +60,13 @@ puts 'Creating technologies...'
 end
 
 puts
+puts 'Creating roles...'
+
+['Developer', 'Quality analyst', 'Tech Lead', 'Business analyst', 'Project Manager'].each do |role_name|
+  FactoryGirl.create :role, name: role_name
+end
+
+puts
 puts 'Creating projects...'
 30.times do
   p = FactoryGirl.create :project
@@ -73,11 +80,12 @@ puts 'Creating projects...'
   Person.all.sample(5).each do |person|
     period_start = Date.today - (10..36).to_a.sample.months
     period_end = period_start + (1..10).to_a.sample.months
+    role = Role.all.sample
 
     p.members.create(person: person,
                      period_start: period_start,
                      period_end: period_end,
-                     function: 'Dev')
+                     role: role)
   end
 
   p.save

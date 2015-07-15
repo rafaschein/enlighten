@@ -6,6 +6,7 @@
 #  person_id     :integer
 #  technology_id :integer
 #  skill_rating  :integer          default(0), not null
+#  certificated  :boolean
 #
 
 require 'rails_helper'
@@ -15,6 +16,7 @@ RSpec.describe PersonTechnology, type: :model do
   it { expect(subject).to have_db_column(:person_id) }
   it { expect(subject).to have_db_column(:technology_id) }
   it { expect(subject).to have_db_column(:skill_rating) }
+  it { expect(subject).to have_db_column(:certificated) }
 
   it { expect(subject).to belong_to(:person) }
   it { expect(subject).to belong_to(:technology) }

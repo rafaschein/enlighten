@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705213458) do
+ActiveRecord::Schema.define(version: 20150715221136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150705213458) do
     t.integer "person_id"
     t.integer "technology_id"
     t.integer "skill_rating",  default: 0, null: false
+    t.boolean "certificated"
   end
 
   add_index "person_technologies", ["person_id"], name: "index_person_technologies_on_person_id", using: :btree

@@ -6,6 +6,7 @@
 #  person_id     :integer
 #  technology_id :integer
 #  skill_rating  :integer          default(0), not null
+#  certificated  :boolean
 #
 
 class PersonTechnology < ActiveRecord::Base

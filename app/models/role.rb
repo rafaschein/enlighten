@@ -8,4 +8,7 @@
 #
 
 class Role < ActiveRecord::Base
+  def self.for_select
+    select(:id, :name).order(:name)
+  end
 end

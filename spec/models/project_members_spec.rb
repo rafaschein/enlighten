@@ -18,10 +18,16 @@ RSpec.describe ProjectMember, type: :model do
   it { expect(subject).to have_db_column(:person_id) }
   it { expect(subject).to have_db_column(:period_start) }
   it { expect(subject).to have_db_column(:period_end) }
-  it { expect(subject).to have_db_column(:function) }
+  it { expect(subject).to have_db_column(:role_id) }
 
   it { expect(subject).to belong_to(:project) }
   it { expect(subject).to belong_to(:person) }
+  it { expect(subject).to belong_to(:role) }
+
+  it { expect(subject).to validate_presence_of(:project) }
+  it { expect(subject).to validate_presence_of(:person) }
+  it { expect(subject).to validate_presence_of(:role) }
+  it { expect(subject).to validate_presence_of(:period_start) }
 
   describe 'period operations' do
     subject { create(:project_member, period_start: period_start, period_end: period_end) }

@@ -7,13 +7,17 @@
 #  person_id    :integer
 #  period_start :date
 #  period_end   :date
-#  function     :string
+#  role_id      :integer
 #
 
 class ProjectMember < ActiveRecord::Base
   belongs_to :project
   belongs_to :person
+  belongs_to :role
 
+  validates :project, presence: true
+  validates :person, presence: true
+  validates :role, presence: true
   validates :period_start, presence: true
 
   def period

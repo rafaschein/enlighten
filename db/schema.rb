@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715222742) do
+ActiveRecord::Schema.define(version: 20150715224051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,11 +71,12 @@ ActiveRecord::Schema.define(version: 20150715222742) do
     t.integer "person_id"
     t.date    "period_start"
     t.date    "period_end"
-    t.string  "function"
+    t.integer "role_id"
   end
 
   add_index "project_members", ["person_id"], name: "index_project_members_on_person_id", using: :btree
   add_index "project_members", ["project_id"], name: "index_project_members_on_project_id", using: :btree
+  add_index "project_members", ["role_id"], name: "index_project_members_on_role_id", using: :btree
 
   create_table "project_technologies", force: :cascade do |t|
     t.integer "project_id"
@@ -131,5 +132,6 @@ ActiveRecord::Schema.define(version: 20150715222742) do
 
   add_foreign_key "activities", "users"
   add_foreign_key "people", "users"
+  add_foreign_key "project_members", "roles"
   add_foreign_key "projects", "clients"
 end

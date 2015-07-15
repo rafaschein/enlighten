@@ -33,4 +33,6 @@ RSpec.describe User, type: :model do
   it { expect(subject).to have_db_column(:last_sign_in_ip) }
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
+
+  it { expect(subject).to have_one(:person) }
 end

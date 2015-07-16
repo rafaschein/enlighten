@@ -2,6 +2,16 @@
 = link_to 'Edit', edit_technology_path(@technology), class: 'tiny secondary button right'
 = link_to 'Back', technologies_path, class: 'tiny secondary button right'
 
+- if current_user.followed_technologies.include?(@technology)
+  = link_to 'Unfollow', unfollow_technology_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Follow', follow_technology_path, method: :put, class: 'tiny secondary button right'
+
+- if current_user.liked_technologies.include?(@technology)
+  = link_to 'Unlike', unlike_technology_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Like', like_technology_path, method: :put, class: 'tiny secondary button right'
+
 = render partial: 'components/head', locals: { main_model: @technology, secondary_model: nil }
 
 .row

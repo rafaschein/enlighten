@@ -147,4 +147,123 @@ RSpec.describe TechnologiesController, type: :controller do
     end
   end
 
+  describe 'PUT #follow' do
+    let(:user) { create :user }
+    let(:technology) { create :technology }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :follow, id: technology.id }
+
+    it 'current user follow technology' do
+      subject
+      technology.reload
+
+      expect(technology.followers).to include(user)
+      expect(response).to redirect_to(technology)
+    end
+
+    it 'current user try follow already followed technology' do
+      technology.followers << user
+
+      subject
+      technology.reload
+
+      expect(controller.current_user).not_to receive(:save)
+      expect(technology.followers).to eq [user]
+      expect(response).to redirect_to(technology)
+    end
+  end
+
+  describe 'PUT #unfollow' do
+    let(:user) { create :user }
+    let(:technology) { create :technology }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :unfollow, id: technology.id }
+
+    it 'current user already unfollowed technology' do
+      technology.followers << user
+
+      expect(controller.current_user.followed_technologies).to receive(:delete)
+      expect(controller.current_user).to receive(:save)
+
+      subject
+    end
+
+    it 'current user unfollow technology' do
+      technology.followers << user
+
+      subject
+      technology.reload
+
+      expect(technology.followers).to eq []
+      expect(response).to redirect_to(technology)
+    end
+  end
+
+  describe 'PUT #like' do
+    let(:user) { create :user }
+    let(:technology) { create :technology }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :like, id: technology.id }
+
+    it 'current user like technology' do
+      subject
+      technology.reload
+
+      expect(technology.likers).to include(user)
+      expect(response).to redirect_to(technology)
+    end
+
+    it 'current user try like already liked technology' do
+      technology.likers << user
+
+      subject
+      technology.reload
+
+      expect(controller.current_user).not_to receive(:save)
+      expect(technology.likers).to eq [user]
+      expect(response).to redirect_to(technology)
+    end
+  end
+
+  describe 'PUT #unlike' do
+    let(:user) { create :user }
+    let(:technology) { create :technology }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :unlike, id: technology.id }
+
+    it 'current user already liked technology' do
+      technology.likers << user
+
+      expect(controller.current_user.liked_technologies).to receive(:delete)
+      expect(controller.current_user).to receive(:save)
+
+      subject
+    end
+
+    it 'current user unlike technology' do
+      technology.likers << user
+
+      subject
+      technology.reload
+
+      expect(technology.likers).to eq []
+      expect(response).to redirect_to(technology)
+    end
+  end
 end

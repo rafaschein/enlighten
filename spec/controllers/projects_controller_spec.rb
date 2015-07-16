@@ -147,4 +147,123 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
+  describe 'PUT #follow' do
+    let(:user) { create :user }
+    let(:project) { create :project }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :follow, id: project.id }
+
+    it 'current user follow project' do
+      subject
+      project.reload
+
+      expect(project.followers).to include(user)
+      expect(response).to redirect_to(project)
+    end
+
+    it 'current user try follow already followed project' do
+      project.followers << user
+
+      subject
+      project.reload
+
+      expect(controller.current_user).not_to receive(:save)
+      expect(project.followers).to eq [user]
+      expect(response).to redirect_to(project)
+    end
+  end
+
+  describe 'PUT #unfollow' do
+    let(:user) { create :user }
+    let(:project) { create :project }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :unfollow, id: project.id }
+
+    it 'current user already unfollowed project' do
+      project.followers << user
+
+      expect(controller.current_user.followed_projects).to receive(:delete)
+      expect(controller.current_user).to receive(:save)
+
+      subject
+    end
+
+    it 'current user unfollow project' do
+      project.followers << user
+
+      subject
+      project.reload
+
+      expect(project.followers).to eq []
+      expect(response).to redirect_to(project)
+    end
+  end
+
+  describe 'PUT #like' do
+    let(:user) { create :user }
+    let(:project) { create :project }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :like, id: project.id }
+
+    it 'current user like project' do
+      subject
+      project.reload
+
+      expect(project.likers).to include(user)
+      expect(response).to redirect_to(project)
+    end
+
+    it 'current user try like already liked project' do
+      project.likers << user
+
+      subject
+      project.reload
+
+      expect(controller.current_user).not_to receive(:save)
+      expect(project.likers).to eq [user]
+      expect(response).to redirect_to(project)
+    end
+  end
+
+  describe 'PUT #unlike' do
+    let(:user) { create :user }
+    let(:project) { create :project }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :unlike, id: project.id }
+
+    it 'current user already liked project' do
+      project.likers << user
+
+      expect(controller.current_user.liked_projects).to receive(:delete)
+      expect(controller.current_user).to receive(:save)
+
+      subject
+    end
+
+    it 'current user unlike project' do
+      project.likers << user
+
+      subject
+      project.reload
+
+      expect(project.likers).to eq []
+      expect(response).to redirect_to(project)
+    end
+  end
 end

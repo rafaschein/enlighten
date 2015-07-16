@@ -20,6 +20,8 @@ RSpec.describe Technology, type: :model do
   it { expect(subject).to have_db_column(:updated_at) }
 
   it { expect(subject).to have_and_belong_to_many(:projects) }
+  it { expect(subject).to have_and_belong_to_many(:followers) }
+  it { expect(subject).to have_and_belong_to_many(:likers) }
 
   it { expect(subject).to validate_presence_of(:name) }
 
@@ -65,6 +67,36 @@ RSpec.describe Technology, type: :model do
 
       expect(technology.activities.first.item).to eq posts_b
       expect(technology.activities.second.item).to eq posts_a
+    end
+  end
+
+  describe '#followers' do
+    let(:technology) { create :technology }
+
+    it 'user followed technology' do
+      user = create :user
+
+      user.followed_technologies << technology
+      user.save
+      user.reload
+      technology.reload
+
+      expect(technology.followers).to eq [user]
+    end
+  end
+
+  describe '#likers' do
+    let(:technology) { create :technology }
+
+    it 'user liked technology' do
+      user = create :user
+
+      user.liked_technologies << technology
+      user.save
+      user.reload
+      technology.reload
+
+      expect(technology.likers).to eq [user]
     end
   end
 end

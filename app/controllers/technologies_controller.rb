@@ -1,5 +1,5 @@
 class TechnologiesController < ApplicationController
-  before_action :set_technology, only: [:show, :edit, :update, :destroy]
+  before_action :set_technology, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /technologies
   def index
@@ -44,6 +44,48 @@ class TechnologiesController < ApplicationController
     @technology.destroy
 
     redirect_to technologies_url, notice: 'Technology was successfully destroyed.'
+  end
+
+  # PATCH/PUT /follow
+  def follow
+    current_user.followed_technologies << @technology
+
+    if current_user.save
+      redirect_to @technology, notice: "You're following the technology."
+    end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @technology, notice: "You're already following the technology."
+  end
+
+  # PATCH/PUT /follow
+  def unfollow
+    if current_user.followed_technologies.include?(@technology)
+      current_user.followed_technologies.delete(@technology)
+      current_user.save
+    end
+
+    redirect_to @technology, notice: "You're not following the technology."
+  end
+
+  # PATCH/PUT /like
+  def like
+    current_user.liked_technologies << @technology
+
+    if current_user.save
+      redirect_to @technology, notice: "You're liked the technology."
+    end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @technology, notice: "You're already liked the technology."
+  end
+
+  # PATCH/PUT /like
+  def unlike
+    if current_user.liked_technologies.include?(@technology)
+      current_user.liked_technologies.delete(@technology)
+      current_user.save
+    end
+
+    redirect_to @technology, notice: "You're not liking the technology."
   end
 
   private

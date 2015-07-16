@@ -130,8 +130,60 @@ ActiveRecord::Schema.define(version: 20150715224051) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "users_following_projects", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_following_projects", ["project_id"], name: "index_users_following_projects_on_project_id", using: :btree
+  add_index "users_following_projects", ["user_id", "project_id"], name: "index_users_following_projects_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "users_following_projects", ["user_id"], name: "index_users_following_projects_on_user_id", using: :btree
+
+  create_table "users_following_technologies", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "technology_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_following_technologies", ["technology_id"], name: "index_users_following_technologies_on_technology_id", using: :btree
+  add_index "users_following_technologies", ["user_id", "technology_id"], name: "index_users_following_technologies_on_user_id_and_technology_id", unique: true, using: :btree
+  add_index "users_following_technologies", ["user_id"], name: "index_users_following_technologies_on_user_id", using: :btree
+
+  create_table "users_liking_projects", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_liking_projects", ["project_id"], name: "index_users_liking_projects_on_project_id", using: :btree
+  add_index "users_liking_projects", ["user_id", "project_id"], name: "index_users_liking_projects_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "users_liking_projects", ["user_id"], name: "index_users_liking_projects_on_user_id", using: :btree
+
+  create_table "users_liking_technologies", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "technology_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_liking_technologies", ["technology_id"], name: "index_users_liking_technologies_on_technology_id", using: :btree
+  add_index "users_liking_technologies", ["user_id", "technology_id"], name: "index_users_liking_technologies_on_user_id_and_technology_id", unique: true, using: :btree
+  add_index "users_liking_technologies", ["user_id"], name: "index_users_liking_technologies_on_user_id", using: :btree
+
   add_foreign_key "activities", "users"
   add_foreign_key "people", "users"
   add_foreign_key "project_members", "roles"
   add_foreign_key "projects", "clients"
+  add_foreign_key "users_following_projects", "projects"
+  add_foreign_key "users_following_projects", "users"
+  add_foreign_key "users_following_technologies", "technologies"
+  add_foreign_key "users_following_technologies", "users"
+  add_foreign_key "users_liking_projects", "projects"
+  add_foreign_key "users_liking_projects", "users"
+  add_foreign_key "users_liking_technologies", "technologies"
+  add_foreign_key "users_liking_technologies", "users"
 end

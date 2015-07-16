@@ -24,4 +24,20 @@ class User < ActiveRecord::Base
          :rememberable, :trackable
 
   has_one :person
+
+  has_and_belongs_to_many :followed_projects,
+                          class_name: Project.name,
+                          join_table: :users_following_projects
+
+  has_and_belongs_to_many :followed_technologies,
+                          class_name: Technology.name,
+                          join_table: :users_following_technologies
+
+  has_and_belongs_to_many :liked_projects,
+                          class_name: Project.name,
+                          join_table: :users_liking_projects
+
+  has_and_belongs_to_many :liked_technologies,
+                          class_name: Technology.name,
+                          join_table: :users_liking_technologies
 end

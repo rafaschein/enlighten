@@ -17,8 +17,10 @@ class Person < ActiveRecord::Base
   has_many :memberships, class_name: ProjectMember.name
   has_many :technologies, class_name: PersonTechnology.name
   has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
+  has_many :social_links, class_name: SocialLink.name
 
   accepts_nested_attributes_for :technologies
+  accepts_nested_attributes_for :social_links
 
   validates :name, presence: true
 

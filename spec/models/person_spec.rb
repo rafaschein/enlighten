@@ -24,6 +24,7 @@ RSpec.describe Person, type: :model do
   it { expect(subject).to have_db_column(:updated_at) }
 
   it { expect(subject).to have_many(:memberships) }
+  it { expect(subject).to have_many(:social_links) }
 
   it { expect(subject).to validate_presence_of(:name) }
 

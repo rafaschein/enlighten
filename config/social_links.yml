@@ -1,0 +1,11 @@
+default: &default
+  - provider: github
+    url: 'https://github.com/#identifier'
+  - provider: twitter
+    url: 'https://twitter.com/#identifier'
+  - provider: facebook
+    url: 'https://www.facebook.com/#identifier'
+
+development: *default
+test: *default
+production: *default

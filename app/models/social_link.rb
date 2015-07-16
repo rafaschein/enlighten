@@ -2,12 +2,12 @@
 #
 # Table name: social_links
 #
-#  id          :integer          not null, primary key
-#  person_id   :integer
-#  provider    :string
-#  indentifier :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id         :integer          not null, primary key
+#  person_id  :integer
+#  provider   :string
+#  identifier :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class SocialLink < ActiveRecord::Base
@@ -20,7 +20,7 @@ class SocialLink < ActiveRecord::Base
   def url
     template = self.class.provider_url_configuration(provider)
 
-    template.sub('#identifier', indentifier)
+    template.sub('#identifier', identifier)
   end
 
   private

@@ -32,6 +32,10 @@ RSpec.describe SocialLink, type: :model do
   describe '.available_providers' do
     subject { SocialLink.available_providers }
 
+    before do
+      allow(Rails.application).to receive(:config_for) { yml_configuration }
+    end
+
     it { expect(subject).to eq [:github, :twitter] }
   end
 

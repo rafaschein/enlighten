@@ -20,10 +20,10 @@
       .small-12.columns
         #social_links
           = f.simple_fields_for :social_links do |social_link|
-            = render 'social_link_fields', :f => social_link
+            = render 'social_link_fields', f: social_link
           .links
-            = link_to_add_association 'add social_link', f, :'social_links'
-  
+            = link_to_add_association 'add social link', f, :social_links
+
   fieldset
     legend Technologies
 
@@ -31,7 +31,7 @@
       .small-12.columns
         #technologies
           = f.simple_fields_for :technologies do |technology|
-            = render 'technology_fields', :f => technology
+            = render 'technology_fields', f: technology
           .links
             = link_to_add_association 'add technology', f, :technologies
 

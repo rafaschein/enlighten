@@ -1,4 +1,4 @@
-= link_to 'Destroy', @person, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'tiny alert button right'
+= link_to 'Destroy', @person, data: { confirm: 'Are you sure?' }, method: :delete, class: 'tiny alert button right'
 = link_to 'Edit', edit_person_path(@person), class: 'tiny secondary button right', class: 'tiny secondary button right'
 = link_to 'Back', people_path, class: 'tiny secondary button right', class: 'tiny secondary button right'
 
@@ -20,10 +20,10 @@
               = social_link.provider
 
       dt Projects:
-      dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map { |m| m.project } }
+      dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map(&:project) }
 
       dt Technologies:
-      dd = render partial: 'components/image_list', locals: { model_list: @person.technologies.map { |m| m.technology } }
+      dd = render partial: 'components/image_list', locals: { model_list: @person.technologies.map(&:technology) }
 
   .timeline.small-8.columns
     = render partial: 'shared/activity_form', locals: { instance: Post.new, url: person_activities_path(person_id: @person.id, type: :post) }

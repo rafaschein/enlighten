@@ -4,11 +4,11 @@ html lang="en"
     meta charset="utf-8"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
 
-    title = content_for?(:title) ? yield(:title) : "Enlighten"
+    title = content_for?(:title) ? yield(:title) : 'Enlighten'
 
     = stylesheet_link_tag 'application'
-    = javascript_include_tag "vendor/modernizr"
-    = javascript_include_tag "application"
+    = javascript_include_tag 'vendor/modernizr'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
   body
 
@@ -31,7 +31,7 @@ html lang="en"
                 li = link_to 'New Client...', new_client_path
                 li = link_to 'New Technology...', new_technology_path
             li
-              = link_to('Log out', destroy_user_session_path, :method => :delete)
+              = link_to('Log out', destroy_user_session_path, method: :delete)
 
           // ul.left
           //   li

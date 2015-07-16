@@ -17,19 +17,19 @@ class Project < ActiveRecord::Base
   belongs_to :client
 
   has_and_belongs_to_many :technologies,
-    class_name: Technology.name,
-    join_table: :project_technologies
+                          class_name: Technology.name,
+                          join_table: :project_technologies
 
   has_many :members, class_name: ProjectMember.name
   has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
 
   has_and_belongs_to_many :followers,
-    class_name: User.name,
-    join_table: :users_following_projects
+                          class_name: User.name,
+                          join_table: :users_following_projects
 
   has_and_belongs_to_many :likers,
-    class_name: User.name,
-    join_table: :users_liking_projects
+                          class_name: User.name,
+                          join_table: :users_liking_projects
 
   accepts_nested_attributes_for :members
 

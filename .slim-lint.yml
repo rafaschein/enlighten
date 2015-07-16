@@ -1,5 +1,6 @@
 exclude:
   - './lib/templates/**/*.html.slim'
+  - './vendor/**/*.html.slim'
 
 linters:
   LineLength:

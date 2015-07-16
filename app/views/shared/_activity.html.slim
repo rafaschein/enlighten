@@ -4,14 +4,13 @@
       .small-2.columns
         .activity-person tooltip=activity.user.person.name = link_to activity.user.person do
           = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'jpg')
-    
+
       .small-10.columns
           = render_markdown activity.item.body
 
     .row
       span.small-12.columns
-        = "Posted #{time_ago_in_words(activity.created_at)}"
+        = "Posted in #{time_ago_in_words(activity.created_at)}"
         - unless request.path == url_for(activity.activity_owner)
-          = " on "
+          = ' on '
           = link_to "#{activity.activity_owner.name}", activity.activity_owner
-    

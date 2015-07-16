@@ -1,0 +1,7 @@
+exclude:
+  - './lib/templates/**/*.html.slim'
+  - './vendor/**/*.slim'
+
+linters:
+  LineLength:
+    enabled: false

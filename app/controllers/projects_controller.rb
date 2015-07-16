@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /projects
   def index
@@ -44,6 +44,52 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     redirect_to projects_url, notice: 'Project was successfully destroyed.'
+  end
+
+  # PATCH/PUT /follow
+  def follow
+    begin
+      current_user.followed_projects << @project
+
+      if current_user.save
+        redirect_to @project, notice: "You're following the project."
+      end
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to @project, notice: "You're already following the project."
+    end
+  end
+
+  # PATCH/PUT /follow
+  def unfollow
+    if current_user.followed_projects.include?(@project)
+      current_user.followed_projects.delete(@project)
+      current_user.save
+    end
+
+    redirect_to @project, notice: "You're not following the project."
+  end
+
+  # PATCH/PUT /like
+  def like
+    begin
+      current_user.liked_projects << @project
+
+      if current_user.save
+        redirect_to project_path, notice: "You're liked the project."
+      end
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to @project, notice: "You're already liked the project."
+    end
+  end
+
+  # PATCH/PUT /like
+  def unlike
+    if current_user.liked_projects.include?(@project)
+      current_user.liked_projects.delete(@project)
+      current_user.save
+    end
+
+    redirect_to @project, notice: "You're not liking the project."
   end
 
   private

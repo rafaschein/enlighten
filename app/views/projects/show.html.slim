@@ -2,6 +2,16 @@
 = link_to 'Edit', edit_project_path(@project), class: 'tiny secondary button right'
 = link_to 'Voltar', projects_path, class: 'tiny secondary button right'
 
+- if current_user.followed_projects.include?(@project)
+  = link_to 'Unfollow', unfollow_project_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Follow', follow_project_path, method: :put, class: 'tiny secondary button right'
+
+- if current_user.liked_projects.include?(@project)
+  = link_to 'Unlike', unlike_project_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Like', like_project_path, method: :put, class: 'tiny secondary button right'
+
 = render partial: 'components/head', locals: { main_model: @project, secondary_model: @project.client }
 
 .row.markdown

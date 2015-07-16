@@ -18,8 +18,6 @@
 #
 
 class User < ActiveRecord::Base
-  include HasAndBelongsToMany
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -27,8 +25,19 @@ class User < ActiveRecord::Base
 
   has_one :person
 
-  has_and_belongs_to_many_followed_projects :following
-  has_and_belongs_to_many_followed_technologies :following
-  has_and_belongs_to_many_liked_projects :liking
-  has_and_belongs_to_many_liked_technologies :liking
+  has_and_belongs_to_many :followed_projects,
+    class_name: Project.name,
+    join_table: :users_following_projects
+
+  has_and_belongs_to_many :followed_technologies,
+    class_name: Technology.name,
+    join_table: :users_following_technologies
+
+  has_and_belongs_to_many :liked_projects,
+    class_name: Project.name,
+    join_table: :users_liking_projects
+
+  has_and_belongs_to_many :liked_technologies,
+    class_name: Technology.name,
+    join_table: :users_liking_technologies
 end

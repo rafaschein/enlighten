@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715224051) do
+ActiveRecord::Schema.define(version: 20150716211054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,10 +41,8 @@ ActiveRecord::Schema.define(version: 20150715224051) do
   create_table "people", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "github_account"
-    t.string   "twitter_account"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "image_id"
   end
 
@@ -103,6 +101,16 @@ ActiveRecord::Schema.define(version: 20150715224051) do
     t.string "name"
     t.text   "description"
   end
+
+  create_table "social_links", force: :cascade do |t|
+    t.integer  "person_id"
+    t.string   "provider"
+    t.string   "identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "social_links", ["person_id"], name: "index_social_links_on_person_id", using: :btree
 
   create_table "technologies", force: :cascade do |t|
     t.string   "name"
@@ -178,6 +186,7 @@ ActiveRecord::Schema.define(version: 20150715224051) do
   add_foreign_key "people", "users"
   add_foreign_key "project_members", "roles"
   add_foreign_key "projects", "clients"
+  add_foreign_key "social_links", "people"
   add_foreign_key "users_following_projects", "projects"
   add_foreign_key "users_following_projects", "users"
   add_foreign_key "users_following_technologies", "technologies"

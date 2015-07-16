@@ -1,53 +1,54 @@
 default: &default
-    - provider: behance
-      url: 'https://www.behance.net/#identifier'
 
-    - provider: codepen
-      url: 'http://codepen.io/#identifier'
+  - provider: behance
+    url: 'https://www.behance.net/#identifier'
 
-    - provider: deviantart
-      url: 'http://#identifier.deviantart.com/'
+  - provider: codepen
+    url: 'http://codepen.io/#identifier'
 
-    - provider: dribbble
-      url: 'https://dribbble.com/#identifier'
+  - provider: deviantart
+    url: 'http://#identifier.deviantart.com/'
 
-    - provider: facebook
-      url: 'https://www.facebook.com/#identifier'
+  - provider: dribbble
+    url: 'https://dribbble.com/#identifier'
 
-    - provider: flickr
-      url: 'https://www.flickr.com/photos/#identifier'
+  - provider: facebook
+    url: 'https://www.facebook.com/#identifier'
 
-    - provider: github
-      url: 'https://github.com/#identifier'
+  - provider: flickr
+    url: 'https://www.flickr.com/photos/#identifier'
 
-    - provider: googleplus
-      url: '#identifier'
+  - provider: github
+    url: 'https://github.com/#identifier'
 
-    - provider: instagram
-      url: 'https://instagram.com/#identifier'
+  - provider: googleplus
+    url: '#identifier'
 
-    - provider: linkedin
-      url: '#identifier'
+  - provider: instagram
+    url: 'https://instagram.com/#identifier'
 
-    - provider: pinterest
-      url: 'https://www.pinterest.com//#identifier'
+  - provider: linkedin
+    url: '#identifier'
 
-    - provider: skype
+  - provider: pinterest
+    url: 'https://www.pinterest.com//#identifier'
 
-    - provider: slideshare
-      url: 'http://www.slideshare.net/#identifier'
+  - provider: skype
 
-    - provider: stackoverflow
-      url: 'http://stackoverflow.com/users/#identifier'
+  - provider: slideshare
+    url: 'http://www.slideshare.net/#identifier'
 
-    - provider: tumblr
-      url: 'http://#identifier.tumblr.com/'
+  - provider: stackoverflow
+    url: 'http://stackoverflow.com/users/#identifier'
 
-    - provider: twitter
-      url: 'https://twitter.com/#identifier'
+  - provider: tumblr
+    url: 'http://#identifier.tumblr.com/'
 
-    - provider: youtube
-      url: 'https://www.youtube.com/user/#identifier'
+  - provider: twitter
+    url: 'https://twitter.com/#identifier'
+
+  - provider: youtube
+    url: 'https://www.youtube.com/user/#identifier'
 
 development: *default
 test: *default

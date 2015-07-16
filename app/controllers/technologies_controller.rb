@@ -48,15 +48,13 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /follow
   def follow
-    begin
-      current_user.followed_technologies << @technology
+    current_user.followed_technologies << @technology
 
-      if current_user.save
-        redirect_to @technology, notice: "You're following the technology."
-      end
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to @technology, notice: "You're already following the technology."
+    if current_user.save
+      redirect_to @technology, notice: "You're following the technology."
     end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @technology, notice: "You're already following the technology."
   end
 
   # PATCH/PUT /follow
@@ -71,15 +69,13 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /like
   def like
-    begin
-      current_user.liked_technologies << @technology
+    current_user.liked_technologies << @technology
 
-      if current_user.save
-        redirect_to @technology, notice: "You're liked the technology."
-      end
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to @technology, notice: "You're already liked the technology."
+    if current_user.save
+      redirect_to @technology, notice: "You're liked the technology."
     end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @technology, notice: "You're already liked the technology."
   end
 
   # PATCH/PUT /like

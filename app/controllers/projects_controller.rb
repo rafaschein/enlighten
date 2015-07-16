@@ -48,15 +48,13 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /follow
   def follow
-    begin
-      current_user.followed_projects << @project
+    current_user.followed_projects << @project
 
-      if current_user.save
-        redirect_to @project, notice: "You're following the project."
-      end
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to @project, notice: "You're already following the project."
+    if current_user.save
+      redirect_to @project, notice: "You're following the project."
     end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @project, notice: "You're already following the project."
   end
 
   # PATCH/PUT /follow
@@ -71,15 +69,13 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /like
   def like
-    begin
-      current_user.liked_projects << @project
+    current_user.liked_projects << @project
 
-      if current_user.save
-        redirect_to project_path, notice: "You're liked the project."
-      end
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to @project, notice: "You're already liked the project."
+    if current_user.save
+      redirect_to project_path, notice: "You're liked the project."
     end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @project, notice: "You're already liked the project."
   end
 
   # PATCH/PUT /like

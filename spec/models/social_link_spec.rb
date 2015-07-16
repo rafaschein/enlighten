@@ -43,7 +43,7 @@ RSpec.describe SocialLink, type: :model do
     subject { SocialLink.provider_url_configuration(provider) }
 
     before do
-      allow(Rails.application).to receive(:config_for).and_return(yml_configuration)
+      allow(Rails.application).to receive(:config_for) { yml_configuration }
     end
 
     context 'when provider is github' do
@@ -63,7 +63,7 @@ RSpec.describe SocialLink, type: :model do
     subject { SocialLink.configuration }
 
     before do
-      allow(Rails.application).to receive(:config_for).and_return(yml_configuration)
+      allow(Rails.application).to receive(:config_for) { yml_configuration }
     end
 
     it do
@@ -78,7 +78,7 @@ RSpec.describe SocialLink, type: :model do
     subject { create :social_link, provider: 'github', identifier: 'CWISoftware' }
 
     before do
-      allow(Rails.application).to receive(:config_for).and_return(yml_configuration)
+      allow(Rails.application).to receive(:config_for) { yml_configuration }
     end
 
     it { expect(subject.url).to eq('https://github.com/CWISoftware') }

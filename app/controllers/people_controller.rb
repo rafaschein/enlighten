@@ -59,6 +59,7 @@ class PeopleController < ApplicationController
       :user_id,
       :name,
       :image,
+      social_links_attributes: [:id, :provider, :identifier, :_destroy],
       technologies_attributes: [:id, :technology_id, :skill_rating, :certificated, :_destroy])
   end
 end

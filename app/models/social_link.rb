@@ -17,19 +17,17 @@ class SocialLink < ActiveRecord::Base
     configuration.map { |p| p[:provider].to_sym }
   end
 
-  def url
-    template = self.class.provider_url_configuration(provider)
-
-    template.sub('#identifier', identifier)
-  end
-
-  private
-
   def self.provider_url_configuration(provider)
     configuration.find { |i| i[:provider] == provider }[:url]
   end
 
   def self.configuration
     Rails.application.config_for(:social_links).map(&:symbolize_keys)
+  end
+
+  def url
+    template = self.class.provider_url_configuration(provider)
+
+    template.sub('#identifier', identifier)
   end
 end

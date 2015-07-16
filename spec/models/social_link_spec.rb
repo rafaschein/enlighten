@@ -20,17 +20,50 @@ RSpec.describe SocialLink, type: :model do
   it { expect(subject).to have_db_column(:identifier) }
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
-
   it { expect(subject).to belong_to(:person) }
+
+  before do
+    allow(Rails.application).to receive(:config_for).and_return(yml_configuration)
+  end
+
+  let(:yml_configuration) do
+    [
+      { 'provider' => 'github', 'url' => 'https://github.com/#identifier' },
+      { 'provider' => 'twitter', 'url' => 'https://twitter.com/#identifier' }
+    ]
+  end
 
   describe '.available_providers' do
     subject { SocialLink.available_providers }
 
-    before do
-      allow(Rails.application).to receive(:config_for).and_return([{"provider"=>"github", "url"=>"https://github.com/\#{identifier}"}, {"provider"=>"twitter", "url"=>"https://twitter.com/\#{identifier}"}])
+    it { expect(subject).to eq [:github, :twitter] }
+  end
+
+  describe '.provider_url_configuration' do
+    subject { SocialLink.provider_url_configuration(provider) }
+
+    context 'when provider is github' do
+      let(:provider) { 'github' }
+
+      it { expect(subject).to eq 'https://github.com/#identifier' }
     end
 
-    it { expect(subject).to eq [:github, :twitter] }
+    context 'when provider is twitter' do
+      let(:provider) { 'twitter' }
+
+      it { expect(subject).to eq 'https://twitter.com/#identifier' }
+    end
+  end
+
+  describe '.configuration' do
+    subject { SocialLink.configuration }
+
+    it do
+      expect(subject). to eq([
+        { provider: 'github', url: 'https://github.com/#identifier' },
+        { provider: 'twitter', url: 'https://twitter.com/#identifier' }
+      ])
+    end
   end
 
   describe '#url' do

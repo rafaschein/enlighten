@@ -58,8 +58,6 @@ class PeopleController < ApplicationController
     params.require(:person).permit(
       :user_id,
       :name,
-      :github_account,
-      :twitter_account,
       :image,
       technologies_attributes: [:id, :technology_id, :skill_rating, :certificated, :_destroy])
   end

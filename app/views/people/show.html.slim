@@ -11,12 +11,6 @@
         dt Email:
         dd = @person.user.email
 
-      dt Github account:
-      dd = @person.github_account
-
-      dt Twitter account:
-      dd = @person.twitter_account
-
       dt Projects:
       dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map { |m| m.project } }
 

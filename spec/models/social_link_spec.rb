@@ -83,12 +83,4 @@ RSpec.describe SocialLink, type: :model do
 
     it { expect(subject.url).to eq('https://github.com/CWISoftware') }
   end
-
-  describe 'social link icons' do
-    it 'has all configured social links icons' do
-      SocialLink.available_providers.each do |provider|
-        expect(Rails.root.join('app', 'assets', 'images', 'social', "#{provider}.png")).to exist
-      end
-    end
-  end
 end

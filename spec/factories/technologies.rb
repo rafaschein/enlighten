@@ -9,6 +9,7 @@
 #  updated_at             :datetime         not null
 #  image_id               :string
 #  technology_category_id :integer
+#  parent_id              :integer
 #
 
 FactoryGirl.define do

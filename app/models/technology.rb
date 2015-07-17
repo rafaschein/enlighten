@@ -9,9 +9,16 @@
 #  updated_at             :datetime         not null
 #  image_id               :string
 #  technology_category_id :integer
+#  parent_id              :integer
 #
 
 class Technology < ActiveRecord::Base
+  has_many :children,
+           class_name: self.name,
+           foreign_key: :parent_id
+
+  belongs_to :parent, class_name: self.name
+
   belongs_to :category,
              class_name: TechnologyCategory.name,
              foreign_key: :technology_category_id

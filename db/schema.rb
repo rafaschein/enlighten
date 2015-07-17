@@ -119,8 +119,10 @@ ActiveRecord::Schema.define(version: 20150717010402) do
     t.datetime "updated_at",             null: false
     t.string   "image_id"
     t.integer  "technology_category_id"
+    t.integer  "parent_id"
   end
 
+  add_index "technologies", ["parent_id"], name: "index_technologies_on_parent_id", using: :btree
   add_index "technologies", ["technology_category_id"], name: "index_technologies_on_technology_category_id", using: :btree
 
   create_table "technology_categories", force: :cascade do |t|

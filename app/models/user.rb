@@ -33,6 +33,14 @@ class User < ActiveRecord::Base
                           class_name: Technology.name,
                           join_table: :users_following_technologies
 
+  has_and_belongs_to_many :followed_clients,
+                          class_name: Client.name,
+                          join_table: :users_following_clients
+
+  has_and_belongs_to_many :followed_people,
+                          class_name: Person.name,
+                          join_table: :users_following_people
+
   has_and_belongs_to_many :liked_projects,
                           class_name: Project.name,
                           join_table: :users_liking_projects
@@ -40,4 +48,12 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :liked_technologies,
                           class_name: Technology.name,
                           join_table: :users_liking_technologies
+
+  has_and_belongs_to_many :liked_clients,
+                          class_name: Client.name,
+                          join_table: :users_liking_clients
+
+  has_and_belongs_to_many :liked_people,
+                          class_name: Person.name,
+                          join_table: :users_liking_people
 end

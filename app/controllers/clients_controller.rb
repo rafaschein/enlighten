@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /clients
   def index
@@ -44,6 +44,48 @@ class ClientsController < ApplicationController
     @client.destroy
 
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
+  end
+
+  # PATCH/PUT /follow
+  def follow
+    current_user.followed_clients << @client
+
+    if current_user.save
+      redirect_to @client, notice: "You're following the client."
+    end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @client, notice: "You're already following the client."
+  end
+
+  # PATCH/PUT /follow
+  def unfollow
+    if current_user.followed_clients.include?(@client)
+      current_user.followed_clients.delete(@client)
+      current_user.save
+    end
+
+    redirect_to @client, notice: "You're not following the client."
+  end
+
+  # PATCH/PUT /like
+  def like
+    current_user.liked_clients << @client
+
+    if current_user.save
+      redirect_to client_path, notice: "You're liked the client."
+    end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to @client, notice: "You're already liked the client."
+  end
+
+  # PATCH/PUT /like
+  def unlike
+    if current_user.liked_clients.include?(@client)
+      current_user.liked_clients.delete(@client)
+      current_user.save
+    end
+
+    redirect_to @client, notice: "You're not liking the client."
   end
 
   private

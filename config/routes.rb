@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :activities, path: 'activities/:type', only: [:show, :create], defaults: { owner: 'project' }
   end
 
-  resources :people do
+  resources :people, concerns: [:followable, :likable] do
     resources :activities, path: 'activities/:type', only: [:show, :create], defaults: { owner: 'person' }
   end
 
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :activities, path: 'activities/:type', only: [:show, :create], defaults: { owner: 'technology' }
   end
 
-  resources :clients
+  resources :clients, concerns: [:followable, :likable]
 
   devise_for :users
 end

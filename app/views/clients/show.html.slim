@@ -4,6 +4,16 @@
 = link_to 'Edit', edit_client_path(@client), class: 'tiny secondary button right'
 = link_to 'Back', clients_path, class: 'tiny secondary button right'
 
+- if current_user.followed_clients.include?(@client)
+  = link_to 'Unfollow', unfollow_client_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Follow', follow_client_path, method: :put, class: 'tiny secondary button right'
+
+- if current_user.liked_clients.include?(@client)
+  = link_to 'Unlike', unlike_client_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Like', like_client_path, method: :put, class: 'tiny secondary button right'
+
 = render partial: 'components/head', locals: { main_model: @client, secondary_model: nil }
 
 .panel

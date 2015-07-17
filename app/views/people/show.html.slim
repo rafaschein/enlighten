@@ -4,6 +4,16 @@
 = link_to 'Edit', edit_person_path(@person), class: 'tiny secondary button right', class: 'tiny secondary button right'
 = link_to 'Back', people_path, class: 'tiny secondary button right', class: 'tiny secondary button right'
 
+- if current_user.followed_people.include?(@person)
+  = link_to 'Unfollow', unfollow_person_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Follow', follow_person_path, method: :put, class: 'tiny secondary button right'
+
+- if current_user.liked_people.include?(@person)
+  = link_to 'Unlike', unlike_person_path, method: :put, class: 'tiny secondary button right'
+- else
+  = link_to 'Like', like_person_path, method: :put, class: 'tiny secondary button right'
+
 = render partial: 'components/head', locals: { main_model: @person, secondary_model: nil }
 
 .row

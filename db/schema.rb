@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716211054) do
+ActiveRecord::Schema.define(version: 20150717010402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,28 @@ ActiveRecord::Schema.define(version: 20150716211054) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "users_following_clients", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_following_clients", ["client_id"], name: "index_users_following_clients_on_client_id", using: :btree
+  add_index "users_following_clients", ["user_id", "client_id"], name: "index_users_following_clients_on_user_id_and_client_id", unique: true, using: :btree
+  add_index "users_following_clients", ["user_id"], name: "index_users_following_clients_on_user_id", using: :btree
+
+  create_table "users_following_people", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_following_people", ["person_id"], name: "index_users_following_people_on_person_id", using: :btree
+  add_index "users_following_people", ["user_id", "person_id"], name: "index_users_following_people_on_user_id_and_person_id", unique: true, using: :btree
+  add_index "users_following_people", ["user_id"], name: "index_users_following_people_on_user_id", using: :btree
+
   create_table "users_following_projects", id: false, force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -159,6 +181,28 @@ ActiveRecord::Schema.define(version: 20150716211054) do
   add_index "users_following_technologies", ["technology_id"], name: "index_users_following_technologies_on_technology_id", using: :btree
   add_index "users_following_technologies", ["user_id", "technology_id"], name: "index_users_following_technologies_on_user_id_and_technology_id", unique: true, using: :btree
   add_index "users_following_technologies", ["user_id"], name: "index_users_following_technologies_on_user_id", using: :btree
+
+  create_table "users_liking_clients", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_liking_clients", ["client_id"], name: "index_users_liking_clients_on_client_id", using: :btree
+  add_index "users_liking_clients", ["user_id", "client_id"], name: "index_users_liking_clients_on_user_id_and_client_id", unique: true, using: :btree
+  add_index "users_liking_clients", ["user_id"], name: "index_users_liking_clients_on_user_id", using: :btree
+
+  create_table "users_liking_people", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_liking_people", ["person_id"], name: "index_users_liking_people_on_person_id", using: :btree
+  add_index "users_liking_people", ["user_id", "person_id"], name: "index_users_liking_people_on_user_id_and_person_id", unique: true, using: :btree
+  add_index "users_liking_people", ["user_id"], name: "index_users_liking_people_on_user_id", using: :btree
 
   create_table "users_liking_projects", id: false, force: :cascade do |t|
     t.integer  "user_id"
@@ -187,10 +231,18 @@ ActiveRecord::Schema.define(version: 20150716211054) do
   add_foreign_key "project_members", "roles"
   add_foreign_key "projects", "clients"
   add_foreign_key "social_links", "people"
+  add_foreign_key "users_following_clients", "clients"
+  add_foreign_key "users_following_clients", "users"
+  add_foreign_key "users_following_people", "people"
+  add_foreign_key "users_following_people", "users"
   add_foreign_key "users_following_projects", "projects"
   add_foreign_key "users_following_projects", "users"
   add_foreign_key "users_following_technologies", "technologies"
   add_foreign_key "users_following_technologies", "users"
+  add_foreign_key "users_liking_clients", "clients"
+  add_foreign_key "users_liking_clients", "users"
+  add_foreign_key "users_liking_people", "people"
+  add_foreign_key "users_liking_people", "users"
   add_foreign_key "users_liking_projects", "projects"
   add_foreign_key "users_liking_projects", "users"
   add_foreign_key "users_liking_technologies", "technologies"

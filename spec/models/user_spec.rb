@@ -37,8 +37,12 @@ RSpec.describe User, type: :model do
   it { expect(subject).to have_one(:person) }
   it { expect(subject).to have_and_belong_to_many(:followed_technologies) }
   it { expect(subject).to have_and_belong_to_many(:followed_projects) }
+  it { expect(subject).to have_and_belong_to_many(:followed_clients) }
+  it { expect(subject).to have_and_belong_to_many(:followed_people) }
   it { expect(subject).to have_and_belong_to_many(:liked_technologies) }
   it { expect(subject).to have_and_belong_to_many(:liked_projects) }
+  it { expect(subject).to have_and_belong_to_many(:liked_clients) }
+  it { expect(subject).to have_and_belong_to_many(:liked_people) }
 
   describe '#projects' do
     let(:project) { create :project }
@@ -85,6 +89,54 @@ RSpec.describe User, type: :model do
       user.reload
 
       expect(user.liked_technologies).to eq [technology]
+    end
+  end
+
+  describe '#clients' do
+    let(:client) { create :client }
+
+    it 'user followed clients' do
+      user = create :user
+
+      user.followed_clients << client
+      user.save
+      user.reload
+
+      expect(user.followed_clients).to eq [client]
+    end
+
+    it 'user liked clients' do
+      user = create :user
+
+      user.liked_clients << client
+      user.save
+      user.reload
+
+      expect(user.liked_clients).to eq [client]
+    end
+  end
+
+  describe '#people' do
+    let(:person) { create :person }
+
+    it 'user followed people' do
+      user = create :user
+
+      user.followed_people << person
+      user.save
+      user.reload
+
+      expect(user.followed_people).to eq [person]
+    end
+
+    it 'user liked people' do
+      user = create :user
+
+      user.liked_people << person
+      user.save
+      user.reload
+
+      expect(user.liked_people).to eq [person]
     end
   end
 end

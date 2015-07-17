@@ -13,11 +13,11 @@
 #
 
 class Technology < ActiveRecord::Base
-  has_many :children,
-           class_name: self.name,
-           foreign_key: :parent_id
+  belongs_to :parent, class_name: name
 
-  belongs_to :parent, class_name: self.name
+  has_many :children,
+           class_name: name,
+           foreign_key: :parent_id
 
   belongs_to :category,
              class_name: TechnologyCategory.name,

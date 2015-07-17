@@ -21,6 +21,8 @@ RSpec.describe Person, type: :model do
 
   it { expect(subject).to have_many(:memberships) }
   it { expect(subject).to have_many(:social_links) }
+  it { expect(subject).to have_and_belong_to_many(:followers) }
+  it { expect(subject).to have_and_belong_to_many(:likers) }
 
   it { expect(subject).to validate_presence_of(:name) }
 
@@ -89,6 +91,36 @@ RSpec.describe Person, type: :model do
       let(:person) { create :person, user_id: nil }
 
       it { expect { person.all_activities }.not_to raise_exception }
+    end
+  end
+
+  describe '#followers' do
+    let(:person) { create :person }
+
+    it 'user followed people' do
+      user = create :user
+
+      user.followed_people << person
+      user.save
+      user.reload
+      person.reload
+
+      expect(person.followers).to eq [user]
+    end
+  end
+
+  describe '#likers' do
+    let(:person) { create :person }
+
+    it 'user liked people' do
+      user = create :user
+
+      user.liked_people << person
+      user.save
+      user.reload
+      person.reload
+
+      expect(person.likers).to eq [user]
     end
   end
 end

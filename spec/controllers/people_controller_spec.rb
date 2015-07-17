@@ -147,4 +147,123 @@ RSpec.describe PeopleController, type: :controller do
     end
   end
 
+  describe 'PUT #follow' do
+    let(:user) { create :user }
+    let(:person) { create :person }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :follow, id: person.id }
+
+    it 'current user follow person' do
+      subject
+      person.reload
+
+      expect(person.followers).to include(user)
+      expect(response).to redirect_to(person)
+    end
+
+    it 'current user try follow already followed person' do
+      person.followers << user
+
+      subject
+      person.reload
+
+      expect(controller.current_user).not_to receive(:save)
+      expect(person.followers).to eq [user]
+      expect(response).to redirect_to(person)
+    end
+  end
+
+  describe 'PUT #unfollow' do
+    let(:user) { create :user }
+    let(:person) { create :person }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :unfollow, id: person.id }
+
+    it 'current user already unfollowed person' do
+      person.followers << user
+
+      expect(controller.current_user.followed_people).to receive(:delete)
+      expect(controller.current_user).to receive(:save)
+
+      subject
+    end
+
+    it 'current user unfollow person' do
+      person.followers << user
+
+      subject
+      person.reload
+
+      expect(person.followers).to eq []
+      expect(response).to redirect_to(person)
+    end
+  end
+
+  describe 'PUT #like' do
+    let(:user) { create :user }
+    let(:person) { create :person }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :like, id: person.id }
+
+    it 'current user like person' do
+      subject
+      person.reload
+
+      expect(person.likers).to include(user)
+      expect(response).to redirect_to(person)
+    end
+
+    it 'current user try like already liked person' do
+      person.likers << user
+
+      subject
+      person.reload
+
+      expect(controller.current_user).not_to receive(:save)
+      expect(person.likers).to eq [user]
+      expect(response).to redirect_to(person)
+    end
+  end
+
+  describe 'PUT #unlike' do
+    let(:user) { create :user }
+    let(:person) { create :person }
+
+    before do
+      sign_in user
+    end
+
+    subject { put :unlike, id: person.id }
+
+    it 'current user already liked person' do
+      person.likers << user
+
+      expect(controller.current_user.liked_people).to receive(:delete)
+      expect(controller.current_user).to receive(:save)
+
+      subject
+    end
+
+    it 'current user unlike person' do
+      person.likers << user
+
+      subject
+      person.reload
+
+      expect(person.likers).to eq []
+      expect(response).to redirect_to(person)
+    end
+  end
 end

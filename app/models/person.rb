@@ -17,6 +17,14 @@ class Person < ActiveRecord::Base
   has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
   has_many :social_links, class_name: SocialLink.name
 
+  has_and_belongs_to_many :followers,
+                          class_name: User.name,
+                          join_table: :users_following_people
+
+  has_and_belongs_to_many :likers,
+                          class_name: User.name,
+                          join_table: :users_liking_people
+
   accepts_nested_attributes_for :technologies
   accepts_nested_attributes_for :social_links
 

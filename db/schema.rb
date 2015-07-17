@@ -115,10 +115,13 @@ ActiveRecord::Schema.define(version: 20150717010402) do
   create_table "technologies", force: :cascade do |t|
     t.string   "name"
     t.string   "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "image_id"
+    t.integer  "technology_category_id"
   end
+
+  add_index "technologies", ["technology_category_id"], name: "index_technologies_on_technology_category_id", using: :btree
 
   create_table "technology_categories", force: :cascade do |t|
     t.string   "name"
@@ -237,6 +240,7 @@ ActiveRecord::Schema.define(version: 20150717010402) do
   add_foreign_key "project_members", "roles"
   add_foreign_key "projects", "clients"
   add_foreign_key "social_links", "people"
+  add_foreign_key "technologies", "technology_categories"
   add_foreign_key "users_following_clients", "clients"
   add_foreign_key "users_following_clients", "users"
   add_foreign_key "users_following_people", "people"

@@ -2,15 +2,20 @@
 #
 # Table name: technologies
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  website    :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  image_id   :string
+#  id                     :integer          not null, primary key
+#  name                   :string
+#  website                :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  image_id               :string
+#  technology_category_id :integer
 #
 
 class Technology < ActiveRecord::Base
+  belongs_to :category,
+             class_name: TechnologyCategory.name,
+             foreign_key: :technology_category_id
+
   has_and_belongs_to_many :projects,
                           class_name: Project.name,
                           join_table: :project_technologies
@@ -27,6 +32,7 @@ class Technology < ActiveRecord::Base
                           join_table: :users_liking_technologies
 
   validates :name, presence: true
+  validates :category, presence: true
 
   attachment :image
 end

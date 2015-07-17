@@ -5,15 +5,26 @@
 [![Test Coverage](https://codeclimate.com/github/CWISoftware/enlighten/badges/coverage.svg)](https://codeclimate.com/github/CWISoftware/enlighten/coverage)
 [![Dependency Status](https://gemnasium.com/CWISoftware/enlighten.svg)](https://gemnasium.com/CWISoftware/enlighten)
 
+**Enlighten** aims to enhance organizational culture by providing a platform to disseminate great attitudes, technologies and ideas between projects and teams of an organization.
 
-This project aims to enhance organizational culture by providing a platform to disseminate great attitudes, technologies and ideas between projects and teams of an organization.
+## Technologies
 
-# Technologies
-* Framework: [Ruby on Rails](http://guides.rubyonrails.org/)
-* Unit testing: [Rspec](http://rspec.info/)
-* BDD: [Cucumber](https://cucumber.io/)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Ruby_on_Rails_logo.svg" width="100" height="100">](http://rubyonrails.org/)
+[<img src="https://raw.githubusercontent.com/rspec/rspec.github.io/source/source/images/logo.png" width="100" height="100">](http://rspec.info/)
+[<img src="https://avatars2.githubusercontent.com/u/320565?v=3&s=200" width="100" height="100">](https://cucumber.io/)
 
-# Development Setup
+## Usage
+
+If you want to contribute to Enlighten or run it from source, clone this repository to your machine:
+
+    $ git clone https://github.com/CWISoftware/enlighten.git
+    $ cd enlighten
+    $ bundle
+    $ rails s
+
+## Contributing
+
+We appreciate any contribution to Enlighten, so check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide for more information. We usually keep a list of features and bugs [in the issue tracker](https://github.com/CWISoftware/enlighten/issues).
 
 ## Communication
 
@@ -25,43 +36,26 @@ This project aims to enhance organizational culture by providing a platform to d
 
 [![Stories in Ready](https://badge.waffle.io/CWISoftware/enlighten.png?label=ready&title=Ready)](https://waffle.io/CWISoftware/enlighten)
 
-## Development environment setup
+## Development Environment Setup
 
-### Unix
-```
-# install ImageMagick
-brew install imagemagick # OS X
-sudo apt-get install imagemagick # Ubuntu
+[<img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Vagrant.png" width="50" height="50">](https://github.com/CWISoftware/enlighten-vagrant)
 
-# install postgres
-brew install postgresql # OS X
-apt-get...  # Ubuntu
-
-# install rvm (ruby version manager)
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable
-
-# clone project
-git clone git@github.com:dwayhs/enlighten.git
-
-# access project folder (rvm initializes gemset)
-cd enlighten
-
+```bash
 # install the dependencies
 bundle install
 
 # run tests
 rake
 
-# create database and execute migrations (needs an accessible postgresql server)
+# create database and execute migrations
 rake db:create
 rake db:migrate
 
-# create seed records for development envoronment on the database
+# create seed records for development environment on the database
 rake db:seed:development
 
 # execute development server
-rails s
+rails s -b 0.0.0.0
 
 # access localhost:3000 on you browser
 
@@ -70,8 +64,10 @@ rails s
 #   User password: 12345678
 ```
 
-### Windows
+## License
 
-```
-TODO
-```
+"Enlighten" are copyright (c) 2015 CWI Software.
+
+Enlighten source code is released under MIT License.
+
+Check [LICENSE](LICENSE) files for more information.

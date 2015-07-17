@@ -32,7 +32,7 @@ We appreciate any contribution to Enlighten, so check out our [CONTRIBUTING.md](
 
 [![Join the chat at https://gitter.im/CWISoftware/enlighten](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CWISoftware/enlighten?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-### Tasks ready for development
+### Stories
 
 [![Stories in Ready](https://badge.waffle.io/CWISoftware/enlighten.png?label=ready&title=Ready)](https://waffle.io/CWISoftware/enlighten)
 
@@ -63,6 +63,24 @@ rails s -b 0.0.0.0
 #   User email: test@test.com
 #   User password: 12345678
 ```
+
+## Important links
+
+* [CWI Software Website][1]
+* [Enlighten Website][2]
+* [Issue Tracker][3]
+* [Chat][4]
+* [Stories][5]
+* [Vagrant][6]
+* [Puppet][7]
+
+  [1]: http://www.cwi.com.br
+  [2]: https://enlighten-prototype.herokuapp.com
+  [3]: https://github.com/CWISoftware/enlighten/issues
+  [4]: https://gitter.im/CWISoftware/enlighten
+  [5]: https://waffle.io/CWISoftware/enlighten
+  [6]: https://github.com/CWISoftware/enlighten-vagrant
+  [7]: https://github.com/CWISoftware/enlighten-vagrant-puppet
 
 ## License
 

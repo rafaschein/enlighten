@@ -7,7 +7,6 @@ html lang="en"
     title = content_for?(:title) ? "#{yield(:title)} - Enlighten" : 'Enlighten'
 
     = stylesheet_link_tag 'application'
-    = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body

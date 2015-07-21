@@ -14,10 +14,6 @@ gem 'pg'
 gem 'sass-rails'
 gem 'compass-rails'
 
-# CSS framework
-gem 'foundation-rails'
-gem 'foundation-icons-sass-rails'
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 

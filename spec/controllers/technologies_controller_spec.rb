@@ -63,12 +63,16 @@ RSpec.describe TechnologiesController, type: :controller do
 
       it 'saves the new technology in the database' do
         expect do
-          post :create, technology: attributes_for(:technology, image: image_file)
+          post :create, technology: attributes_for(:technology,
+                                                   image: image_file,
+                                                   technology_category_id: create(:technology_category).id)
         end.to change(Technology, :count).by(1)
       end
 
       it 'redirects to the technology #show' do
-        post :create, technology: attributes_for(:technology)
+        post :create, technology: attributes_for(:technology,
+                                                 technology_category_id: create(:technology_category).id)
+
         expect(response).to redirect_to(assigns(:technology))
       end
     end

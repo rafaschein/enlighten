@@ -7,6 +7,14 @@
 
   .row
     .small-12.columns
+      = f.input :technology_category_id, collection: TechnologyCategory.all, value_method: :id, label_method: :name
+
+  .row
+    .small-12.columns
+      = f.input :parent_id, collection: Technology.all, value_method: :id, label_method: :name
+
+  .row
+    .small-12.columns
       = f.input :name
 
   .row

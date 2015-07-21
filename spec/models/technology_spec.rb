@@ -2,28 +2,35 @@
 #
 # Table name: technologies
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  website    :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  image_id   :string
+#  id                     :integer          not null, primary key
+#  name                   :string
+#  website                :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  image_id               :string
+#  technology_category_id :integer
+#  parent_id              :integer
 #
 
 require 'rails_helper'
 
 RSpec.describe Technology, type: :model do
   it { expect(subject).to have_db_column(:id) }
+  it { expect(subject).to have_db_column(:parent_id) }
   it { expect(subject).to have_db_column(:name) }
   it { expect(subject).to have_db_column(:website) }
   it { expect(subject).to have_db_column(:created_at) }
   it { expect(subject).to have_db_column(:updated_at) }
 
+  it { expect(subject).to belong_to(:category) }
+  it { expect(subject).to belong_to(:parent) }
+  it { expect(subject).to have_many(:children) }
   it { expect(subject).to have_and_belong_to_many(:projects) }
   it { expect(subject).to have_and_belong_to_many(:followers) }
   it { expect(subject).to have_and_belong_to_many(:likers) }
 
   it { expect(subject).to validate_presence_of(:name) }
+  it { expect(subject).to validate_presence_of(:category) }
 
   describe '#projects' do
     it 'associates technology projects' do
@@ -98,5 +105,18 @@ RSpec.describe Technology, type: :model do
 
       expect(technology.likers).to eq [user]
     end
+  end
+
+  describe 'technology hierarchy' do
+    subject { create :technology }
+
+    before do
+      subject.children << create(:technology)
+      subject.reload
+    end
+
+    it { expect(subject.children).to have(1).item }
+    it { expect(subject.children.first).to be_kind_of(Technology) }
+    it { expect(subject.children.first.parent).to eq(subject) }
   end
 end

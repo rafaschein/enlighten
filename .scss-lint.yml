@@ -1,0 +1,4 @@
+exclude:
+  - './coverage/*'
+  - './app/assets/stylesheets/base/normalize.scss'
+  - './vendor/*'

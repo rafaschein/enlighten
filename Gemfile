@@ -70,6 +70,7 @@ gem 'refile-s3'
 # Code quality
 gem 'rubocop', require: false
 gem 'slim_lint', require: false
+gem 'scss_lint', require: false
 
 # Application monitoring
 gem 'newrelic_rpm'

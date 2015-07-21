@@ -337,6 +337,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    scss_lint (0.40.1)
+      rainbow (~> 2.0)
+      sass (~> 3.4.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -451,6 +454,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   rubocop
   sass-rails
+  scss_lint
   sdoc (~> 0.4.0)
   shoulda-matchers
   simple_form

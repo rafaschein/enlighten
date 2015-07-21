@@ -1,11 +1,11 @@
 def attributes_from_table(table)
-  table.hashes.inject({}) do |memory, element|
-    memory[element['attribute']] = element['value']
-    memory
+  table.hashes.each_with_object({}) do |element, hash|
+    hash[element['attribute']] = element['value']
+    hash
   end
 end
 
-Given(/^a "(.*?)"$/) do |factory_name, name|
+Given(/^a "(.*?)"$/) do |factory_name|
   @model_instance = create(factory_name.to_sym)
 end
 

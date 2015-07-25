@@ -1,0 +1,7 @@
+.row.nested-fields
+ .row.collapse.small-4.columns
+   .small-10.columns
+     = f.attachment_field :image
+     = f.input :description
+   .small-2.columns
+      = link_to_remove_association '-', f, class: 'button info postfix', tabindex: '-1'

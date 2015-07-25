@@ -30,11 +30,22 @@
       = f.association :technologies, as: :check_boxes
 
   fieldset
+    legend Screenshots
+
+    .row
+      .small-12.columns
+        #screenshots
+          = f.simple_fields_for :screenshots do |screenshot|
+            = render 'screenshot_fields', f: screenshot
+          .links
+            = link_to_add_association 'add screenshot', f, :screenshots
+
+  fieldset
     legend Members
 
     .row
       .small-12.columns
-        #telephones
+        #members
           = f.simple_fields_for :members do |member|
             = render 'member_fields', f: member
           .links

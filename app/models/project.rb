@@ -33,7 +33,7 @@ class Project < ActiveRecord::Base
                           class_name: User.name,
                           join_table: :users_liking_projects
 
-  accepts_nested_attributes_for :members
+  accepts_nested_attributes_for :members, :screenshots
 
   validates :name, presence: true
 

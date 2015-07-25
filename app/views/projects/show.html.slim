@@ -16,6 +16,10 @@
 
 = render partial: 'components/head', locals: { main_model: @project, secondary_model: @project.client }
 
+.row
+  - @project.screenshots.each do |screenshot|
+    = image_tag attachment_url(screenshot, :image, :fit, 160, 160, format: 'jpg')
+
 .row.markdown
   = render_markdown @project.description
 

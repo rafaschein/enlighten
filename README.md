@@ -84,8 +84,6 @@ rails s -b 0.0.0.0
 
 ## License
 
-"Enlighten" are copyright (c) 2015 CWI Software.
-
 Enlighten source code is released under MIT License.
 
 Check [LICENSE](LICENSE) files for more information.

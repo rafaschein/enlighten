@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'codeclimate-test-reporter'
+require 'paper_trail/frameworks/rspec'
 
 SimpleCov.start 'rails'
 

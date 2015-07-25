@@ -11,6 +11,8 @@
 #
 
 class ProjectScreenshot < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :project
 
   attachment :image

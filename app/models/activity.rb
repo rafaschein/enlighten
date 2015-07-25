@@ -13,6 +13,8 @@
 #
 
 class Activity < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :activity_owner, polymorphic: true
   belongs_to :item, polymorphic: true
   belongs_to :user

@@ -21,6 +21,8 @@ class Project < ActiveRecord::Base
                           join_table: :project_technologies
 
   has_many :members, class_name: ProjectMember.name
+  has_many :screenshots, class_name: ProjectScreenshot.name
+
   has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
 
   has_and_belongs_to_many :followers,

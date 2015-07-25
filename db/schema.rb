@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717010402) do
+ActiveRecord::Schema.define(version: 20150725002610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 20150717010402) do
   add_index "project_members", ["person_id"], name: "index_project_members_on_person_id", using: :btree
   add_index "project_members", ["project_id"], name: "index_project_members_on_project_id", using: :btree
   add_index "project_members", ["role_id"], name: "index_project_members_on_role_id", using: :btree
+
+  create_table "project_screenshots", force: :cascade do |t|
+    t.integer  "project_id"
+    t.text     "description"
+    t.string   "image_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "project_screenshots", ["project_id"], name: "index_project_screenshots_on_project_id", using: :btree
 
   create_table "project_technologies", force: :cascade do |t|
     t.integer "project_id"
@@ -240,6 +250,7 @@ ActiveRecord::Schema.define(version: 20150717010402) do
   add_foreign_key "activities", "users"
   add_foreign_key "people", "users"
   add_foreign_key "project_members", "roles"
+  add_foreign_key "project_screenshots", "projects"
   add_foreign_key "projects", "clients"
   add_foreign_key "social_links", "people"
   add_foreign_key "technologies", "technology_categories"

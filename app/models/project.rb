@@ -21,6 +21,8 @@ class Project < ActiveRecord::Base
                           join_table: :project_technologies
 
   has_many :members, class_name: ProjectMember.name
+  has_many :screenshots, class_name: ProjectScreenshot.name
+
   has_many :activities, -> { order(created_at: :desc) }, as: :activity_owner
 
   has_and_belongs_to_many :followers,
@@ -31,7 +33,7 @@ class Project < ActiveRecord::Base
                           class_name: User.name,
                           join_table: :users_liking_projects
 
-  accepts_nested_attributes_for :members
+  accepts_nested_attributes_for :members, :screenshots
 
   validates :name, presence: true
 

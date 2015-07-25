@@ -105,6 +105,7 @@ class ProjectsController < ApplicationController
       :scm_reference,
       :image,
       technology_ids: [],
-      members_attributes: [:id, :person_id, :role_id, :period_start, :period_end, :_destroy])
+      members_attributes: [:id, :person_id, :role_id, :period_start, :period_end, :_destroy],
+      screenshots_attributes: [:id, :image, :description, :_destroy])
   end
 end

@@ -27,6 +27,7 @@ RSpec.describe Project, type: :model do
 
   it { expect(subject).to belong_to(:client) }
   it { expect(subject).to have_many(:members) }
+  it { expect(subject).to have_many(:screenshots) }
   it { expect(subject).to have_and_belong_to_many(:technologies) }
   it { expect(subject).to have_and_belong_to_many(:followers) }
   it { expect(subject).to have_and_belong_to_many(:likers) }
@@ -43,6 +44,19 @@ RSpec.describe Project, type: :model do
       project.reload
 
       expect(project.members).to eq [member]
+    end
+  end
+
+  describe '#screenshots' do
+    it 'associates project screenshots' do
+      project = create :project
+      screenshot = create :project_screenshot
+
+      project.screenshots << screenshot
+      project.save
+      project.reload
+
+      expect(project.screenshots).to eq [screenshot]
     end
   end
 

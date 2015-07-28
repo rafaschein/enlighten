@@ -9,6 +9,8 @@
 #
 
 class Post < ActiveRecord::Base
+  has_paper_trail
+
   has_one :activity, as: :item
 
   validates :body, presence: true

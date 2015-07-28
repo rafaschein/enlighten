@@ -11,6 +11,8 @@
 #
 
 class Person < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :user
   has_many :memberships, class_name: ProjectMember.name
   has_many :technologies, class_name: PersonTechnology.name

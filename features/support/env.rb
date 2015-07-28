@@ -3,6 +3,7 @@ require 'cucumber/rails'
 require 'capybara/cucumber'
 require 'rspec/rails'
 require 'capybara/poltergeist'
+require 'paper_trail/frameworks/cucumber'
 
 module Cucumber
   module Rails

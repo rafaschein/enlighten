@@ -11,6 +11,8 @@
 #
 
 class SocialLink < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :person
 
   def self.available_providers

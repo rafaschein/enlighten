@@ -28,6 +28,9 @@ gem 'coffee-rails'
 gem 'simple_form'
 gem 'cocoon'
 
+# Active record audits
+gem 'paper_trail', '~> 4.0.0.rc'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

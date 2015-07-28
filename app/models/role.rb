@@ -8,6 +8,8 @@
 #
 
 class Role < ActiveRecord::Base
+  has_paper_trail
+
   def self.for_select
     select(:id, :name).order(:name)
   end

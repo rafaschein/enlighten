@@ -10,16 +10,30 @@
 }
 
 .card__title {
-  background-color: $color-default-card-placeholder;
+  background-color: $color-text-invert;
   min-height: 180px; //TODO: think about this
+  overflow: hidden;
   padding: $spacing;
+  position: relative;
 
   .avatar { // Interaction with avatar component
-    height: 50%;
-    margin-top: 25%;
-    padding-bottom: 50%;
-    width: 50%;
+    height: 65%;
+    padding-bottom: 65%;
+    width: 65%;
   }
+}
+
+.card__title-background {
+  @include prefix(filter,
+                  blur(5px) grayscale(80%),
+                  ('moz', 'ms', 'webkit'));
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: scale(1.6);
 }
 
 .card__menu {

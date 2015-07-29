@@ -1,6 +1,6 @@
 exclude:
   - './coverage/*'
-  - './app/assets/stylesheets/util/normalize.scss'
+  - './app/assets/stylesheets/vendor/*'
   - './vendor/*'
 
 linters:

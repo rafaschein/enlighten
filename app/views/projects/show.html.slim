@@ -1,53 +1,79 @@
 - content_for :title, @project.name
 
-= link_to 'Destroy', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: 'tiny alert button right'
-= link_to 'Edit', edit_project_path(@project), class: 'tiny secondary button right'
-= link_to 'Voltar', projects_path, class: 'tiny secondary button right'
+aside
+  .card
+    .card__title.text-center
+      = link_to @project do
+        .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'jpg')})"
 
-- if current_user.followed_projects.include?(@project)
-  = link_to 'Unfollow', unfollow_project_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Follow', follow_project_path, method: :put, class: 'tiny secondary button right'
+    .card__content.text-center
+      h4 = @project.name
 
-- if current_user.liked_projects.include?(@project)
-  = link_to 'Unlike', unlike_project_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Like', like_project_path, method: :put, class: 'tiny secondary button right'
+      = link_to @project.scm_reference do
+        = @project.scm_reference
 
-= render partial: 'components/head', locals: { main_model: @project, secondary_model: @project.client }
+      - if current_user.followed_projects.include?(@project)
+        = link_to 'Unfollow', unfollow_project_path, method: :put, class: 'button'
+      - else
+        = link_to 'Follow', follow_project_path, method: :put, class: 'button'
 
-.row
-  - @project.screenshots.each do |screenshot|
-    = image_tag attachment_url(screenshot, :image, :fit, 160, 160, format: 'jpg')
+  .card
+    .card__content
+      h5 Technologies
+      ul
+      - @project.technologies.each do |technology|
+        li tooltip=technology.name = link_to technology do
+          = image_tag attachment_url(technology, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--technology'
+          = " #{technology.name}"
 
-.row.markdown
-  = render_markdown @project.description
+  .card
+    .card__content
+      h5 Members
+      ul
+      - @project.members.each do |member|
+        li tooltip=member.person.name = link_to member.person do
+          = image_tag attachment_url(member.person, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--person'
+          = " #{member.person.name}"
 
-.row
-  .attributes-container.small-4.columns
-    dl
-      dt Scm:
-      dd
-        = "(#{@project.scm_type})"
-        = link_to @project.scm_reference do
-          = @project.scm_reference
+.main
+  .card
+    .card__title
+      ul.card__menu
+        li = link_to 'Destroy', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
+        li = link_to 'Edit', edit_project_path(@project), class: 'button'
 
-      dt Technologies:
-      dd
-        ul
-          - @project.technologies.each do |technology|
-            li = link_to technology do
-              = technology.name
+        - if current_user.liked_projects.include?(@person)
+          li = link_to 'Unlike', unlike_project_path, method: :put, class: 'button'
+        - else
+          li = link_to 'Like', like_project_path, method: :put, class: 'button'
 
-      dt Members:
-      dd
-        ul
-          - @project.members.each do |member|
-            li = link_to member.person do
-              = member.person.name
+    .card__content
+      ul.extra-info
+        li
+          span.extra-info__value 117
+          span.extra-info__label followers
 
-  .timeline.small-8.columns
-    = render partial: 'shared/activity_form', locals: { instance: Post.new, url: project_activities_path(project_id: @project.id, type: :post) }
+        li
+          span.extra-info__value 180
+          span.extra-info__label favorites
 
-    #activities
-      = render partial: 'shared/activity', collection: @project.activities
+        li
+          span.extra-info__value 124
+          span.extra-info__label comments
+
+  - if @project.screenshots.any?
+    .card
+      .card__content
+        - @project.screenshots.each do |screenshot|
+          = image_tag attachment_url(screenshot, :image, :fit, 160, 160, format: 'jpg')
+
+  .card
+    .card__content.markdown
+      = render_markdown @project.description
+
+  .card
+    .card__content
+      = render partial: 'shared/activity_form', locals: { instance: Post.new, url: project_activities_path(project_id: @project.id, type: :post) }
+
+      #activities
+        = render partial: 'shared/activity', collection: @project.activities

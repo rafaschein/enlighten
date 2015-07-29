@@ -1,0 +1,20 @@
+@charset 'utf-8';
+
+.container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 960px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+  width: 80%;
+}
+
+aside {
+  @include column(4);
+}
+
+.main {
+  @include column(8);
+  @include gutter;
+}

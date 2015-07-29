@@ -14,10 +14,6 @@ gem 'pg'
 gem 'sass-rails'
 gem 'compass-rails'
 
-# CSS framework
-gem 'foundation-rails'
-gem 'foundation-icons-sass-rails'
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 
@@ -74,6 +70,7 @@ gem 'refile-s3'
 # Code quality
 gem 'rubocop', require: false
 gem 'slim_lint', require: false
+gem 'scss_lint', require: false
 
 # Application monitoring
 gem 'newrelic_rpm'

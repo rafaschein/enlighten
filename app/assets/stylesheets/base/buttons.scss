@@ -1,0 +1,24 @@
+@charset 'utf-8';
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: $color-text;
+  border: 0;
+  border-radius: 4px;
+  color: $color-text-strong-invert;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px; // TODO: this should be a variable somewhere
+  font-weight: 600;
+  height: 38px;
+  letter-spacing: .1rem;
+  line-height: 38px;
+  padding: 0 $spacing;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

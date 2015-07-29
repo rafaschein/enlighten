@@ -1,66 +1,25 @@
+@charset 'utf-8';
+
 @import 'compass';
-@import 'foundation_and_overrides';
+@import 'settings';
 
-@import 'components/picture';
-@import 'components/picture_list';
-@import 'components/markdown';
+@import 'vendor/normalize';
 
-/* GENERIC */
+@import 'util/mixins';
+@import 'util/breakpoints';
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
+@import 'base/utility';
+@import 'base/document';
+@import 'base/typography';
+@import 'base/grid';
+@import 'base/links';
+@import 'base/buttons';
+@import 'base/forms';
 
-.container {
-  width: 100%;
-  max-width: 960px;
-  margin: 20px auto;
-}
+@import 'components/navbar';
+@import 'components/card';
+@import 'components/avatar';
+@import 'components/social_link';
+@import 'components/alert';
 
-.hint {
-  font-style: italic;
-  color: #999;
-  margin: 0;
-}
-
-.entity-head {
-  margin-bottom: 20px;
-}
-
-.attributes-container {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-
-  * {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-.activity-form {
-  border-radius: 4px;
-  padding: 4px;
-  margin-bottom: 20px;
-}
-
-.activity-item {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 4px;
-  margin-bottom: 20px;
-}
-
-.activity-person {
-  text-align: center;
-}
-
-.social-icon {
-  width: 24px;
-  height: 24px;
-  display: inline-block;
-  margin-right: 4px;
-}
+@import 'layout';

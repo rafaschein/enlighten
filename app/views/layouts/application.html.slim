@@ -7,42 +7,27 @@ html lang="en"
     title = content_for?(:title) ? "#{yield(:title)} - Enlighten" : 'Enlighten'
 
     = stylesheet_link_tag 'application'
-    = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body
 
-    nav.top-bar role='navigation' data-options="is_hover: false" data-topbar='data-topbar'
-      ul.title-area
-        li.name
-          h1 = link_to 'Enlighten', root_path
-        li.toggle-topbar.menu-icon
-          a href='#'
-            span Menu
+    - if user_signed_in?
+      nav.navbar role='navigation'
+        ul.navbar__title
+          li
+            h1 = link_to 'Enlighten', root_path
 
-      - if user_signed_in?
-        section.top-bar-section
-          ul.right
-            li.has-dropdown
-              a href='#' +
-              ul.dropdown
-                li = link_to 'New Project...', new_project_path
-                li = link_to 'New Person...', new_person_path
-                li = link_to 'New Client...', new_client_path
-                li = link_to 'New Technology...', new_technology_path
-            li
-              = link_to('Log out', destroy_user_session_path, method: :delete)
-
-          // ul.left
-          //   li
+        ul.navbar__options
+          li
+            = link_to('Log out', destroy_user_session_path, method: :delete)
 
     - if alert.present?
-      .alert-box.alert data-alert=''
+      .alert-box.alert
         = alert
         a.close href='#' class='close' &times;
 
     - if notice.present?
-      .alert-box.info data-alert=''
+      .alert-box.info
         = notice
         a.close href='#' class='close' &times;
 

@@ -1,44 +1,84 @@
 - content_for :title, @person.name
 
-= link_to 'Destroy', @person, data: { confirm: 'Are you sure?' }, method: :delete, class: 'tiny alert button right'
-= link_to 'Edit', edit_person_path(@person), class: 'tiny secondary button right'
-= link_to 'Back', people_path, class: 'tiny secondary button right'
+aside
+  .card
+    .card__title.text-center
+      = link_to @person do
+        .avatar.avatar--person style="background-image: url(#{attachment_url(@person, :image, :fill, 300, 300, format: 'jpg')})"
 
-- if current_user.followed_people.include?(@person)
-  = link_to 'Unfollow', unfollow_person_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Follow', follow_person_path, method: :put, class: 'tiny secondary button right'
+    .card__content.text-center
+      h4 = @person.name
 
-- if current_user.liked_people.include?(@person)
-  = link_to 'Unlike', unlike_person_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Like', like_person_path, method: :put, class: 'tiny secondary button right'
-
-= render partial: 'components/head', locals: { main_model: @person, secondary_model: nil }
-
-.row
-  .attributes-container.small-4.columns
-    dl
       - if @person.user.present?
-        dt Email:
-        dd = @person.user.email
+        span = @person.user.email
 
-      - @person.social_links.any?
-        dt Social:
-        dd
+      - if current_user.followed_people.include?(@person)
+        = link_to 'Unfollow', unfollow_person_path, method: :put, class: 'button'
+      - else
+        = link_to 'Follow', follow_person_path, method: :put, class: 'button'
+
+
+  - @person.social_links.any?
+    .card
+      .card__content.text-center
+        h5 = "follow #{@person.name} on:"
+        .social-networks
           - @person.social_links.each do |social_link|
-            = link_to social_link.url, target: '_blank', class: 'button'
-              = image_tag "social/#{social_link.provider}.png", class: 'social-icon', width: '24', height: '24'
-              = social_link.provider
+            = link_to social_link.url, target: '_blank'
+              = image_tag "social/#{social_link.provider}.png", class: 'social-link', width: '24', height: '24'
 
-      dt Projects:
-      dd = render partial: 'components/image_list', locals: { model_list: @person.memberships.map(&:project) }
+  .card
+    .card__content
+      h5 Technologies
+      ul
+      - @person.technologies.each do |person_technology|
+        li tooltip=person_technology.technology.name = link_to person_technology.technology do
+          = image_tag attachment_url(person_technology.technology, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--technology'
+          = " #{person_technology.technology.name} (#{person_technology.skill_rating})"
 
-      dt Technologies:
-      dd = render partial: 'components/image_list', locals: { model_list: @person.technologies.map(&:technology) }
+.main
+  .card
+    .card__title
+      ul.card__menu
+        li = link_to 'Destroy', @person, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
+        li = link_to 'Edit', edit_person_path(@person), class: 'button'
 
+        - if current_user.liked_people.include?(@person)
+          li = link_to 'Unlike', unlike_person_path, method: :put, class: 'button'
+        - else
+          li = link_to 'Like', like_person_path, method: :put, class: 'button'
+
+    .card__content
+      ul.extra-info
+        li
+          span.extra-info__value 117
+          span.extra-info__label followers
+
+        li
+          span.extra-info__value 180
+          span.extra-info__label favorites
+
+        li
+          span.extra-info__value 124
+          span.extra-info__label comments
+
+        li
+          span.extra-info__value 240
+          span.extra-info__label posts
+
+  .card
+    .card__content
+      = render partial: 'shared/activity_form', locals: { instance: Post.new, url: person_activities_path(person_id: @person.id, type: :post) }
+
+      #activities
+        = render partial: 'shared/activity', collection: @person.all_activities
+
+  .card
+    .card__content
+      h3 Projects
+      ul
+      - @person.memberships.each do |membership|
+        li tooltip=membership.project.name = link_to membership.project do
+          = image_tag attachment_url(membership.project, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--project'
+          = " #{membership.project.name}"
   .timeline.small-8.columns
-    = render partial: 'shared/activity_form', locals: { instance: Post.new, url: person_activities_path(person_id: @person.id, type: :post) }
-
-    #activities
-      = render partial: 'shared/activity', collection: @person.all_activities

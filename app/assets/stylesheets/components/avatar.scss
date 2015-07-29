@@ -1,0 +1,28 @@
+@charset 'utf-8';
+
+.avatar {
+  display: inline-block;
+  height: 100px;
+  position: relative;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.avatar--small {
+  height: 32px;
+  width: 32px;
+}
+
+.avatar--person {
+  border-radius: 50%;
+}
+
+.avatar--project {
+  border-radius: 10%;
+}
+
+.avatar--technology {
+  @include prefix(clip-path,
+                  polygon(29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%),
+                  ('moz', 'ms', 'webkit'));
+}

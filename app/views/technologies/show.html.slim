@@ -1,50 +1,69 @@
 - content_for :title, @technology.name
 
-= link_to 'Destroy', @technology, data: { confirm: 'Are you sure?' }, method: :delete, class: 'tiny alert button right'
-= link_to 'Edit', edit_technology_path(@technology), class: 'tiny secondary button right'
-= link_to 'Back', technologies_path, class: 'tiny secondary button right'
+aside
+  .card
+    .card__title.text-center
+      = link_to @technology do
+        .avatar.avatar--technology style="background-image: url(#{attachment_url(@technology, :image, :fill, 300, 300, format: 'jpg')})"
 
-- if current_user.followed_technologies.include?(@technology)
-  = link_to 'Unfollow', unfollow_technology_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Follow', follow_technology_path, method: :put, class: 'tiny secondary button right'
+    .card__content.text-center
+      h4 = @technology.name
 
-- if current_user.liked_technologies.include?(@technology)
-  = link_to 'Unlike', unlike_technology_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Like', like_technology_path, method: :put, class: 'tiny secondary button right'
+      = link_to @technology.website do
+        = @technology.website
 
-= render partial: 'components/head', locals: { main_model: @technology, secondary_model: nil }
+      - if current_user.followed_technologies.include?(@technology)
+        = link_to 'Unfollow', unfollow_technology_path, method: :put, class: 'button'
+      - else
+        = link_to 'Follow', follow_technology_path, method: :put, class: 'button'
 
-.row
-  .attributes-container.small-4.columns
-    dl
-      dt Website:
-      dd = link_to @technology.website, @technology.website
+.main
+  .card
+    .card__title
+      ul.card__menu
+        li = link_to 'Destroy', @technology, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
+        li = link_to 'Edit', edit_technology_path(@technology), class: 'button'
 
-      dt Category:
-      dd = @technology.category.name
+        - if current_user.liked_technologies.include?(@technology)
+          li = link_to 'Unlike', unlike_technology_path, method: :put, class: 'button'
+        - else
+          li = link_to 'Like', like_technology_path, method: :put, class: 'button'
 
-      - if @technology.parent.present?
-        dt Parent technology:
-        dd = @technology.parent.name
+    .card__content
+      ul.extra-info
+        li
+          span.extra-info__value 117
+          span.extra-info__label followers
 
-      dt Projects:
-      dd
-        ul
-          - @technology.projects.each do |projects|
-            li = link_to projects do
-              = projects.name
+        li
+          span.extra-info__value 180
+          span.extra-info__label favorites
 
-      dt Skilled people:
-      dd
-        ul
-          - @technology.skilled_people.each do |skilled_person|
-            li = link_to skilled_person.person do
-              = "#{skilled_person.person.name} (#{skilled_person.skill_rating})"
+        li
+          span.extra-info__value 124
+          span.extra-info__label comments
 
-  .timeline.small-8.columns
-    = render partial: 'shared/activity_form', locals: { instance: Post.new, url: technology_activities_path(technology_id: @technology.id, type: :post) }
+  .card
+    .card__content
+      = render partial: 'shared/activity_form', locals: { instance: Post.new, url: technology_activities_path(technology_id: @technology.id, type: :post) }
 
-    #activities
-      = render partial: 'shared/activity', collection: @technology.activities
+      #activities
+        = render partial: 'shared/activity', collection: @technology.activities
+
+  .card
+    .card__content
+      h5 Projects:
+      ul
+        - @technology.projects.each do |project|
+          li tooltip=project.name = link_to project do
+            = image_tag attachment_url(project, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--project'
+            = " #{project.name}"
+
+  .card
+    .card__content
+      h5 Skilled people:
+      ul
+        - @technology.skilled_people.each do |skilled_person|
+          li tooltip=skilled_person.person.name = link_to skilled_person.person do
+            = image_tag attachment_url(skilled_person.person, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--person'
+            = " #{skilled_person.person.name} (#{skilled_person.skill_rating})"

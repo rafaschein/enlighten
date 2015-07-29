@@ -1,0 +1,27 @@
+@charset 'utf-8';
+
+// extra-small is the default
+$breakpoints: (
+  'small': (min-width: 768px),
+  'medium': (min-width: 992px),
+  'large': (min-width: 1200px),
+);
+
+/// Responsive manager.
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(type-of($raw-query) == 'string', unquote($raw-query), inspect($raw-query));
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}

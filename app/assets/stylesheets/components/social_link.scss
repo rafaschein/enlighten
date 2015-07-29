@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+.social-link {
+  background-color: $color-text;
+  border-radius: 6px;
+  display: inline-block;
+  height: 32px;
+  margin: 0 $spacing/4 $spacing;
+  padding: 6px;
+  width: 32px;
+}

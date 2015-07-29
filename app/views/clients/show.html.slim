@@ -1,29 +1,51 @@
 - content_for :title, @client.name
 
-= link_to 'Destroy', @client, data: { confirm: 'Are you sure?' }, method: :delete, class: 'tiny alert button right'
-= link_to 'Edit', edit_client_path(@client), class: 'tiny secondary button right'
-= link_to 'Back', clients_path, class: 'tiny secondary button right'
+aside
+  .card
+    .card__title.text-center
+      = link_to @client do
+        .avatar.avatar--project style="background-image: url(#{attachment_url(@client, :image, :fill, 300, 300, format: 'jpg')})"
 
-- if current_user.followed_clients.include?(@client)
-  = link_to 'Unfollow', unfollow_client_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Follow', follow_client_path, method: :put, class: 'tiny secondary button right'
+    .card__content.text-center
+      h4 = link_to @client do
+        = @client.name
 
-- if current_user.liked_clients.include?(@client)
-  = link_to 'Unlike', unlike_client_path, method: :put, class: 'tiny secondary button right'
-- else
-  = link_to 'Like', like_client_path, method: :put, class: 'tiny secondary button right'
+      = link_to @client.website, @client.website
 
-= render partial: 'components/head', locals: { main_model: @client, secondary_model: nil }
+      - if current_user.followed_clients.include?(@client)
+        = link_to 'Unfollow', unfollow_client_path, method: :put, class: 'button'
+      - else
+        = link_to 'Follow', follow_client_path, method: :put, class: 'button'
 
-.panel
-  dl
-    dt Website:
-    dd = link_to @client.website, @client.website
+.main
+  .card
+    .card__title
+      ul.card__menu
+        li = link_to 'Destroy', @client, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
+        li = link_to 'Edit', edit_client_path(@client), class: 'button'
 
-    dt Projects:
-    dd
-      ul
-        - @client.projects.each do |project|
-          li = link_to project do
-            = project.name
+        - if current_user.liked_clients.include?(@person)
+          li = link_to 'Unlike', unlike_client_path, method: :put, class: 'button'
+        - else
+          li = link_to 'Like', like_client_path, method: :put, class: 'button'
+
+    .card__content
+      ul.extra-info
+        li
+          span.extra-info__value 117
+          span.extra-info__label followers
+
+        li
+          span.extra-info__value 180
+          span.extra-info__label favorites
+
+        li
+          span.extra-info__value 124
+          span.extra-info__label comments
+
+  .card
+    .card__content.markdown
+      - @client.projects.each do |project|
+        li tooltip=project.name = link_to project do
+          = image_tag attachment_url(project, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--project'
+          = " #{project.name}"

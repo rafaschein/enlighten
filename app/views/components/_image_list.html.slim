@@ -1,4 +1,0 @@
-ul.picture-list
-  - model_list.each do |model_instance|
-    li tooltip=model_instance.name = link_to model_instance do
-      = image_tag attachment_url(model_instance, :image, :fill, 45, 45, format: 'jpg')

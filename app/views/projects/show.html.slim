@@ -7,7 +7,12 @@ aside
         .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'jpg')})"
 
     .card__content.text-center
-      h4 = @project.name
+      h4 = link_to @project do
+        = @project.name
+
+      - if @project.client.present?
+        h5 = link_to @project.client do
+          = @project.client.name
 
       = link_to @project.scm_reference do
         = @project.scm_reference
@@ -42,7 +47,7 @@ aside
         li = link_to 'Destroy', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
         li = link_to 'Edit', edit_project_path(@project), class: 'button'
 
-        - if current_user.liked_projects.include?(@person)
+        - if current_user.liked_projects.include?(@project)
           li = link_to 'Unlike', unlike_project_path, method: :put, class: 'button'
         - else
           li = link_to 'Like', like_project_path, method: :put, class: 'button'

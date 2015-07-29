@@ -61,15 +61,15 @@ aside
           span.extra-info__value 124
           span.extra-info__label comments
 
-  .card
-    .card__content.markdown
-      = render_markdown @project.description
-
   - if @project.screenshots.any?
     .card
       .card__content
         - @project.screenshots.each do |screenshot|
           = image_tag attachment_url(screenshot, :image, :fit, 160, 160, format: 'jpg')
+
+  .card
+    .card__content.markdown
+      = render_markdown @project.description
 
   .card
     .card__content

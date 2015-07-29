@@ -4,7 +4,7 @@ aside
   .card
     .card__title.text-center
       = link_to @project do
-        .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'jpg')})"
+        .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
       h4 = link_to @project do
@@ -28,7 +28,7 @@ aside
       ul
       - @project.technologies.each do |technology|
         li tooltip=technology.name = link_to technology do
-          = image_tag attachment_url(technology, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--technology'
+          = image_tag attachment_url(technology, :image, :fill, 45, 45, format: 'png'), class: 'avatar avatar--small avatar--technology'
           = " #{technology.name}"
 
   .card
@@ -37,7 +37,7 @@ aside
       ul
       - @project.members.each do |member|
         li tooltip=member.person.name = link_to member.person do
-          = image_tag attachment_url(member.person, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--person'
+          = image_tag attachment_url(member.person, :image, :fill, 45, 45, format: 'png'), class: 'avatar avatar--small avatar--person'
           = " #{member.person.name}"
 
 .main
@@ -70,7 +70,7 @@ aside
     .card
       .card__content
         - @project.screenshots.each do |screenshot|
-          = image_tag attachment_url(screenshot, :image, :fit, 160, 160, format: 'jpg')
+          = image_tag attachment_url(screenshot, :image, :fit, 160, 160, format: 'png')
 
   .card
     .card__content.markdown

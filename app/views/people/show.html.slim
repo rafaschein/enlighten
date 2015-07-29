@@ -4,7 +4,7 @@ aside
   .card
     .card__title.text-center
       = link_to @person do
-        .avatar.avatar--person style="background-image: url(#{attachment_url(@person, :image, :fill, 300, 300, format: 'jpg')})"
+        .avatar.avatar--person style="background-image: url(#{attachment_url(@person, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
       h4 = @person.name
@@ -33,7 +33,7 @@ aside
       ul
       - @person.technologies.each do |person_technology|
         li tooltip=person_technology.technology.name = link_to person_technology.technology do
-          = image_tag attachment_url(person_technology.technology, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--technology'
+          = image_tag attachment_url(person_technology.technology, :image, :fill, 45, 45, format: 'png'), class: 'avatar avatar--small avatar--technology'
           = " #{person_technology.technology.name} (#{person_technology.skill_rating})"
 
 .main
@@ -79,5 +79,5 @@ aside
       ul
       - @person.memberships.each do |membership|
         li tooltip=membership.project.name = link_to membership.project do
-          = image_tag attachment_url(membership.project, :image, :fill, 45, 45, format: 'jpg'), class: 'avatar avatar--small avatar--project'
+          = image_tag attachment_url(membership.project, :image, :fill, 45, 45, format: 'png'), class: 'avatar avatar--small avatar--project'
           = " #{membership.project.name}"

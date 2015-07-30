@@ -77,7 +77,4 @@ aside
 
   .card
     .card__content
-      = render partial: 'shared/activity_form', locals: { instance: Post.new, url: project_activities_path(project_id: @project.id, type: :post) }
-
-      #activities
-        = render partial: 'shared/activity', collection: @project.activities
+      = render partial: 'shared/activity', locals: { instance: Post.new, url: project_activities_path(project_id: @project.id, type: :post), activities: @project.activities }

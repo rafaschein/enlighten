@@ -1,13 +1,22 @@
-- if activity.item.is_a? Post
-  article.activity-item
-    .activity-item__left
-        = link_to activity.user.person do
-          = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'png'), class: 'avatar avatar--person'
+= simple_form_for(instance, url: url, type: :post, html: { class: 'activity-form' }) do |f|
+  .row.collapse
+    .small-9.columns
+      = f.text_field :body, autofocus: true, placeholder: 'Have something nice to say?'
+    .small-3.columns
+      = f.button :submit, class: 'postfix'
+      
+#activities
+  - activities.each do |activity|
+    - if activity.item.is_a? Post
+      article.activity-item
+        .activity-item__left
+            = link_to activity.user.person do
+              = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'png'), class: 'avatar avatar--person'
 
-    .activity-item__content
-      = render_markdown activity.item.body
+        .activity-item__content
+          = render_markdown activity.item.body
 
-      = "Posted in #{time_ago_in_words(activity.created_at)}"
-      - unless request.path == url_for(activity.activity_owner)
-        = ' on '
-        = link_to "#{activity.activity_owner.name}", activity.activity_owner
+          = "Posted in #{time_ago_in_words(activity.created_at)}"
+          - unless request.path == url_for(activity.activity_owner)
+            = ' on '
+            = link_to "#{activity.activity_owner.name}", activity.activity_owner

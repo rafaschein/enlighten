@@ -7,10 +7,10 @@ aside
         .avatar.avatar--project style="background-image: url(#{attachment_url(@client, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
-      h4 = link_to @client do
+      h1.card--profile__name = link_to @client do
         = @client.name
 
-      = link_to @client.website, @client.website
+      span.card--profile__data = link_to @client.website, @client.website
 
       - if current_user.followed_clients.include?(@client)
         = link_to 'Unfollow', unfollow_client_path, method: :put, class: 'button'

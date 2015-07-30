@@ -7,15 +7,13 @@ aside
         .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
-      h4 = link_to @project do
+      h1.card--profile__name = link_to @project do
         = @project.name
 
       - if @project.client.present?
-        h5 = link_to @project.client do
-          = @project.client.name
+        span.card--profile__subname = link_to @project.client.name, @project.client
 
-      = link_to @project.scm_reference do
-        = @project.scm_reference
+      span.card--profile__data = link_to @project.scm_reference
 
       - if current_user.followed_projects.include?(@project)
         = link_to 'Unfollow', unfollow_project_path, method: :put, class: 'button'

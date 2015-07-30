@@ -8,16 +8,16 @@ aside
         .avatar.avatar--person style="background-image: url(#{attachment_url(@person, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
-      h4 = @person.name
+      h1.card--profile__name = link_to @person do
+        = @person.name
 
       - if @person.user.present?
-        span = @person.user.email
+        span.card--profile__data = mail_to @person.user.email, @person.user.email
 
       - if current_user.followed_people.include?(@person)
         = link_to 'Unfollow', unfollow_person_path, method: :put, class: 'button'
       - else
         = link_to 'Follow', follow_person_path, method: :put, class: 'button'
-
 
   - @person.social_links.any?
     .card

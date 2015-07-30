@@ -7,10 +7,10 @@ aside
         .avatar.avatar--technology style="background-image: url(#{attachment_url(@technology, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
-      h4 = @technology.name
+      h1.card--profile__name = link_to @technology do
+        = @technology.name
 
-      = link_to @technology.website do
-        = @technology.website
+      span.card--profile__data = link_to @technology.website, @technology.website
 
       - if current_user.followed_technologies.include?(@technology)
         = link_to 'Unfollow', unfollow_technology_path, method: :put, class: 'button'

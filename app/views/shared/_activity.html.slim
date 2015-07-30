@@ -19,4 +19,4 @@
           = "Posted in #{time_ago_in_words(activity.created_at)}"
           - unless request.path == url_for(activity.activity_owner)
             = ' on '
-            = link_to "#{activity.activity_owner.name}", activity.activity_owner
+            = link_to activity.activity_owner.name, activity.activity_owner

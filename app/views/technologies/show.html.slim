@@ -3,6 +3,7 @@
 aside
   .card
     .card__title.text-center
+      .card__title-background  style="background-image: url(#{attachment_url(@technology, :image, :fill, 300, 300, format: 'png')})"
       = link_to @technology do
         .avatar.avatar--technology style="background-image: url(#{attachment_url(@technology, :image, :fill, 300, 300, format: 'png')})"
 

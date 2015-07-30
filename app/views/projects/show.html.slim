@@ -3,6 +3,7 @@
 aside
   .card
     .card__title.text-center
+      .card__title-background  style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'png')})"
       = link_to @project do
         .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'png')})"
 

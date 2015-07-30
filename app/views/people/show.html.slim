@@ -69,7 +69,6 @@ aside
 
   .card
     .card__content
-    
       = render partial: 'shared/activity', locals: { instance: Post.new, url: person_activities_path(person_id: @person.id, type: :post), activities: @person.all_activities }
 
   .card

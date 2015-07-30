@@ -1,16 +1,13 @@
 - if activity.item.is_a? Post
-  article.activity-item.post
-    .row
-      .small-2.columns
-        .activity-person tooltip=activity.user.person.name = link_to activity.user.person do
-          = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'png')
+  article.activity-item
+    .activity-item__left
+        = link_to activity.user.person do
+          = image_tag attachment_url(activity.user.person, :image, :fill, 90, 90, format: 'png'), class: 'avatar avatar--person'
 
-      .small-10.columns
-          = render_markdown activity.item.body
+    .activity-item__content
+      = render_markdown activity.item.body
 
-    .row
-      span.small-12.columns
-        = "Posted in #{time_ago_in_words(activity.created_at)}"
-        - unless request.path == url_for(activity.activity_owner)
-          = ' on '
-          = link_to "#{activity.activity_owner.name}", activity.activity_owner
+      = "Posted in #{time_ago_in_words(activity.created_at)}"
+      - unless request.path == url_for(activity.activity_owner)
+        = ' on '
+        = link_to "#{activity.activity_owner.name}", activity.activity_owner

@@ -72,10 +72,10 @@ class ProjectsController < ApplicationController
     current_user.liked_projects << @project
 
     if current_user.save
-      redirect_to project_path, notice: "You're liked the project."
+      redirect_to project_path, notice: 'You liked the project.'
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @project, notice: "You're already liked the project."
+    redirect_to @project, notice: 'You already liked the project.'
   end
 
   # PATCH/PUT /like

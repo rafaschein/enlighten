@@ -72,10 +72,10 @@ class PeopleController < ApplicationController
     current_user.liked_people << @person
 
     if current_user.save
-      redirect_to person_path, notice: "You're liked the person."
+      redirect_to person_path, notice: 'You liked the person.'
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @person, notice: "You're already liked the person."
+    redirect_to @person, notice: 'You already liked the person.'
   end
 
   # PATCH/PUT /like

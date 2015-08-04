@@ -72,10 +72,10 @@ class ClientsController < ApplicationController
     current_user.liked_clients << @client
 
     if current_user.save
-      redirect_to client_path, notice: "You're liked the client."
+      redirect_to client_path, notice: 'You liked the client.'
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @client, notice: "You're already liked the client."
+    redirect_to @client, notice: 'You already liked the client.'
   end
 
   # PATCH/PUT /like

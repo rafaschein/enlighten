@@ -72,10 +72,10 @@ class TechnologiesController < ApplicationController
     current_user.liked_technologies << @technology
 
     if current_user.save
-      redirect_to @technology, notice: "You're liked the technology."
+      redirect_to @technology, notice: 'You liked the technology.'
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @technology, notice: "You're already liked the technology."
+    redirect_to @technology, notice: 'You already liked the technology.'
   end
 
   # PATCH/PUT /like

@@ -28,12 +28,20 @@ Capybara.register_driver :poltergeist do |app|
     timeout: 120,
     debug: false,
     phantomjs_options: ['--load-images=no', '--disk-cache=false'],
-    inspector: true
+    inspector: true,
+    window_size: [1024, 2048]
   }
 
   Capybara::Poltergeist::Driver.new(app, options)
 end
 
-AfterStep do
-  page.save_screenshot 'scr.png'
+# Screenshots after steps - good for debugging
+screenshots_folder = Rails.root.join('screenshots')
+screenshots_folder.children.each(&:unlink) if screenshots_folder.exist?
+
+screenshot_count = 0
+
+AfterStep do |scenario|
+  page.save_screenshot screenshots_folder.join("scr-#{screenshot_count}-#{scenario.title.parameterize}.png")
+  screenshot_count += 1
 end

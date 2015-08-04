@@ -10,7 +10,7 @@ vendor/bundle
 
 # Ignore all logfiles and tempfiles.
 /log/*
+screenshots/*
 !/log/.keep
 /tmp
 coverage
-scr.png

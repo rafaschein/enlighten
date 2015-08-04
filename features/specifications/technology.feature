@@ -7,6 +7,34 @@ Feature: Technology
       | attribute | value                     |
       | name      | Ruby                      |
       | website   | https://www.ruby-lang.org |
-    When  I access created object url
+    When  I access its url
     Then  I should see "Ruby"
     And   I should see a link "https://www.ruby-lang.org" with href "https://www.ruby-lang.org"
+
+  Scenario: Follow technology
+    Given a "technology"
+    And  I am on its url
+    When I click on "Follow"
+    Then I should see "UNFOLLOW"
+
+  Scenario: Unfollow technology
+    Given a "technology"
+    And  I am on its url
+    And  I clicked on "Follow"
+    When I click on "Unfollow"
+    And  I should see "FOLLOW"
+
+  Scenario: Like technology
+    Given a "technology"
+    And  I am on its url
+    When I click on "Like"
+    Then I should see "You liked the technology"
+    And  I should see "UNLIKE"
+
+  Scenario: Unlike technology
+    Given a "technology"
+    And  I am on its url
+    And  I clicked on "Like"
+    When I click on "Unlike"
+    Then I should see "You're not liking the technology"
+    And  I should see "LIKE"

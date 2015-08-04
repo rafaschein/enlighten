@@ -10,7 +10,7 @@ Given(/^I access "(.*?)"$/) do |url|
   visit url
 end
 
-When(/^I access created object url$/) do
+When(/^I (?:access|am on) its url$/) do
   model_url = polymorphic_url(@model_instance,
                               host: Capybara.current_session.server.host,
                               port: Capybara.current_session.server.port)
@@ -21,15 +21,19 @@ When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |element, text|
   fill_in element, with: text
 end
 
-When(/^I click on the "(.*?)" button$/) do |button|
+When(/^I click(?:ed)? on the "(.*?)" button$/) do |button|
   click_button(button)
 end
 
-When(/^I click on "(.*?)"$/) do |link|
+When(/^I click(?:ed)? on "(.*?)"$/) do |link|
   click_link(link)
 end
 
 Then(/^I should see "(.*?)"$/) do |text|
+  expect(page).to have_content(text)
+end
+
+Then(/^I should not see "(.*?)"$/) do |text|
   expect(page).to have_content(text)
 end
 

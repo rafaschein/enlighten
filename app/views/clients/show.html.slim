@@ -25,7 +25,7 @@ aside
         li = link_to 'Destroy', @client, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
         li = link_to 'Edit', edit_client_path(@client), class: 'button'
 
-        - if current_user.liked_clients.include?(@person)
+        - if current_user.liked_clients.include?(@client)
           li = link_to 'Unlike', unlike_client_path, method: :put, class: 'button'
         - else
           li = link_to 'Like', like_client_path, method: :put, class: 'button'

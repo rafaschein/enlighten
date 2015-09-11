@@ -282,7 +282,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.0)
     redcarpet (3.3.2)
-    refile (0.6.0)
+    refile (0.6.1)
       mime-types
       rest-client (~> 1.8)
       sinatra (~> 1.4.5)

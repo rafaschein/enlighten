@@ -63,7 +63,7 @@ gem 'irbtools', require: 'irbtools/binding'
 gem 'rails_12factor', group: :production
 
 # Send files
-gem 'refile', require: ['refile/rails', 'refile/image_processing']
+gem 'refile', require: ['refile/rails']
 gem 'refile-mini_magick'
 gem 'refile-s3'
 

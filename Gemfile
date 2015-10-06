@@ -110,6 +110,7 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'poltergeist'
+  gem 'selenium-webdriver'
 
   # Generates test data
   gem 'factory_girl_rails', '~> 4.0'

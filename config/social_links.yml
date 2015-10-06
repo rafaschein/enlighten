@@ -28,7 +28,7 @@ default: &default
     url: 'https://instagram.com/#identifier'
 
   - provider: linkedin
-    url: '#identifier'
+    url: 'https://www.linkedin.com/in/#identifier'
 
   - provider: pinterest
     url: 'https://www.pinterest.com//#identifier'

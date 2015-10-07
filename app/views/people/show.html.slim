@@ -14,19 +14,10 @@ aside
       - if @person.user.present?
         span.card--profile__data = mail_to @person.user.email, @person.user.email
 
-      - if current_user.followed_people.include?(@person)
-        = link_to 'Unfollow', unfollow_person_path, method: :put, class: 'button'
-      - else
-        = link_to 'Follow', follow_person_path, method: :put, class: 'button'
-
-  - @person.social_links.any?
-    .card
-      .card__content.text-center
-        h5 = "follow #{@person.name} on:"
-        .social-networks
-          - @person.social_links.each do |social_link|
-            = link_to social_link.url, target: '_blank'
-              = image_tag "social/#{social_link.provider}.png", class: 'social-link', width: '24', height: '24'
+      .social-links
+        - @person.social_links.each do |social_link|
+          = link_to social_link.url, target: '_blank'
+            = image_tag "social/#{social_link.provider}.png", class: 'social-link', width: '24', height: '24'
 
   .card
     .card__content
@@ -43,6 +34,11 @@ aside
       ul.card__menu
         li = link_to 'Destroy', @person, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
         li = link_to 'Edit', edit_person_path(@person), class: 'button'
+
+        - if current_user.followed_people.include?(@person)
+          li = link_to 'Unfollow', unfollow_person_path, method: :put, class: 'button'
+        - else
+          li = link_to 'Follow', follow_person_path, method: :put, class: 'button'
 
         - if current_user.liked_people.include?(@person)
           li = link_to 'Unlike', unlike_person_path, method: :put, class: 'button'

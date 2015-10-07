@@ -19,10 +19,7 @@
   }
 
   &__button {
-    background-color: $color-background-card;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
+    background: $color-background-card center/14px no-repeat;
     border: 1px solid $color-background;
     display: block;
     float: left;

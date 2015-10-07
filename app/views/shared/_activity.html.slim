@@ -1,9 +1,9 @@
+h5 Activity
+
 = simple_form_for(instance, url: url, type: :post, html: { class: 'activity-form' }) do |f|
-  .row.collapse
-    .small-9.columns
-      = f.text_field :body, autofocus: true, placeholder: 'Have something nice to say?'
-    .small-3.columns
-      = f.button :submit, class: 'postfix'
+    = f.button(:button, '', class: 'activity-form__button activity-form__button--image')
+    = f.text_field :body, class: 'activity-form__body', autofocus: true, placeholder: 'Have something nice to say?'
+    = f.button(:button, '', id: 'submit-post', class: 'activity-form__button activity-form__button--submit')
 
 #activities
   - activities.each do |activity|

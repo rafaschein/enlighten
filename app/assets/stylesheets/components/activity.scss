@@ -1,5 +1,47 @@
 @charset 'utf-8';
 
+.activity-form {
+  @include clearfix;
+  border-bottom: 1px solid $color-background;
+  margin-left: -$spacing;
+  margin-right: -$spacing;
+  padding: 0 $spacing $spacing;
+
+  &__body {
+    background-color: $color-background-card;
+    border: 1px solid $color-background;
+    border-left: 0;
+    border-right: 0;
+    display: block;
+    float: left;
+    height: 34px;
+    padding: 0 6px;
+    width: calc(100% - 35px * 2);
+  }
+
+  &__button {
+    background-color: $color-background-card;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    border: 1px solid $color-background;
+    display: block;
+    float: left;
+    height: 34px;
+    width: 34px;
+
+    &--image {
+      background-image: inline-image('icons/icn-picture.svg');
+      border-radius: 6px 0 0 6px;
+    }
+
+    &--submit {
+      background-image: inline-image('icons/icn-post.svg');
+      border-radius: 0 6px 6px 0;
+    }
+  }
+}
+
 .activity-item {
   @include clearfix;
   margin-bottom: $spacing;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="250px" height="250px" viewBox="0 0 250 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>icn-post</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="icn-post" sketch:type="MSArtboardGroup" fill="#4A5E6E">
+            <path d="M0,250 C0,250 52.1806854,238.28125 66.9781931,226.5625 L23.364486,182.8125 C11.682243,197.65625 0,250 0,250 L0,250 Z M179.127726,26.5625 L34.2679128,171.875 L78.6604361,216.40625 L223.520249,71.09375 L179.127726,26.5625 Z M218.068536,0 C209.501558,0 201.713396,3.125 196.261682,9.375 L190.031153,15.625 L234.423676,60.15625 L240.654206,53.90625 C246.105919,48.4375 250,40.625 250,32.03125 C249.221184,14.0625 235.202492,0 218.068536,0 Z" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

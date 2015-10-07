@@ -3,8 +3,7 @@
 .activity-form {
   @include clearfix;
   border-bottom: 1px solid $color-background;
-  margin-left: -$spacing;
-  margin-right: -$spacing;
+  margin: 0 (-$spacing);
   padding: 0 $spacing $spacing;
 
   &__body {

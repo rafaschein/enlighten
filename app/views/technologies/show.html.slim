@@ -8,15 +8,20 @@ aside
         .avatar.avatar--technology style="background-image: url(#{attachment_url(@technology, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
+      - if current_user.followed_technologies.include?(@technology)
+        = counter_link('Unfollow', @technology.followers.count, unfollow_technology_path(@technology))
+      - else
+        = counter_link('Follow', @technology.followers.count, follow_technology_path(@technology))
+
+      - if current_user.liked_technologies.include?(@technology)
+        = counter_link('Unlike', @technology.likers.count, unlike_technology_path(@technology))
+      - else
+        = counter_link('Like', @technology.likers.count, like_technology_path(@technology))
+
       h1.card--profile__name = link_to @technology do
         = @technology.name
 
       span.card--profile__data = link_to @technology.website, @technology.website
-
-      - if current_user.followed_technologies.include?(@technology)
-        = link_to 'Unfollow', unfollow_technology_path, method: :put, class: 'button'
-      - else
-        = link_to 'Follow', follow_technology_path, method: :put, class: 'button'
 
 .main
   .card
@@ -24,11 +29,6 @@ aside
       ul.card__menu
         li = link_to 'Destroy', @technology, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
         li = link_to 'Edit', edit_technology_path(@technology), class: 'button'
-
-        - if current_user.liked_technologies.include?(@technology)
-          li = link_to 'Unlike', unlike_technology_path, method: :put, class: 'button'
-        - else
-          li = link_to 'Like', like_technology_path, method: :put, class: 'button'
 
     .card__content
       ul.extra-info

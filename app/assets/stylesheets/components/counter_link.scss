@@ -1,0 +1,19 @@
+.counter-link {
+  color: $color-background-card;
+  display: inline-block;
+  font-size: 10px;
+  line-height: 14px;
+  margin: $spacing / 4;
+
+  &__label {
+    background-color: $color-text;
+    border-radius: 4px 0 0 4px;
+    padding: 2px 6px;
+  }
+
+  &__counter {
+    background-color: $color-text-strong;
+    border-radius: 0 4px 4px 0;
+    padding: 2px 6px;
+  }
+}

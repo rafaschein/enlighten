@@ -14,21 +14,21 @@ Feature: Project
     Given a "project"
     And  I am on its url
     When I click on "Follow"
-    Then I should see "UNFOLLOW"
+    Then I should see "Unfollow"
 
   Scenario: Unfollow project
     Given a "project"
     And  I am on its url
     And  I clicked on "Follow"
     When I click on "Unfollow"
-    And  I should see "FOLLOW"
+    And  I should see "Follow"
 
   Scenario: Like project
     Given a "project"
     And  I am on its url
     When I click on "Like"
     Then I should see "You liked the project"
-    And  I should see "UNLIKE"
+    And  I should see "Unlike"
 
   Scenario: Unlike project
     Given a "project"
@@ -36,4 +36,4 @@ Feature: Project
     And  I clicked on "Like"
     When I click on "Unlike"
     Then I should see "You're not liking the project"
-    And  I should see "LIKE"
+    And  I should see "Like"

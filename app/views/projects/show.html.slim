@@ -8,6 +8,16 @@ aside
         .avatar.avatar--project style="background-image: url(#{attachment_url(@project, :image, :fill, 300, 300, format: 'png')})"
 
     .card__content.text-center
+      - if current_user.followed_projects.include?(@project)
+        = counter_link('Unfollow', @project.followers.count, unfollow_project_path(@project))
+      - else
+        = counter_link('Follow', @project.followers.count, follow_project_path(@project))
+
+      - if current_user.liked_projects.include?(@project)
+        = counter_link('Unlike', @project.likers.count, unlike_project_path(@project))
+      - else
+        = counter_link('Like', @project.likers.count, like_project_path(@project))
+
       h1.card--profile__name = link_to @project do
         = @project.name
 
@@ -15,11 +25,6 @@ aside
         span.card--profile__subname = link_to @project.client.name, @project.client
 
       span.card--profile__data = link_to @project.scm_reference
-
-      - if current_user.followed_projects.include?(@project)
-        = link_to 'Unfollow', unfollow_project_path, method: :put, class: 'button'
-      - else
-        = link_to 'Follow', follow_project_path, method: :put, class: 'button'
 
   .card
     .card__content
@@ -45,11 +50,6 @@ aside
       ul.card__menu
         li = link_to 'Destroy', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
         li = link_to 'Edit', edit_project_path(@project), class: 'button'
-
-        - if current_user.liked_projects.include?(@project)
-          li = link_to 'Unlike', unlike_project_path, method: :put, class: 'button'
-        - else
-          li = link_to 'Like', like_project_path, method: :put, class: 'button'
 
     .card__content
       ul.extra-info

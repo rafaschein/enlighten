@@ -13,21 +13,21 @@ Feature: Person
     Given a "person"
     And  I am on its url
     When I click on "Follow"
-    Then I should see "UNFOLLOW"
+    Then I should see "Unfollow"
 
   Scenario: Unfollow person
     Given a "person"
     And  I am on its url
     And  I clicked on "Follow"
     When I click on "Unfollow"
-    And  I should see "FOLLOW"
+    And  I should see "Follow"
 
   Scenario: Like person
     Given a "person"
     And  I am on its url
     When I click on "Like"
     Then I should see "You liked the person"
-    And  I should see "UNLIKE"
+    And  I should see "Unlike"
 
   Scenario: Unlike person
     Given a "person"
@@ -35,4 +35,4 @@ Feature: Person
     And  I clicked on "Like"
     When I click on "Unlike"
     Then I should see "You're not liking the person"
-    And  I should see "LIKE"
+    And  I should see "Like"

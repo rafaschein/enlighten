@@ -1,0 +1,9 @@
+.dashboard-cards {
+  @include clearfix;
+
+  &__card {
+    @include column(4);
+    box-sizing: border-box;
+    padding: $spacing / 2;
+  }
+}

@@ -1,0 +1,21 @@
+.card
+  .card__title.text-center
+    .card__title-background  style="background-image: url(#{attachment_url(technology, :image, :fill, 300, 300, format: 'png')})"
+    = link_to technology do
+      .avatar.avatar--technology style="background-image: url(#{attachment_url(technology, :image, :fill, 300, 300, format: 'png')})"
+
+  .card__content.text-center
+    - if current_user.followed_technologies.include?(technology)
+      = counter_link('Unfollow', technology.followers.count, unfollow_technology_path(technology))
+    - else
+      = counter_link('Follow', technology.followers.count, follow_technology_path(technology))
+
+    - if current_user.liked_technologies.include?(technology)
+      = counter_link('Unlike', technology.likers.count, unlike_technology_path(technology))
+    - else
+      = counter_link('Like', technology.likers.count, like_technology_path(technology))
+
+    h1.card--profile__name = link_to technology do
+      = technology.name
+
+    span.card--profile__data = link_to technology.website, technology.website

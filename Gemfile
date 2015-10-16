@@ -125,6 +125,9 @@ group :development, :test do
 
   # Reports coverage to clode climate
   gem 'codeclimate-test-reporter', require: nil
+
+  # Security vulnerability tests
+  gem 'brakeman', require: false
 end
 
 ruby '2.2.2'

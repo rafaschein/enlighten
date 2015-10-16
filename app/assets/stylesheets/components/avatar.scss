@@ -1,17 +1,17 @@
 @charset 'utf-8';
 
 .avatar {
-  background-size: cover;
-  display: inline-block;
-  height: 100px;
   position: relative;
-  vertical-align: middle;
+  display: inline-block;
   width: 100px;
+  height: 100px;
+  background-size: cover;
+  vertical-align: middle;
 }
 
 .avatar--small {
-  height: 32px;
   width: 32px;
+  height: 32px;
 }
 
 .avatar--person {

@@ -5,9 +5,9 @@
 /// @link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
 @mixin clearfix {
   &::after {
+    display: table;
     clear: both;
     content: '';
-    display: table;
   }
 }
 

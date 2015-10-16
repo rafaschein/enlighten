@@ -2,38 +2,38 @@
 
 .activity-form {
   @include clearfix;
-  border-bottom: 1px solid $color-background;
   margin: 0 (-$spacing);
   padding: 0 $spacing $spacing;
+  border-bottom: 1px solid $color-background;
 
   &__body {
-    background-color: $color-background-card;
-    border: 1px solid $color-background;
-    border-left: 0;
-    border-right: 0;
     display: block;
     float: left;
+    width: calc(100% - 34px * 2);
     height: 34px;
     padding: 0 6px;
-    width: calc(100% - 34px * 2);
+    border: 1px solid $color-background;
+    border-right: 0;
+    border-left: 0;
+    background-color: $color-background-card;
   }
 
   &__button {
-    background: $color-background-card center / 14px no-repeat;
-    border: 1px solid $color-background;
     display: block;
     float: left;
-    height: 34px;
     width: 34px;
+    height: 34px;
+    border: 1px solid $color-background;
+    background: $color-background-card center / 14px no-repeat;
 
     &--image {
-      background-image: inline-image('icons/icn-picture.svg');
       border-radius: 6px 0 0 6px;
+      background-image: inline-image('icons/icn-picture.svg');
     }
 
     &--submit {
-      background-image: inline-image('icons/icn-post.svg');
       border-radius: 0 6px 6px 0;
+      background-image: inline-image('icons/icn-post.svg');
     }
   }
 }
@@ -52,8 +52,8 @@
   @include column(2);
 
   .avatar { // Interaction with avatar component
-    height: 65%;
     width: 65%;
+    height: 65%;
   }
 }
 

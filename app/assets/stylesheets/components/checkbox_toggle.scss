@@ -6,41 +6,41 @@
 
   &__checkbox + &__label {
     @include prefix(user-select, none, ('moz', 'ms', 'webkit'));
-    background-color: transparent;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 45px;
+    height: 24px;
+    padding: 2px;
     border: 1px solid $color-background-card;
     border-radius: 16px;
-    box-sizing: border-box;
     color: transparent;
-    display: inline-block;
-    height: 24px;
-    overflow: hidden;
-    padding: 2px;
-    position: relative;
+    background-color: transparent;
     transition: background .4s, border-color .4s;
     user-select: none;
     vertical-align: middle;
-    width: 45px;
   }
 
   &__checkbox + &__label:after {
-    content: '';
-    display: block;
     position: absolute;
+    display: block;
+    content: '';
   }
 
   &__checkbox + &__label:after {
-    background-color: $color-background-card;
-    border-radius: 52px;
+    top: 2px;
     bottom: 2px;
     left: 2px;
-    top: 2px;
-    transition: margin .4s, background .4s;
     width: 18px;
+    border-radius: 52px;
+    background-color: $color-background-card;
+    transition: margin .4s, background .4s;
   }
 
   &__checkbox:checked + &__label {
-    background-color: $color-call-for-action;
     border-color: $color-call-for-action;
+    background-color: $color-call-for-action;
   }
 
   &__checkbox:checked + &__label:after {
@@ -48,7 +48,7 @@
   }
 
   &__label-text {
-    line-height: 24px;
     margin-left: 21px;
+    line-height: 24px;
   }
 }

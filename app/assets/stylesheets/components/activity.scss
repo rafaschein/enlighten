@@ -9,6 +9,7 @@
   &__body {
     display: block;
     float: left;
+    box-sizing: border-box;
     width: calc(100% - 34px * 2);
     height: 34px;
     padding: 0 6px;

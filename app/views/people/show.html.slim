@@ -1,33 +1,7 @@
 - content_for :title, @person.name
 
 aside
-  .card
-    .card__title.text-center
-      .card__title-background  style="background-image: url(#{attachment_url(@person, :image, :fill, 300, 300, format: 'png')})"
-      = link_to @person do
-        .avatar.avatar--person style="background-image: url(#{attachment_url(@person, :image, :fill, 300, 300, format: 'png')})"
-
-    .card__content.text-center
-      - if current_user.followed_people.include?(@person)
-        = counter_link('Unfollow', @person.followers.count, unfollow_person_path(@person))
-      - else
-        = counter_link('Follow', @person.followers.count, follow_person_path(@person))
-
-      - if current_user.liked_people.include?(@person)
-        = counter_link('Unlike', @person.likers.count, unlike_person_path(@person))
-      - else
-        = counter_link('Like', @person.likers.count, like_person_path(@person))
-
-      h1.card--profile__name = link_to @person do
-        = @person.name
-
-      - if @person.user.present?
-        span.card--profile__data = mail_to @person.user.email, @person.user.email
-
-      .social-links
-        - @person.social_links.each do |social_link|
-          = link_to social_link.url, target: '_blank'
-            = image_tag "social/#{social_link.provider}.png", class: 'social-link', width: '24', height: '24'
+  = render partial: 'card', locals: { person: @person }
 
   .card
     .card__content

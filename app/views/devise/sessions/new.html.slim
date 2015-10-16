@@ -1,20 +1,28 @@
-.panel.large-4.small-8.center
-  h2 Login
+.login
+  .login__container
+    h1.login__title enlighten
 
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .row
-      = f.label :email
-      = f.email_field :email, autofocus: true
+    span.login__subtitle Compartilhe conhecimentos, experiências e projetos.
 
-    .row
-      = f.label :password
-      = f.password_field :password, autocomplete: 'off'
+    - if alert.present? || notice.present?
+      .form__row.login__error
+        = alert || notice
 
-    .row
-      = f.check_box :remember_me
-      = f.label :remember_me
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'login__form' }) do |f|
+      .form__row
+        = f.label :email, class: 'login__field__label' do
+          = image_tag 'icons/icn-mail.svg', class: 'login__field__icon'
+        = f.email_field :email, autofocus: true, placeholder: 'Email', class: 'login__field'
 
-    .row
-      = f.submit 'Log in', class: 'button radius expand'
+      .form__row
+        = f.label :password, class: 'login__field__label' do
+          = image_tag 'icons/icn-password.svg', class: 'login__field__icon'
+        = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'login__field'
 
-= render 'devise/shared/links'
+      .form__row
+        = f.check_box :remember_me, class: 'checkbox-toggle__checkbox'
+        = f.label :remember_me, class: 'checkbox-toggle__label'
+        = f.label :remember_me, class: 'checkbox-toggle__label-text'
+
+      .form__row
+        = f.submit 'Log in', class: 'login__button'

@@ -17,12 +17,16 @@ $color-text-strong: #33414d;
 // $color-text-heading	$regent-grey
 
 $color-text-invert: rgba($color-background, .75);
-$color-text-strong-invert:	$color-background;
+$color-text-strong-invert: $color-background;
 
 $color-text-link: #273947;
 // $color-text-link-visited	$bouquet
 // $color-text-link-hover	$midnight-blue
 // $color-border
+
+$color-call-for-action: #0094c6;
+$color-overlay: rgba(0, 0, 0, .6);
+$color-autofill-input: #25261b;
 
 // GRID ------------------------------------------------------------------------
 $grid-gutter: 2%;

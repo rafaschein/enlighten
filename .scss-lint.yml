@@ -8,5 +8,12 @@ linters:
   QualifyingElement:
     enabled: false
 
+  IdSelector:
+    enabled: false
+
+  # disabled, waiting this bug to be fixed: https://github.com/brigade/scss-lint/issues/520
+  MergeableSelector:
+    enabled: false
+
   SelectorFormat: # BEM validation
     convention: '^+[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?((_[a-z0-9]([-]?[a-z0-9]+)*){2})*'

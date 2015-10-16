@@ -1,0 +1,95 @@
+.login {
+  background-image: asset-url('background/image-01.jpg');
+  background-size: cover;
+  color: $color-background-card;
+  height: 100%;
+
+  &__container {
+    align-items: center;
+    background: $color-overlay;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+
+  &__form {
+    max-width: 450px;
+    width: 90%;
+  }
+
+  &__title {
+    font-size: 60px;
+    font-weight: 300;
+    margin-bottom: 22px;
+  }
+
+  &__subtitle {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 80px;
+    text-align: center;
+  }
+
+  &__subtitle + &__error {
+    margin-top: -60px;
+  }
+
+  &__error {
+    background: $color-overlay;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px;
+    height: 60px;
+    line-height: 60px;
+    max-width: 450px;
+    text-align: center;
+    vertical-align: middle;
+    width: 90%;
+  }
+
+  &__field {
+    background: transparent;
+    border: 1px solid $color-background-card;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: $color-background-card;
+    height: 60px;
+    outline: none;
+    padding: 0 6px 0 86px;
+    width: 100%;
+
+    &:-webkit-autofill,
+    #user_email:-webkit-autofill,
+    #user_password:-webkit-autofill {
+      box-shadow: 0 0 0 1000px $color-autofill-input inset;
+      -webkit-text-fill-color: $color-background-card;
+    }
+
+    &__label {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 60px;
+      justify-content: center;
+      position: absolute;
+      width: 80px;
+    }
+
+    &__icon {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &__button {
+    background-color: $color-call-for-action;
+    border: 0;
+    border-radius: 5px;
+    height: 60px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+}

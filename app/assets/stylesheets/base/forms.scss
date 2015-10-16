@@ -1,5 +1,8 @@
 @charset 'utf-8';
 
-input[type="text"] {
-  box-sizing: border-box;
+.form {
+  &__row {
+    @include clearfix;
+    margin-bottom: 20px;
+  }
 }

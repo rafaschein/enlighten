@@ -1,25 +1,25 @@
 @charset 'utf-8';
 
 .card {
-  background-color: $color-background-card;
-  border-radius: 6px;
-  display: block;
-  margin-bottom: $spacing;
-  overflow: hidden;
   position: relative;
+  display: block;
+  overflow: hidden;
+  margin-bottom: $spacing;
+  border-radius: 6px;
+  background-color: $color-background-card;
 }
 
 .card__title {
-  background-color: $color-text-invert;
-  min-height: 180px; //TODO: think about this
-  overflow: hidden;
-  padding: $spacing;
   position: relative;
+  overflow: hidden;
+  min-height: 180px; //TODO: think about this
+  padding: $spacing;
+  background-color: $color-text-invert;
 
   .avatar { // Interaction with avatar component
+    width: 65%;
     height: 65%;
     padding-bottom: 65%;
-    width: 65%;
   }
 }
 
@@ -27,22 +27,22 @@
   @include prefix(filter,
                   blur(5px) grayscale(80%),
                   ('moz', 'ms', 'webkit'));
-  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
+  background-size: cover;
   transform: scale(1.6);
 }
 
 .card__menu {
-  list-style: none;
-  margin: 0;
-  overflow: hidden;
   position: absolute;
-  right: $spacing;
   top: $spacing;
+  right: $spacing;
+  overflow: hidden;
+  margin: 0;
+  list-style: none;
 
   li {
     display: inline-block;
@@ -57,19 +57,19 @@
 }
 
 .extra-info {
+  position: absolute;
   bottom: 0;
-  list-style: none;
   margin: 0;
   padding: 0;
-  position: absolute;
+  list-style: none;
 
   li {
-    background-color: $color-background-card;
     display: inline-block;
     float: left;
-    padding: $spacing / 4;
-    text-align: center;
     width: 100px;
+    padding: $spacing / 4;
+    background-color: $color-background-card;
+    text-align: center;
   }
 
   li:not(:first-child) {

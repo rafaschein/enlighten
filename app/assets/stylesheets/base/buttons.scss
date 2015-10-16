@@ -1,20 +1,20 @@
 @charset 'utf-8';
 
 .button {
-  background-color: $color-text;
+  display: inline-block;
+  height: 38px;
+  padding: 0 $spacing;
   border: 0;
   border-radius: 4px;
+  white-space: nowrap;
   color: $color-text-strong-invert;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 11px; // TODO: this should be a variable somewhere
+  background-color: $color-text;
   font-weight: 600;
-  height: 38px;
+  font-size: 11px; // TODO: this should be a variable somewhere
   letter-spacing: .1rem;
   line-height: 38px;
-  padding: 0 $spacing;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  white-space: nowrap;
+  cursor: pointer;
 }

@@ -1,18 +1,18 @@
 @charset 'utf-8';
 
 .navbar {
-  background-color: $color-background-heading;
-  color: $color-text-strong-invert;
   overflow: hidden;
   padding: 0 $spacing;
+  color: $color-text-strong-invert;
+  background-color: $color-background-heading;
 
   a {
     color: $color-text-strong-invert;
   }
 
   ul {
-    list-style: none;
     margin: 0;
+    list-style: none;
   }
 }
 
@@ -21,9 +21,9 @@
   margin: 0;
 
   h1 {
+    margin: 0;
     font-size: 1.8rem;
     line-height: 1.8rem * 1.5;
-    margin: 0;
   }
 }
 

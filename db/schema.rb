@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725014934) do
+ActiveRecord::Schema.define(version: 20151111160815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,22 @@ ActiveRecord::Schema.define(version: 20150725014934) do
   end
 
   add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
+
+  create_table "permission_acls", force: :cascade do |t|
+    t.string   "model"
+    t.string   "action"
+    t.integer  "permission_role_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "permission_acls", ["permission_role_id"], name: "index_permission_acls_on_permission_role_id", using: :btree
+
+  create_table "permission_roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "person_technologies", force: :cascade do |t|
     t.integer "person_id"
@@ -247,6 +263,17 @@ ActiveRecord::Schema.define(version: 20150725014934) do
   add_index "users_liking_technologies", ["user_id", "technology_id"], name: "index_users_liking_technologies_on_user_id_and_technology_id", unique: true, using: :btree
   add_index "users_liking_technologies", ["user_id"], name: "index_users_liking_technologies_on_user_id", using: :btree
 
+  create_table "users_permission_roles", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "permission_role_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "users_permission_roles", ["permission_role_id"], name: "index_users_permission_roles_on_permission_role_id", using: :btree
+  add_index "users_permission_roles", ["user_id", "permission_role_id"], name: "index_users_permission_roles_on_user_id_and_permission_role_id", unique: true, using: :btree
+  add_index "users_permission_roles", ["user_id"], name: "index_users_permission_roles_on_user_id", using: :btree
+
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false
     t.integer  "item_id",    null: false
@@ -260,6 +287,7 @@ ActiveRecord::Schema.define(version: 20150725014934) do
 
   add_foreign_key "activities", "users"
   add_foreign_key "people", "users"
+  add_foreign_key "permission_acls", "permission_roles"
   add_foreign_key "project_members", "roles"
   add_foreign_key "project_screenshots", "projects"
   add_foreign_key "projects", "clients"
@@ -281,4 +309,6 @@ ActiveRecord::Schema.define(version: 20150725014934) do
   add_foreign_key "users_liking_projects", "users"
   add_foreign_key "users_liking_technologies", "technologies"
   add_foreign_key "users_liking_technologies", "users"
+  add_foreign_key "users_permission_roles", "permission_roles"
+  add_foreign_key "users_permission_roles", "users"
 end

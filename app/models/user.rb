@@ -56,4 +56,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :liked_people,
                           class_name: Person.name,
                           join_table: :users_liking_people
+
+  has_and_belongs_to_many :permission_roles,
+                          class_name: Permission::Role.name,
+                          join_table: :users_permission_roles,
+                          association_foreign_key: 'permission_role_id'
 end

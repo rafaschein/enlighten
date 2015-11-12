@@ -43,6 +43,7 @@ RSpec.describe User, type: :model do
   it { expect(subject).to have_and_belong_to_many(:liked_projects) }
   it { expect(subject).to have_and_belong_to_many(:liked_clients) }
   it { expect(subject).to have_and_belong_to_many(:liked_people) }
+  it { expect(subject).to have_and_belong_to_many(:permission_roles) }
 
   describe '#projects' do
     let(:project) { create :project }

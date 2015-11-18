@@ -2,6 +2,83 @@ import 'factory_girl'
 
 random_image_url = 'http://lorempixel.com/250/250/abstract'
 
+puts
+puts 'Creating administrator permission role...'
+permission_role_administrator = FactoryGirl.create :permission_role_administrator
+
+puts
+puts 'Creating administrator permission role acls...'
+permission_acls_administrator = {
+  activity: [
+    :create
+  ],
+  client: [
+    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+  ],
+  dashboard: [
+    :index
+  ],
+  person: [
+    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+  ],
+  post: [
+    :new, :create
+  ],
+  project: [
+    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+  ],
+  technology: [
+    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+  ]
+}
+
+permission_acls_administrator.each do|model, actions|
+  puts "Inserting acls to #{model.to_s}:"
+  actions.each do |action|
+    puts "- #{action.to_s} \n"
+    FactoryGirl.create :permission_acl, model: model.to_s, action: action.to_s, permission_role_id: permission_role_administrator.id
+  end
+end
+
+puts
+puts 'Creating user permission role...'
+permission_role_user = FactoryGirl.create :permission_role_user, default: true
+
+puts
+puts 'Creating user permission role acls...'
+permission_acls_user = {
+  activity: [
+    :create
+  ],
+  client: [
+    :index, :show, :unfollow, :follow, :unlike, :like
+  ],
+  dashboard: [
+    :index
+  ],
+  person: [
+    :index, :show, :unfollow, :follow, :unlike, :like
+  ],
+  post: [
+    :new, :create
+  ],
+  project: [
+    :index, :show, :unfollow, :follow, :unlike, :like
+  ],
+  technology: [
+    :index, :show, :unfollow, :follow, :unlike, :like
+  ]
+}
+
+permission_acls_user.each do|model, actions|
+  puts "Inserting acls to #{model.to_s}:"
+  actions.each do |action|
+    puts "- #{action.to_s} \n"
+    FactoryGirl.create :permission_acl, model: model.to_s, action: action.to_s, permission_role_id: permission_role_user.id
+  end
+end
+
+puts
 puts 'Creating user...'
 user = User.create email: 'test@test.com', password: '12345678'
 john = FactoryGirl.create :person, user: user
@@ -11,7 +88,12 @@ open(random_image_url, 'rb') do |file|
 end
 
 john.save
-print '.'
+
+puts
+puts 'Assigning administrator permission role to test@test.com...'
+administrator = User.find_by(email: 'test@test.com')
+administrator.permission_roles << permission_role_administrator
+administrator.save
 
 puts
 puts 'Creating people...'
@@ -103,7 +185,6 @@ puts 'Creating social interaction...'
   owner_instance.activities.create(item: FactoryGirl.create(:post), user: person.user)
   print '.'
 end
-
 
 puts
 puts 'Done!'

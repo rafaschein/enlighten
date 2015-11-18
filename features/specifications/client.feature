@@ -9,7 +9,7 @@ Feature: Client
       | website   | https://www.acme.com |
     When  I access its url
     Then  I should see "ACME inc."
-    And   I should see a link "https://www.acme.com" with href "https://www.acme.com"
+    And   I should see a link "https://www.acme.com" with href "https://www.acme.com/"
 
   Scenario: Follow client
     Given a "client"

@@ -60,8 +60,9 @@ ActiveRecord::Schema.define(version: 20151111160815) do
 
   create_table "permission_roles", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "default",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "person_technologies", force: :cascade do |t|

@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :rememberable, :trackable
 
+  before_create :assigns_default_permission_roles
+
   has_one :person
 
   has_and_belongs_to_many :followed_projects,
@@ -61,4 +63,12 @@ class User < ActiveRecord::Base
                           class_name: Permission::Role.name,
                           join_table: :users_permission_roles,
                           association_foreign_key: 'permission_role_id'
+
+  private
+
+  def assigns_default_permission_roles
+    Permission::Role.where(default: true).each do |permission_role|
+      self.permission_roles << permission_role
+    end
+  end
 end

@@ -6,6 +6,7 @@ class ActivitiesController < ApplicationController
   # POST /:owner/:owner_id/activities/:types.json
   def create
     @activity = create_activity
+    authorize @activity, :create?
 
     if @activity.save
       render json: { id: @activity.id }, status: :created

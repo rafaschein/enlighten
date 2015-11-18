@@ -4,24 +4,29 @@ class ClientsController < ApplicationController
   # GET /clients
   def index
     @clients = Client.all
+    authorize @clients, :index?
   end
 
   # GET /clients/1
   def show
+    authorize @client, :show?
   end
 
   # GET /clients/new
   def new
     @client = Client.new
+    authorize @client, :new?
   end
 
   # GET /clients/1/edit
   def edit
+    authorize @client, :edit?
   end
 
   # POST /clients
   def create
     @client = Client.new(client_params)
+    authorize @client, :create?
 
     if @client.save
       redirect_to @client, notice: 'Client was successfully created.'
@@ -32,6 +37,8 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /clients/1
   def update
+    authorize @client, :update?
+
     if @client.update(client_params)
       redirect_to @client, notice: 'Client was successfully updated.'
     else
@@ -41,6 +48,7 @@ class ClientsController < ApplicationController
 
   # DELETE /clients/1
   def destroy
+    authorize @client, :destroy?
     @client.destroy
 
     redirect_to clients_url, notice: 'Client was successfully destroyed.'
@@ -48,6 +56,7 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /follow
   def follow
+    authorize @client, :follow?
     current_user.followed_clients << @client
 
     if current_user.save
@@ -59,6 +68,8 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /follow
   def unfollow
+    authorize @client, :unfollow?
+
     if current_user.followed_clients.include?(@client)
       current_user.followed_clients.delete(@client)
       current_user.save
@@ -69,6 +80,7 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /like
   def like
+    authorize @client, :like?
     current_user.liked_clients << @client
 
     if current_user.save
@@ -80,6 +92,8 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /like
   def unlike
+    authorize @client, :unlike?
+
     if current_user.liked_clients.include?(@client)
       current_user.liked_clients.delete(@client)
       current_user.save

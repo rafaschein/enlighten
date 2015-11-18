@@ -1,6 +1,7 @@
 h5 Activity
 
-= simple_form_for(instance, url: url, type: :post, html: { class: 'activity-form' }) do |f|
+- if policy(instance).new?
+  = simple_form_for(instance, url: url, type: :post, html: { class: 'activity-form' }) do |f|
     = f.button(:button, '', class: 'activity-form__button activity-form__button--image')
     = f.text_field :body, class: 'activity-form__body', autofocus: true, placeholder: 'Have something nice to say?'
     = f.button(:button, '', id: 'submit-post', class: 'activity-form__button activity-form__button--submit')

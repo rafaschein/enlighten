@@ -4,24 +4,29 @@ class TechnologiesController < ApplicationController
   # GET /technologies
   def index
     @technologies = Technology.all
+    authorize @technologies, :index?
   end
 
   # GET /technologies/1
   def show
+    authorize @technology, :show?
   end
 
   # GET /technologies/new
   def new
     @technology = Technology.new
+    authorize @technology, :new?
   end
 
   # GET /technologies/1/edit
   def edit
+    authorize @technology, :edit?
   end
 
   # POST /technologies
   def create
     @technology = Technology.new(technology_params)
+    authorize @technology, :create?
 
     if @technology.save
       redirect_to @technology, notice: 'Technology was successfully created.'
@@ -32,6 +37,8 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /technologies/1
   def update
+    authorize @technology, :update?
+
     if @technology.update(technology_params)
       redirect_to @technology, notice: 'Technology was successfully updated.'
     else
@@ -41,6 +48,7 @@ class TechnologiesController < ApplicationController
 
   # DELETE /technologies/1
   def destroy
+    authorize @technology, :destroy?
     @technology.destroy
 
     redirect_to technologies_url, notice: 'Technology was successfully destroyed.'
@@ -48,6 +56,7 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /follow
   def follow
+    authorize @technology, :follow?
     current_user.followed_technologies << @technology
 
     if current_user.save
@@ -59,6 +68,8 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /follow
   def unfollow
+    authorize @technology, :unfollow?
+
     if current_user.followed_technologies.include?(@technology)
       current_user.followed_technologies.delete(@technology)
       current_user.save
@@ -69,6 +80,7 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /like
   def like
+    authorize @technology, :like?
     current_user.liked_technologies << @technology
 
     if current_user.save
@@ -80,6 +92,8 @@ class TechnologiesController < ApplicationController
 
   # PATCH/PUT /like
   def unlike
+    authorize @technology, :unlike?
+
     if current_user.liked_technologies.include?(@technology)
       current_user.liked_technologies.delete(@technology)
       current_user.save

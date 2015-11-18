@@ -9,14 +9,18 @@ aside
 
     .card__content.text-center
       - if current_user.followed_clients.include?(@client)
-        = counter_link('Unfollow', @client.followers.count, unfollow_client_path(@client))
+        - if policy(@client).unfollow?
+          = counter_link('Unfollow', @client.followers.count, unfollow_client_path(@client))
       - else
-        = counter_link('Follow', @client.followers.count, follow_client_path(@client))
+        - if policy(@client).follow?
+          = counter_link('Follow', @client.followers.count, follow_client_path(@client))
 
       - if current_user.liked_clients.include?(@client)
-        = counter_link('Unlike', @client.likers.count, unlike_client_path(@client))
+        - if policy(@client).unlike?
+          = counter_link('Unlike', @client.likers.count, unlike_client_path(@client))
       - else
-        = counter_link('Like', @client.likers.count, like_client_path(@client))
+        - if policy(@client).like?
+          = counter_link('Like', @client.likers.count, like_client_path(@client))
 
       h1.card--profile__name = link_to @client do
         = @client.name
@@ -26,8 +30,11 @@ aside
   .card
     .card__title
       ul.card__menu
-        li = link_to 'Destroy', @client, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
-        li = link_to 'Edit', edit_client_path(@client), class: 'button'
+        - if policy(@client).destroy?
+          li = link_to 'Destroy', @client, data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
+
+        - if policy(@client).edit?
+          li = link_to 'Edit', edit_client_path(@client), class: 'button'
 
     .card__content
       ul.extra-info

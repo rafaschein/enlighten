@@ -4,24 +4,29 @@ class PeopleController < ApplicationController
   # GET /people
   def index
     @people = Person.all
+    authorize @people, :index?
   end
 
   # GET /people/1
   def show
+    authorize @person, :show?
   end
 
   # GET /people/new
   def new
     @person = Person.new
+    authorize @person, :new?
   end
 
   # GET /people/1/edit
   def edit
+    authorize @person, :edit?
   end
 
   # POST /people
   def create
     @person = Person.new(person_params)
+    authorize @person, :create?
 
     if @person.save
       redirect_to @person, notice: 'Person was successfully created.'
@@ -32,6 +37,8 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /people/1
   def update
+    authorize @person, :update?
+
     if @person.update(person_params)
       redirect_to @person, notice: 'Person was successfully updated.'
     else
@@ -41,6 +48,7 @@ class PeopleController < ApplicationController
 
   # DELETE /people/1
   def destroy
+    authorize @person, :destroy?
     @person.destroy
 
     redirect_to people_url, notice: 'Person was successfully destroyed.'
@@ -48,6 +56,7 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /follow
   def follow
+    authorize @person, :follow?
     current_user.followed_people << @person
 
     if current_user.save
@@ -59,6 +68,8 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /follow
   def unfollow
+    authorize @person, :unfollow?
+
     if current_user.followed_people.include?(@person)
       current_user.followed_people.delete(@person)
       current_user.save
@@ -69,6 +80,7 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /like
   def like
+    authorize @person, :like?
     current_user.liked_people << @person
 
     if current_user.save
@@ -80,6 +92,8 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /like
   def unlike
+    authorize @person, :unlike?
+
     if current_user.liked_people.include?(@person)
       current_user.liked_people.delete(@person)
       current_user.save

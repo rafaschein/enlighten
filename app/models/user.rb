@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
 
   def assigns_default_permission_roles
     Permission::Role.where(default: true).each do |permission_role|
-      self.permission_roles << permission_role
+      permission_roles << permission_role
     end
   end
 end

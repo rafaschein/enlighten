@@ -140,4 +140,19 @@ RSpec.describe User, type: :model do
       expect(user.liked_people).to eq [person]
     end
   end
+
+  describe '.assigns_default_permission_roles' do
+    let(:permission_acls)  { [create(:permission_acl)] }
+    let(:permission_roles) { create :permission_role, default: true, permission_acls: permission_acls }
+
+    subject { create :user }
+
+    context 'when have default roles' do
+      before { permission_roles }
+
+      it 'assign default permission roles' do
+        expect(subject.permission_roles).to have(1).item
+      end
+    end
+  end
 end

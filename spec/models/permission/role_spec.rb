@@ -39,4 +39,10 @@ RSpec.describe Permission::Role, type: :model do
       expect(permission_role.permission_acls).to have(5).items
     end
   end
+
+  describe '.table_name_prefix' do
+    it 'returns table name prefixed' do
+      expect(subject.table_name_prefix).to eq('permission_role_')
+    end
+  end
 end

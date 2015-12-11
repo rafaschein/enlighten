@@ -9,14 +9,23 @@
 #  updated_at :datetime         not null
 #
 
-class Permission::Role < ActiveRecord::Base
-  has_paper_trail
+module Permission
+  class Role < ActiveRecord::Base
+    has_paper_trail
 
-  validates :name, presence: true
+    validates :name, presence: true
 
-  has_many :permission_acls, class_name: Permission::Acl.name, foreign_key: 'permission_role_id'
+    has_many :permission_acls,
+             class_name: Permission::Acl.name,
+             foreign_key: 'permission_role_id'
 
-  has_and_belongs_to_many :users,
-                          class_name: User.name,
-                          join_table: :users_permission_roles
+    has_and_belongs_to_many :users,
+                            class_name: User.name,
+                            join_table: :users_permission_roles,
+                            association_foreign_key: 'user_id'
+
+    def self.table_name_prefix
+      'permission_role_'
+    end
+  end
 end

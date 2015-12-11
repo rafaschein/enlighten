@@ -22,13 +22,13 @@
     vertical-align: middle;
   }
 
-  &__checkbox + &__label:after {
+  &__checkbox + &__label::after {
     position: absolute;
     display: block;
     content: '';
   }
 
-  &__checkbox + &__label:after {
+  &__checkbox + &__label::after {
     top: 2px;
     bottom: 2px;
     left: 2px;
@@ -43,7 +43,7 @@
     background-color: $color-call-for-action;
   }
 
-  &__checkbox:checked + &__label:after {
+  &__checkbox:checked + &__label::after {
     margin-left: 21px;
   }
 

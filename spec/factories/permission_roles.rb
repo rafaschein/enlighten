@@ -12,13 +12,13 @@
 FactoryGirl.define do
   factory :permission_role, class: Permission::Role do
     name { Faker::Name.name }
-  end
 
-  factory :permission_role_administrator, class: Permission::Role do
-    name 'Administrator'
-  end
+    trait :administrator do
+      name 'Administrator'
+    end
 
-  factory :permission_role_user, class: Permission::Role do
-    name 'User'
+    trait :user do
+      name 'User'
+    end
   end
 end

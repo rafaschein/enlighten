@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :permission_acl, class: Permission::Acl do
-    model  { ['activity', 'client', 'person', 'person_technology', 'post'].sample }
-    action { ['index', 'show', 'new', 'create', 'edit', 'update', 'delete'].sample }
+    model  { %w('activity', 'client', 'person', 'person_technology', 'post').sample }
+    action { %w('index', 'show', 'new', 'create', 'edit', 'update', 'delete').sample }
   end
 end

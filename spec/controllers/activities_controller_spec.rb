@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe ActivitiesController, type: :controller do
-  routes { Rails.application.routes }
+  let(:permission_acls) do
+    [
+      build(:permission_acl, model: 'activity', action: 'create')
+    ]
+  end
+  let(:permission_roles) { [double(permission_acls: permission_acls)] }
+  let(:current_user)     { create :user }
 
   before do
-    allow(controller).to receive(:authenticate_user!).and_return true
-    allow(controller).to receive(:current_user).and_return create(:user)
+    sign_in current_user
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller.current_user).to receive(:permission_roles) { permission_roles }
   end
 
   shared_examples 'create activity' do

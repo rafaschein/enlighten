@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @projects = Project.all
-    authorize @projects, :index?
+    authorize :project, :index?
   end
 
   # GET /projects/1

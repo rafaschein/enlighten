@@ -1,8 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
+  let(:permission_acls) do
+    [
+      build(:permission_acl, model: 'project', action: 'new'),
+      build(:permission_acl, model: 'project', action: 'index'),
+      build(:permission_acl, model: 'project', action: 'show'),
+      build(:permission_acl, model: 'project', action: 'new'),
+      build(:permission_acl, model: 'project', action: 'edit'),
+      build(:permission_acl, model: 'project', action: 'create'),
+      build(:permission_acl, model: 'project', action: 'update'),
+      build(:permission_acl, model: 'project', action: 'destroy'),
+      build(:permission_acl, model: 'project', action: 'unfollow'),
+      build(:permission_acl, model: 'project', action: 'follow'),
+      build(:permission_acl, model: 'project', action: 'unlike'),
+      build(:permission_acl, model: 'project', action: 'like')
+    ]
+  end
+  let(:permission_roles) { [double(permission_acls: permission_acls)] }
+  let(:current_user)     { create :user }
+
   before do
-    allow(controller).to receive(:authenticate_user!).and_return true
+    sign_in current_user
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller.current_user).to receive(:permission_roles) { permission_roles }
   end
 
   describe 'GET #index' do
@@ -148,12 +169,7 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe 'PUT #follow' do
-    let(:user) { create :user }
     let(:project) { create :project }
-
-    before do
-      sign_in user
-    end
 
     subject { put :follow, id: project.id }
 
@@ -161,34 +177,29 @@ RSpec.describe ProjectsController, type: :controller do
       subject
       project.reload
 
-      expect(project.followers).to include(user)
+      expect(project.followers).to include(current_user)
       expect(response).to redirect_to(project)
     end
 
     it 'current user try follow already followed project' do
-      project.followers << user
+      project.followers << current_user
 
       subject
       project.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(project.followers).to eq [user]
+      expect(project.followers).to eq [current_user]
       expect(response).to redirect_to(project)
     end
   end
 
   describe 'PUT #unfollow' do
-    let(:user) { create :user }
     let(:project) { create :project }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unfollow, id: project.id }
 
     it 'current user already unfollowed project' do
-      project.followers << user
+      project.followers << current_user
 
       expect(controller.current_user.followed_projects).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -197,7 +208,7 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     it 'current user unfollow project' do
-      project.followers << user
+      project.followers << current_user
 
       subject
       project.reload
@@ -208,12 +219,7 @@ RSpec.describe ProjectsController, type: :controller do
   end
 
   describe 'PUT #like' do
-    let(:user) { create :user }
     let(:project) { create :project }
-
-    before do
-      sign_in user
-    end
 
     subject { put :like, id: project.id }
 
@@ -221,34 +227,29 @@ RSpec.describe ProjectsController, type: :controller do
       subject
       project.reload
 
-      expect(project.likers).to include(user)
+      expect(project.likers).to include(current_user)
       expect(response).to redirect_to(project)
     end
 
     it 'current user try like already liked project' do
-      project.likers << user
+      project.likers << current_user
 
       subject
       project.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(project.likers).to eq [user]
+      expect(project.likers).to eq [current_user]
       expect(response).to redirect_to(project)
     end
   end
 
   describe 'PUT #unlike' do
-    let(:user) { create :user }
     let(:project) { create :project }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unlike, id: project.id }
 
     it 'current user already liked project' do
-      project.likers << user
+      project.likers << current_user
 
       expect(controller.current_user.liked_projects).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -257,7 +258,7 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     it 'current user unlike project' do
-      project.likers << user
+      project.likers << current_user
 
       subject
       project.reload

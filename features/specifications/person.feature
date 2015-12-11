@@ -1,6 +1,19 @@
 Feature: Person
   Background:
     Given I am logged in
+    And I have permissions with the following data:
+      | model  | action   |
+      | person | index    |
+      | person | show     |
+      | person | new      |
+      | person | create   |
+      | person | edit     |
+      | person | update   |
+      | person | delete   |
+      | person | follow   |
+      | person | unfollow |
+      | person | like     |
+      | person | unlike   |
 
   Scenario: View a person
     Given a "person" with the following data:

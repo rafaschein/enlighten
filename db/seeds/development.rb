@@ -50,6 +50,9 @@ permission_role_user = FactoryGirl.create :permission_role_user, default: true
 puts
 puts 'Creating user permission role acls...'
 permission_acls_user = {
+  dashboard: [
+    :index
+  ],
   activity: [
     :create
   ],

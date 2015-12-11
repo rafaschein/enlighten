@@ -1,8 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe TechnologiesController, type: :controller do
+  let(:permission_acls) do
+    [
+      build(:permission_acl, model: 'technology', action: 'index'),
+      build(:permission_acl, model: 'technology', action: 'show'),
+      build(:permission_acl, model: 'technology', action: 'new'),
+      build(:permission_acl, model: 'technology', action: 'edit'),
+      build(:permission_acl, model: 'technology', action: 'create'),
+      build(:permission_acl, model: 'technology', action: 'update'),
+      build(:permission_acl, model: 'technology', action: 'destroy'),
+      build(:permission_acl, model: 'technology', action: 'unfollow'),
+      build(:permission_acl, model: 'technology', action: 'follow'),
+      build(:permission_acl, model: 'technology', action: 'unlike'),
+      build(:permission_acl, model: 'technology', action: 'like')
+    ]
+  end
+  let(:permission_roles) { [double(permission_acls: permission_acls)] }
+  let(:current_user)     { create :user }
+
   before do
-    allow(controller).to receive(:authenticate_user!).and_return true
+    sign_in current_user
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller.current_user).to receive(:permission_roles) { permission_roles }
   end
 
   describe 'GET #index' do
@@ -152,12 +172,7 @@ RSpec.describe TechnologiesController, type: :controller do
   end
 
   describe 'PUT #follow' do
-    let(:user) { create :user }
     let(:technology) { create :technology }
-
-    before do
-      sign_in user
-    end
 
     subject { put :follow, id: technology.id }
 
@@ -165,34 +180,29 @@ RSpec.describe TechnologiesController, type: :controller do
       subject
       technology.reload
 
-      expect(technology.followers).to include(user)
+      expect(technology.followers).to include(current_user)
       expect(response).to redirect_to(technology)
     end
 
     it 'current user try follow already followed technology' do
-      technology.followers << user
+      technology.followers << current_user
 
       subject
       technology.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(technology.followers).to eq [user]
+      expect(technology.followers).to eq [current_user]
       expect(response).to redirect_to(technology)
     end
   end
 
   describe 'PUT #unfollow' do
-    let(:user) { create :user }
     let(:technology) { create :technology }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unfollow, id: technology.id }
 
     it 'current user already unfollowed technology' do
-      technology.followers << user
+      technology.followers << current_user
 
       expect(controller.current_user.followed_technologies).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -201,7 +211,7 @@ RSpec.describe TechnologiesController, type: :controller do
     end
 
     it 'current user unfollow technology' do
-      technology.followers << user
+      technology.followers << current_user
 
       subject
       technology.reload
@@ -212,12 +222,7 @@ RSpec.describe TechnologiesController, type: :controller do
   end
 
   describe 'PUT #like' do
-    let(:user) { create :user }
     let(:technology) { create :technology }
-
-    before do
-      sign_in user
-    end
 
     subject { put :like, id: technology.id }
 
@@ -225,34 +230,29 @@ RSpec.describe TechnologiesController, type: :controller do
       subject
       technology.reload
 
-      expect(technology.likers).to include(user)
+      expect(technology.likers).to include(current_user)
       expect(response).to redirect_to(technology)
     end
 
     it 'current user try like already liked technology' do
-      technology.likers << user
+      technology.likers << current_user
 
       subject
       technology.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(technology.likers).to eq [user]
+      expect(technology.likers).to eq [current_user]
       expect(response).to redirect_to(technology)
     end
   end
 
   describe 'PUT #unlike' do
-    let(:user) { create :user }
     let(:technology) { create :technology }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unlike, id: technology.id }
 
     it 'current user already liked technology' do
-      technology.likers << user
+      technology.likers << current_user
 
       expect(controller.current_user.liked_technologies).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -261,7 +261,7 @@ RSpec.describe TechnologiesController, type: :controller do
     end
 
     it 'current user unlike technology' do
-      technology.likers << user
+      technology.likers << current_user
 
       subject
       technology.reload

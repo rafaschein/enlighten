@@ -1,6 +1,19 @@
 Feature: Technology
   Background:
     Given I am logged in
+    And I have permissions with the following data:
+      | model      | action   |
+      | technology | index    |
+      | technology | show     |
+      | technology | new      |
+      | technology | create   |
+      | technology | edit     |
+      | technology | update   |
+      | technology | delete   |
+      | technology | follow   |
+      | technology | unfollow |
+      | technology | like     |
+      | technology | unlike   |
 
   Scenario: View a technology
     Given a "technology" with the following data:

@@ -4,7 +4,7 @@ class TechnologiesController < ApplicationController
   # GET /technologies
   def index
     @technologies = Technology.all
-    authorize @technologies, :index?
+    authorize :technology, :index?
   end
 
   # GET /technologies/1

@@ -1,6 +1,19 @@
 Feature: Project
   Background:
     Given I am logged in
+    And I have permissions with the following data:
+      | model   | action   |
+      | project | index    |
+      | project | show     |
+      | project | new      |
+      | project | create   |
+      | project | edit     |
+      | project | update   |
+      | project | delete   |
+      | project | follow   |
+      | project | unfollow |
+      | project | like     |
+      | project | unlike   |
 
   Scenario: View a project
     Given a "project" with the following data:

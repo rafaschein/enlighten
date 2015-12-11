@@ -2,6 +2,9 @@ Feature: Login
 
 Scenario: User signs in successfully
   Given a user with email "test@test.com" and password "123456"
+    And I have permissions with the following data:
+      | model     | action |
+      | dashboard | index  |
   And   I access "/users/sign_in"
   When  I fill in "Email" with "test@test.com"
   And   I fill in "Password" with "123456"

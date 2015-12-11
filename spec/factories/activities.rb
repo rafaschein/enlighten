@@ -16,5 +16,4 @@ FactoryGirl.define do
   factory :activity do
     user_id { create(:user).id }
   end
-
 end

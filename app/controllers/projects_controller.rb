@@ -4,24 +4,29 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @projects = Project.all
+    authorize :project, :index?
   end
 
   # GET /projects/1
   def show
+    authorize @project, :show?
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+    authorize @project, :new?
   end
 
   # GET /projects/1/edit
   def edit
+    authorize @project, :edit?
   end
 
   # POST /projects
   def create
     @project = Project.new(project_params)
+    authorize @project, :create?
 
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.'
@@ -32,6 +37,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   def update
+    authorize @project, :update?
+
     if @project.update(project_params)
       redirect_to @project, notice: 'Project was successfully updated.'
     else
@@ -41,6 +48,7 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy
+    authorize @project, :destroy?
     @project.destroy
 
     redirect_to projects_url, notice: 'Project was successfully destroyed.'
@@ -48,6 +56,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /follow
   def follow
+    authorize @project, :follow?
     current_user.followed_projects << @project
 
     if current_user.save
@@ -59,6 +68,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /follow
   def unfollow
+    authorize @project, :unfollow?
+
     if current_user.followed_projects.include?(@project)
       current_user.followed_projects.delete(@project)
       current_user.save
@@ -69,6 +80,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /like
   def like
+    authorize @project, :like?
     current_user.liked_projects << @project
 
     if current_user.save
@@ -80,6 +92,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /like
   def unlike
+    authorize @project, :unlike?
+
     if current_user.liked_projects.include?(@project)
       current_user.liked_projects.delete(@project)
       current_user.save

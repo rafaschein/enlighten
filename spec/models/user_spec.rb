@@ -43,6 +43,7 @@ RSpec.describe User, type: :model do
   it { expect(subject).to have_and_belong_to_many(:liked_projects) }
   it { expect(subject).to have_and_belong_to_many(:liked_clients) }
   it { expect(subject).to have_and_belong_to_many(:liked_people) }
+  it { expect(subject).to have_and_belong_to_many(:permission_roles) }
 
   describe '#projects' do
     let(:project) { create :project }
@@ -137,6 +138,21 @@ RSpec.describe User, type: :model do
       user.reload
 
       expect(user.liked_people).to eq [person]
+    end
+  end
+
+  describe '.assigns_default_permission_roles' do
+    let(:permission_acls)  { [create(:permission_acl)] }
+    let(:permission_roles) { create :permission_role, default: true, permission_acls: permission_acls }
+
+    subject { create :user }
+
+    context 'when have default roles' do
+      before { permission_roles }
+
+      it 'assign default permission roles' do
+        expect(subject.permission_roles).to have(1).item
+      end
     end
   end
 end

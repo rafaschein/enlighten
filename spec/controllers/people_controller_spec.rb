@@ -1,8 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe PeopleController, type: :controller do
+  let(:permission_acls) do
+    [
+      build(:permission_acl, model: 'person', action: 'index'),
+      build(:permission_acl, model: 'person', action: 'show'),
+      build(:permission_acl, model: 'person', action: 'new'),
+      build(:permission_acl, model: 'person', action: 'edit'),
+      build(:permission_acl, model: 'person', action: 'create'),
+      build(:permission_acl, model: 'person', action: 'update'),
+      build(:permission_acl, model: 'person', action: 'destroy'),
+      build(:permission_acl, model: 'person', action: 'unfollow'),
+      build(:permission_acl, model: 'person', action: 'follow'),
+      build(:permission_acl, model: 'person', action: 'unlike'),
+      build(:permission_acl, model: 'person', action: 'like')
+    ]
+  end
+  let(:permission_roles) { [double(permission_acls: permission_acls)] }
+  let(:current_user)     { create :user }
+
   before do
-    allow(controller).to receive(:authenticate_user!).and_return true
+    sign_in current_user
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller.current_user).to receive(:permission_roles) { permission_roles }
   end
 
   describe 'GET #index' do
@@ -148,12 +168,7 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe 'PUT #follow' do
-    let(:user) { create :user }
     let(:person) { create :person }
-
-    before do
-      sign_in user
-    end
 
     subject { put :follow, id: person.id }
 
@@ -161,34 +176,29 @@ RSpec.describe PeopleController, type: :controller do
       subject
       person.reload
 
-      expect(person.followers).to include(user)
+      expect(person.followers).to include(current_user)
       expect(response).to redirect_to(person)
     end
 
     it 'current user try follow already followed person' do
-      person.followers << user
+      person.followers << current_user
 
       subject
       person.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(person.followers).to eq [user]
+      expect(person.followers).to eq [current_user]
       expect(response).to redirect_to(person)
     end
   end
 
   describe 'PUT #unfollow' do
-    let(:user) { create :user }
     let(:person) { create :person }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unfollow, id: person.id }
 
     it 'current user already unfollowed person' do
-      person.followers << user
+      person.followers << current_user
 
       expect(controller.current_user.followed_people).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -197,7 +207,7 @@ RSpec.describe PeopleController, type: :controller do
     end
 
     it 'current user unfollow person' do
-      person.followers << user
+      person.followers << current_user
 
       subject
       person.reload
@@ -208,12 +218,7 @@ RSpec.describe PeopleController, type: :controller do
   end
 
   describe 'PUT #like' do
-    let(:user) { create :user }
     let(:person) { create :person }
-
-    before do
-      sign_in user
-    end
 
     subject { put :like, id: person.id }
 
@@ -221,34 +226,29 @@ RSpec.describe PeopleController, type: :controller do
       subject
       person.reload
 
-      expect(person.likers).to include(user)
+      expect(person.likers).to include(current_user)
       expect(response).to redirect_to(person)
     end
 
     it 'current user try like already liked person' do
-      person.likers << user
+      person.likers << current_user
 
       subject
       person.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(person.likers).to eq [user]
+      expect(person.likers).to eq [current_user]
       expect(response).to redirect_to(person)
     end
   end
 
   describe 'PUT #unlike' do
-    let(:user) { create :user }
     let(:person) { create :person }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unlike, id: person.id }
 
     it 'current user already liked person' do
-      person.likers << user
+      person.likers << current_user
 
       expect(controller.current_user.liked_people).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -257,7 +257,7 @@ RSpec.describe PeopleController, type: :controller do
     end
 
     it 'current user unlike person' do
-      person.likers << user
+      person.likers << current_user
 
       subject
       person.reload

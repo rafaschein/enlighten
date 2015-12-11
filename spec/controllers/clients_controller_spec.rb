@@ -1,8 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe ClientsController, type: :controller do
+  let(:permission_acls) do
+    [
+      build(:permission_acl, model: 'client', action: 'index'),
+      build(:permission_acl, model: 'client', action: 'show'),
+      build(:permission_acl, model: 'client', action: 'new'),
+      build(:permission_acl, model: 'client', action: 'edit'),
+      build(:permission_acl, model: 'client', action: 'create'),
+      build(:permission_acl, model: 'client', action: 'update'),
+      build(:permission_acl, model: 'client', action: 'destroy'),
+      build(:permission_acl, model: 'client', action: 'unfollow'),
+      build(:permission_acl, model: 'client', action: 'follow'),
+      build(:permission_acl, model: 'client', action: 'unlike'),
+      build(:permission_acl, model: 'client', action: 'like')
+    ]
+  end
+  let(:permission_roles) { [double(permission_acls: permission_acls)] }
+  let(:current_user)     { create :user }
+
   before do
-    allow(controller).to receive(:authenticate_user!).and_return true
+    sign_in current_user
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller.current_user).to receive(:permission_roles) { permission_roles }
   end
 
   describe 'GET #index' do
@@ -148,12 +168,7 @@ RSpec.describe ClientsController, type: :controller do
   end
 
   describe 'PUT #follow' do
-    let(:user) { create :user }
     let(:client) { create :client }
-
-    before do
-      sign_in user
-    end
 
     subject { put :follow, id: client.id }
 
@@ -161,34 +176,29 @@ RSpec.describe ClientsController, type: :controller do
       subject
       client.reload
 
-      expect(client.followers).to include(user)
+      expect(client.followers).to include(current_user)
       expect(response).to redirect_to(client)
     end
 
     it 'current user try follow already followed client' do
-      client.followers << user
+      client.followers << current_user
 
       subject
       client.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(client.followers).to eq [user]
+      expect(client.followers).to eq [current_user]
       expect(response).to redirect_to(client)
     end
   end
 
   describe 'PUT #unfollow' do
-    let(:user) { create :user }
     let(:client) { create :client }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unfollow, id: client.id }
 
     it 'current user already unfollowed client' do
-      client.followers << user
+      client.followers << current_user
 
       expect(controller.current_user.followed_clients).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -197,7 +207,7 @@ RSpec.describe ClientsController, type: :controller do
     end
 
     it 'current user unfollow client' do
-      client.followers << user
+      client.followers << current_user
 
       subject
       client.reload
@@ -208,12 +218,7 @@ RSpec.describe ClientsController, type: :controller do
   end
 
   describe 'PUT #like' do
-    let(:user) { create :user }
     let(:client) { create :client }
-
-    before do
-      sign_in user
-    end
 
     subject { put :like, id: client.id }
 
@@ -221,34 +226,29 @@ RSpec.describe ClientsController, type: :controller do
       subject
       client.reload
 
-      expect(client.likers).to include(user)
+      expect(client.likers).to include(current_user)
       expect(response).to redirect_to(client)
     end
 
     it 'current user try like already liked client' do
-      client.likers << user
+      client.likers << current_user
 
       subject
       client.reload
 
       expect(controller.current_user).not_to receive(:save)
-      expect(client.likers).to eq [user]
+      expect(client.likers).to eq [current_user]
       expect(response).to redirect_to(client)
     end
   end
 
   describe 'PUT #unlike' do
-    let(:user) { create :user }
     let(:client) { create :client }
-
-    before do
-      sign_in user
-    end
 
     subject { put :unlike, id: client.id }
 
     it 'current user already liked client' do
-      client.likers << user
+      client.likers << current_user
 
       expect(controller.current_user.liked_clients).to receive(:delete)
       expect(controller.current_user).to receive(:save)
@@ -257,7 +257,7 @@ RSpec.describe ClientsController, type: :controller do
     end
 
     it 'current user unlike client' do
-      client.likers << user
+      client.likers << current_user
 
       subject
       client.reload

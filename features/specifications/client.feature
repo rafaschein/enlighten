@@ -1,6 +1,19 @@
 Feature: Client
   Background:
     Given I am logged in
+    And I have permissions with the following data:
+      | model  | action   |
+      | client | index    |
+      | client | show     |
+      | client | new      |
+      | client | create   |
+      | client | edit     |
+      | client | update   |
+      | client | delete   |
+      | client | follow   |
+      | client | unfollow |
+      | client | like     |
+      | client | unlike   |
 
   Scenario: View a client
     Given a "client" with the following data:

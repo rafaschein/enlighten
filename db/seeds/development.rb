@@ -9,6 +9,9 @@ permission_role_administrator = FactoryGirl.create :permission_role_administrato
 puts
 puts 'Creating administrator permission role acls...'
 permission_acls_administrator = {
+  dashboard: [
+    :index
+  ],
   activity: [
     :create
   ],

@@ -22,7 +22,7 @@ Feature: Technology
       | website   | https://www.ruby-lang.org |
     When  I access its url
     Then  I should see "Ruby"
-    And   I should see a link "https://www.ruby-lang.org" with href "https://www.ruby-lang.org"
+    And   I should see a link "https://www.ruby-lang.org" with href "https://www.ruby-lang.org/"
 
   Scenario: Follow technology
     Given a "technology"

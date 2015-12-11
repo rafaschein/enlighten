@@ -10,6 +10,22 @@ Given(/^I access "(.*?)"$/) do |url|
   visit url
 end
 
+Given(/^I have permissions with the following data:$/) do |table|
+  # create permission acls
+  permission_acls = table.hashes.map do |element|
+    create(:permission_acl,
+           model: element['model'].to_s.downcase,
+           action: element['action'].to_s.downcase)
+  end
+
+  # create permission role and assing acls
+  permission_role = create(:permission_role, permission_acls: permission_acls)
+
+  # assigns to user
+  @user.permission_roles << permission_role
+  @user.save
+end
+
 When(/^I (?:access|am on) its url$/) do
   model_url = polymorphic_url(@model_instance,
                               host: Capybara.current_session.server.host,

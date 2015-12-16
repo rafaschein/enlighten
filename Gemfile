@@ -36,6 +36,7 @@ gem 'jquery-rails'
 # Authentication
 gem 'devise'
 gem 'devise-i18n'
+gem 'devise_ldap_authenticatable'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'

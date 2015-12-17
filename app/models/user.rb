@@ -18,10 +18,9 @@
 #
 
 class User < ActiveRecord::Base
-  has_paper_trail
+  include ::Authenticatable
 
-  devise :database_authenticatable,
-         :rememberable, :trackable
+  has_paper_trail
 
   before_create :assigns_default_permission_roles
 

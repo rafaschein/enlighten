@@ -79,6 +79,9 @@ gem 'newrelic_rpm'
 # Application Permission
 gem 'pundit'
 
+# Manage Environment Variables
+gem 'figaro'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

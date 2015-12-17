@@ -2,7 +2,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # ==> LDAP Configuration
-  if Figaro.env.ldap_enabled
+  if LDAP.enabled?
     config.ldap_logger = true
     config.ldap_create_user = true
     config.ldap_config = "#{Rails.root}/config/ldap.yml"

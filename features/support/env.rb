@@ -4,6 +4,7 @@ require 'capybara/cucumber'
 require 'rspec/rails'
 require 'capybara/poltergeist'
 require 'paper_trail/frameworks/cucumber'
+require 'cucumber/rspec/doubles'
 
 module Cucumber
   module Rails

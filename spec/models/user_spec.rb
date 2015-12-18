@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
+#  remember_token         :string
 #
 
 require 'rails_helper'
@@ -25,6 +26,7 @@ RSpec.describe User, type: :model do
   it { expect(subject).to have_db_column(:encrypted_password) }
   it { expect(subject).to have_db_column(:reset_password_token) }
   it { expect(subject).to have_db_column(:reset_password_sent_at) }
+  it { expect(subject).to have_db_column(:remember_token) }
   it { expect(subject).to have_db_column(:remember_created_at) }
   it { expect(subject).to have_db_column(:sign_in_count) }
   it { expect(subject).to have_db_column(:current_sign_in_at) }

@@ -4,7 +4,7 @@ random_image_url = 'http://lorempixel.com/250/250/abstract'
 
 puts
 puts 'Creating administrator permission role...'
-permission_role_administrator = FactoryGirl.create :permission_role_administrator
+permission_role_administrator = FactoryGirl.create(:permission_role, :administrator)
 
 puts
 puts 'Creating administrator permission role acls...'
@@ -45,7 +45,7 @@ end
 
 puts
 puts 'Creating user permission role...'
-permission_role_user = FactoryGirl.create :permission_role_user, default: true
+permission_role_user = FactoryGirl.create(:permission_role, :user, default: true)
 
 puts
 puts 'Creating user permission role acls...'

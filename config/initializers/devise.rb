@@ -12,7 +12,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = 'f08545848551dcbf192965ec5a240ccfdd87e9cfd3ecd494b8645d6d3792a6cadd0dd0232a7c9203f9d85512ef289026fdac02451f9ea2d23965d989707e649e'
+  config.secret_key = Figaro.env.secret_key_base
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -105,7 +105,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '1217d1c37d699e5d65e24c998c0c7d82298aaeaef3261b12cf1d6be696864e05218a49952ac578dad9b9994a3819772ec284dc11a6eaa9d682d3d55e736caad4'
+  config.pepper = Figaro.env.secret_key_base
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -264,4 +264,15 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+end
+
+# Implements encrypt for LDAP password
+module Devise
+  module Models
+    module LdapAuthenticatable
+      module ClassMethods
+        Devise::Models.config(self, :pepper, :stretches, :send_password_change_notification)
+      end
+    end
+  end
 end

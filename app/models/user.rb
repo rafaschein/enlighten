@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
+#  remember_token         :string
 #
 
 class User < ActiveRecord::Base
@@ -69,5 +70,9 @@ class User < ActiveRecord::Base
     Permission::Role.where(default: true).each do |permission_role|
       permission_roles << permission_role
     end
+  end
+
+  def password_digest(decrypted_password)
+    Devise::Encryptor.digest(self.class, decrypted_password)
   end
 end

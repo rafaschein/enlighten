@@ -1,22 +1,7 @@
-h1 Dashboard
+script id="card-template" type="x-tmpl-mustache"
+  = render partial: "shared/card"
 
-h3 Trending people
-
-.dashboard-cards
-  - @people.take(6).each do |person|
-    .dashboard-cards__card
-      = render partial: 'people/card', locals: { person: person }
-
-h3 Trending Projects
-
-.dashboard-cards
-  - @projects.take(6).each do |project|
-    .dashboard-cards__card
-      = render partial: 'projects/card', locals: { project: project }
-
-h3 Trending Technologies
-
-.dashboard-cards
-  - @technologies.take(6).each do |technology|
-    .dashboard-cards__card
-      = render partial: 'technologies/card', locals: { technology: technology }
+.card-grid
+.card-grid-pager
+  a
+    span Carregar Mais

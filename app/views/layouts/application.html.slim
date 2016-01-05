@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
 
-    title = content_for?(:title) ? "#{yield(:title)} - Enlighten" : 'Enlighten'
+    title = content_for?(:title) ? "#{yield(:title)} - enlighten" : 'enlighten'
 
     link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'
     = stylesheet_link_tag 'application'
@@ -14,13 +14,32 @@ html lang="en"
 
     - if user_signed_in?
       nav.navbar role='navigation'
-        ul.navbar__title
-          li
-            h1 = link_to 'Enlighten', root_path
-
-        ul.navbar__options
-          li
-            = link_to('Log out', destroy_user_session_path, method: :delete)
+        .container
+          div.navbar__brand
+            = link_to root_path
+              = image_tag 'enlighten.svg', width: "94", height: "32"
+          ul.navbar__container.navbar__container--right
+            li.dropdown
+              a.dropdown__toggle
+                img.geometry.geometry--circle src="http://localhost:3000/attachments/2ccc11a834bb24df01cc2c117ef29c350357d37d/store/fill/300/300/21f4db3a082dbe2d7c8b671e1c2616a61057d8ebbefd84f34e964b955185/image.png" width="30" height="30"
+                span John Paulo Ragner Voloski
+                .arrow.arrow--down
+              ul.dropdown__menu
+                li
+                  a
+                    = "Painel"
+                li
+                  a
+                    = "Ver Perfil"
+                li
+                  a
+                    = "Editar Perfil"
+                li
+                  a
+                    = "Configurações"
+                li
+                  a
+                    = "Sair"
 
     - if alert.present?
       .alert-box.alert
@@ -34,3 +53,30 @@ html lang="en"
 
     .container
       = yield
+
+    - if user_signed_in?
+      .footer
+        .footer__newsletter
+        .footer__links
+          .footer__links__brand
+            = image_tag 'enlighten.svg'
+            span @ 2015 CWI Software. Todos os direitos reservados.
+          .footer__links__navigation
+            .footer__links__navigation__container
+              .footer__links__navigation__container__title NAVEGUE PELOS CONTEÚDOS
+              a.footer__links__navigation__container__page href='' Conhecimentos
+              a.footer__links__navigation__container__page href='' Pessoas
+              a.footer__links__navigation__container__page href='' Projetos
+              a.footer__links__navigation__container__page href='' Clientes
+            .footer__links__navigation__container.footer__links__navigation__container--right
+              .footer__links__navigation__container__title ACOMPANHE A CWI
+              a.footer__links__navigation__container__social href='https://www.facebook.com/CWISoftware' target='_blank'
+                = image_tag 'icons/footer/icn-facebook.svg'
+              a.footer__links__navigation__container__social href='https://twitter.com/cwisoftware' target='_blank'
+                = image_tag 'icons/footer/icn-twitter.svg'
+              a.footer__links__navigation__container__social href='https://www.linkedin.com/company/cwi-software' target='_blank'
+                = image_tag 'icons/footer/icn-linkedin.svg'
+              a.footer__links__navigation__container__social href='https://www.youtube.com/channel/UCQrB7CaLhd0iFSNXE-whRow' target='_blank'
+                = image_tag 'icons/footer/icn-youtube.svg'
+              a.footer__links__navigation__container__social href='https://vimeo.com/cwisoftware' target='_blank'
+                = image_tag 'icons/footer/icn-vimeo.svg'

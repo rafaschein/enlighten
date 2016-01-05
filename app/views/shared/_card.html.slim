@@ -1,0 +1,24 @@
+div.card.card--person
+  div.card__path
+    = "{{ path }}"
+  div.card__container
+    img.card__container__avatar src="{{ avatar }}"
+    div.card__container__title 
+      = "{{ title }}"
+    div.card__container__subtitle
+      = "{{ subtitle }}"
+    ul.card__container__information
+      = "{{ #informations }}"
+      li
+        img src="{{ icn }}"
+        div.card__container__information__label
+          = "{{ title }}"
+      = "{{ /informations }}"
+  div.card__statistic
+    = "{{ #statistics }}"
+    div.card__statistic__container
+      a href="{{ link }}"
+        img src=" {{ icn }}"
+      div.card__statistic__container__label
+        = "{{ title }}"
+    = "{{ /statistics }}"

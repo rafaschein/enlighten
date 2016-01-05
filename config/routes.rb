@@ -93,5 +93,7 @@ Rails.application.routes.draw do
 
   resources :clients, concerns: [:followable, :likable]
 
+  resources :cards, only: [:index]
+
   devise_for :users
 end

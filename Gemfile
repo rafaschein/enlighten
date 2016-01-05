@@ -82,6 +82,16 @@ gem 'pundit'
 # Manage Environment Variables
 gem 'figaro'
 
+# jQuery Plugin to Build Pinterest Grid
+gem 'jquery-masonry-rails' 
+
+# Pagination
+gem 'kaminari'
+gem 'api-pagination'
+
+# Serializer
+gem 'active_model_serializers'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

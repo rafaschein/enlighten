@@ -2,16 +2,13 @@
 
 .container {
   position: relative;
-  overflow: hidden;
   box-sizing: border-box;
   max-width: 960px;
   margin: 0 auto;
-  padding: 10px;
 }
 
 @include respond-above('medium') {
   .container {
-    padding: 20px;
   }
 
   aside {

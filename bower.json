@@ -1,0 +1,6 @@
+{
+  "name": "enlighten",
+  "dependencies": {
+    "lightweight": "git@github.com:CWISoftware/lightweight.git#v1-dev"
+  }
+}

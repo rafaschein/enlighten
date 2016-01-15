@@ -20,3 +20,4 @@
 // lightweight dependencies
 //= require lightweight/js/lightweight
 //= require lightweight/js/dropdown
+//= require lightweight/js/navbar

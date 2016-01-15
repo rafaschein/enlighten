@@ -9,4 +9,8 @@
 @import "pages/overrides/navbar";
 @import "pages/settings";
 @import "pages/dashboard";
-@import "pages/login"
+@import "pages/login";
+
+.container {
+  min-height: 100%;
+}

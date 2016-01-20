@@ -16,22 +16,22 @@ permission_acls_administrator = {
     :create
   ],
   client: [
-    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
   ],
   dashboard: [
     :index
   ],
   person: [
-    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
   ],
   post: [
     :new, :create
   ],
   project: [
-    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
   ],
   technology: [
-    :index, :show, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :new, :edit, :create, :update, :destroy, :unfollow, :follow, :unlike, :like
   ]
 }
 
@@ -57,22 +57,22 @@ permission_acls_user = {
     :create
   ],
   client: [
-    :index, :show, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :unfollow, :follow, :unlike, :like
   ],
   dashboard: [
     :index
   ],
   person: [
-    :index, :show, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :unfollow, :follow, :unlike, :like
   ],
   post: [
     :new, :create
   ],
   project: [
-    :index, :show, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :unfollow, :follow, :unlike, :like
   ],
   technology: [
-    :index, :show, :unfollow, :follow, :unlike, :like
+    :index, :cards, :show, :card, :unfollow, :follow, :unlike, :like
   ]
 }
 

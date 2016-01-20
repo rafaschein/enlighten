@@ -1,7 +1,8 @@
 script id="card-template" type="x-tmpl-mustache"
   = render partial: "shared/card"
 
-.card-grid
-.card-grid-pager
-  a
-    span Carregar Mais
+.row
+  .card-grid href = cards_path(format: :json)
+  .card-grid-pager
+    a
+      span Carregar Mais

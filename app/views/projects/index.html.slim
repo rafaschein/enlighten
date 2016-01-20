@@ -1,6 +1,8 @@
-h1 Listing projects
+script id="card-template" type="x-tmpl-mustache"
+  = render partial: "shared/card"
 
-ul.projects
-  - @projects.each do |project|
-    li = link_to project do
-      = project.name
+.row
+  .card-grid href = cards_projects_path(format: :json)
+  .card-grid-pager
+    a
+      span Carregar Mais

@@ -1,9 +1,5 @@
 class Card::Project
-  attr_reader :path, :title, :subtitle, :informations
-
-  def initialize(model)
-    @model = model
-  end
+  include Card
 
   def path
     "Projetos"
@@ -14,11 +10,11 @@ class Card::Project
   end
 
   def subtitle
-    @model.client.name
+    @model.client.name unless @model.client.nil?
   end
 
   def informations
-    [
+    @informations << [
       {
         icn: 'icons/cards/icn-posts.svg',
         title: "#{@model.activities.count} publicações"
@@ -32,20 +28,7 @@ class Card::Project
         title: "#{@model.members.count} participantes"
       }
     ]
-  end
 
-  def statistics
-    [
-      {
-        icn: 'icons/cards/icn-likers.svg',
-        link: '#',
-        title: @model.likers.count
-      },
-      {
-        icn: 'icons/cards/icn-followers.svg',
-        link: '#',
-        title: @model.followers.count
-      }
-    ]
+    super
   end
 end

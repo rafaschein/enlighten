@@ -1,9 +1,5 @@
 class Card::Person
-  attr_reader :path, :title, :subtitle, :informations
-
-  def initialize(model)
-    @model = model
-  end
+  include Card
 
   def path
     "Pessoas"
@@ -13,11 +9,8 @@ class Card::Person
     @model.name
   end
 
-  def subtitle
-  end
-
   def informations
-    [
+    @informations << [
       {
         icn: 'icons/cards/icn-role.svg',
         title: last_membership.role.name
@@ -26,27 +19,14 @@ class Card::Person
         icn: 'icons/cards/icn-project.svg',
         title: last_membership.project.name
       }
-    ]
-  end
+    ] unless last_membership.nil?
 
-  def statistics
-    [
-      {
-        icn: 'icons/cards/icn-likers.svg',
-        link: '#',
-        title: @model.likers.count
-      },
-      {
-        icn: 'icons/cards/icn-followers.svg',
-        link: '#',
-        title: @model.followers.count
-      }
-    ]
+    super
   end
 
   private
 
   def last_membership
-    @model.memberships.last
+    @model.memberships.last unless @model.memberships.nil?
   end
 end

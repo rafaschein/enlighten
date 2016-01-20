@@ -1,3 +1,3 @@
 class CardSerializer < ActiveModel::Serializer
-  attributes :path, :avatar, :title, :subtitle, :informations, :statistics
+  attributes :type, :path, :avatar, :title, :subtitle, :informations, :statistics, :links
 end

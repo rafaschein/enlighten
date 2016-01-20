@@ -92,6 +92,9 @@ gem 'api-pagination'
 # Serializer
 gem 'active_model_serializers'
 
+# Gravatar
+gem 'gravatar-ultimate'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_person, only: [:card, :show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /people
   def index
@@ -7,9 +7,27 @@ class PeopleController < ApplicationController
     authorize :person, :index?
   end
 
+  # GET /people/cards.json
+  def cards
+    @people = paginate Card::Person.all(current_user)
+
+    respond_to do |format|
+      format.json { render json: @people, each_serializer: CardSerializer }
+    end
+  end
+
   # GET /people/1
   def show
     authorize @person, :show?
+  end
+
+  # GET /people/1/card.json
+  def card
+    respond_to do |format|
+      format.json do
+        render json: Card::Person.new(@person, current_user), serializer: CardSerializer
+      end
+    end
   end
 
   # GET /people/new
@@ -60,10 +78,16 @@ class PeopleController < ApplicationController
     current_user.followed_people << @person
 
     if current_user.save
-      redirect_to @person, notice: "You're following the person."
+      respond_to do |format|
+        format.html { redirect_to @person, notice: "You're following the person." }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @person, notice: "You're already following the person."
+    respond_to do |format|
+      format.html { redirect_to @person, notice: "You're already following the person." }
+      format.json { head :not_modified }
+    end
   end
 
   # PATCH/PUT /follow
@@ -75,7 +99,10 @@ class PeopleController < ApplicationController
       current_user.save
     end
 
-    redirect_to @person, notice: "You're not following the person."
+    respond_to do |format|
+      format.html { redirect_to @person, notice: "You're not following the person." }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -84,10 +111,16 @@ class PeopleController < ApplicationController
     current_user.liked_people << @person
 
     if current_user.save
-      redirect_to person_path, notice: 'You liked the person.'
+      respond_to do |format|
+        format.html { redirect_to @person, notice: 'You liked the person.' }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @person, notice: 'You already liked the person.'
+    respond_to do |format|
+      format.html { redirect_to @person, notice: 'You already liked the person.' }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -99,7 +132,10 @@ class PeopleController < ApplicationController
       current_user.save
     end
 
-    redirect_to @person, notice: "You're not liking the person."
+    respond_to do |format|
+      format.html { redirect_to @person, notice: "You're not liking the person." }
+      format.json { head :created }
+    end
   end
 
   private

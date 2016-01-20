@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_project, only: [:card, :show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /projects
   def index
@@ -7,9 +7,27 @@ class ProjectsController < ApplicationController
     authorize :project, :index?
   end
 
+  # GET /projects/cards.json
+  def cards
+    @projects = paginate Card::Project.all(current_user)
+
+    respond_to do |format|
+      format.json { render json: @projects, each_serializer: CardSerializer }
+    end
+  end
+
   # GET /projects/1
   def show
     authorize @project, :show?
+  end
+
+  # GET /project/1/card.json
+  def card
+    respond_to do |format|
+      format.json do
+        render json: Card::Project.new(@project, current_user), serializer: CardSerializer
+      end
+    end
   end
 
   # GET /projects/new
@@ -60,10 +78,16 @@ class ProjectsController < ApplicationController
     current_user.followed_projects << @project
 
     if current_user.save
-      redirect_to @project, notice: "You're following the project."
+      respond_to do |format|
+        format.html { redirect_to @project, notice: "You're following the project." }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @project, notice: "You're already following the project."
+    respond_to do |format|
+      format.html { redirect_to @project, notice: "You're already following the project." }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /follow
@@ -75,7 +99,10 @@ class ProjectsController < ApplicationController
       current_user.save
     end
 
-    redirect_to @project, notice: "You're not following the project."
+    respond_to do |format|
+      format.html { redirect_to @project, notice: "You're not following the project." }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -84,10 +111,16 @@ class ProjectsController < ApplicationController
     current_user.liked_projects << @project
 
     if current_user.save
-      redirect_to project_path, notice: 'You liked the project.'
+      respond_to do |format|
+        format.html { redirect_to @project, notice: 'You liked the project.' }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @project, notice: 'You already liked the project.'
+    respond_to do |format|
+      format.html { redirect_to @project, notice: 'You already liked the project.' }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -99,7 +132,10 @@ class ProjectsController < ApplicationController
       current_user.save
     end
 
-    redirect_to @project, notice: "You're not liking the project."
+    respond_to do |format|
+      format.html { redirect_to @project, notice: "You're not liking the project." }
+      format.json { head :created }
+    end
   end
 
   private

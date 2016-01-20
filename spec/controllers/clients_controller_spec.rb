@@ -38,6 +38,25 @@ RSpec.describe ClientsController, type: :controller do
     end
   end
 
+  describe 'GET #cards' do
+    it 'assigns @clients' do
+      create_list(:client, 10)
+      get :cards, format: :json
+      expect(assigns(:clients)).to have(10).items
+    end
+  end
+
+  describe 'GET #card' do
+    before do
+      @client = create :client
+    end
+
+    it 'renders the :card serialized' do
+      get :card, id: @client.id, format: :json
+      expect(assigns(:client)).to eq(@client)
+    end
+  end
+
   describe 'GET #new' do
     it 'renders the :new template' do
       get :new

@@ -168,6 +168,9 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gravatar-ultimate (2.0.0)
+      activesupport (>= 2.3.14)
+      rack
     haml (4.0.7)
       tilt
     highline (1.7.8)
@@ -478,6 +481,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   figaro
+  gravatar-ultimate
   i18n-debug
   irbtools
   jbuilder (~> 2.0)

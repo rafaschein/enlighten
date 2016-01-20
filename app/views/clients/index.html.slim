@@ -1,6 +1,8 @@
-h1 Listing clients
+script id="card-template" type="x-tmpl-mustache"
+  = render partial: "shared/card"
 
-ul
-  - @clients.each do |client|
-    li = link_to client do
-      = client.name
+.row
+  .card-grid href = cards_clients_path(format: :json)
+  .card-grid-pager
+    a
+      span Carregar Mais

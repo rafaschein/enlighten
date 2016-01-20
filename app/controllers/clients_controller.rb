@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_client, only: [:card, :show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /clients
   def index
@@ -7,9 +7,27 @@ class ClientsController < ApplicationController
     authorize :client, :index?
   end
 
+  # GET /clients/cards.json
+  def cards
+    @clients = paginate Card::Client.all(current_user)
+
+    respond_to do |format|
+      format.json { render json: @clients, each_serializer: CardSerializer }
+    end
+  end
+
   # GET /clients/1
   def show
     authorize @client, :show?
+  end
+
+  # GET /clients/1/card.json
+  def card
+    respond_to do |format|
+      format.json do
+        render json: Card::Client.new(@client, current_user), serializer: CardSerializer
+      end
+    end
   end
 
   # GET /clients/new
@@ -60,10 +78,16 @@ class ClientsController < ApplicationController
     current_user.followed_clients << @client
 
     if current_user.save
-      redirect_to @client, notice: "You're following the client."
+      respond_to do |format|
+        format.html { redirect_to @client, notice: "You're following the client." }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @client, notice: "You're already following the client."
+    respond_to do |format|
+      format.html { redirect_to @client, notice: "You're already following the client." }
+      format.json { head :not_modified }
+    end
   end
 
   # PATCH/PUT /follow
@@ -75,7 +99,10 @@ class ClientsController < ApplicationController
       current_user.save
     end
 
-    redirect_to @client, notice: "You're not following the client."
+    respond_to do |format|
+      format.html { redirect_to @client, notice: "You're not following the client." }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -84,10 +111,16 @@ class ClientsController < ApplicationController
     current_user.liked_clients << @client
 
     if current_user.save
-      redirect_to client_path, notice: 'You liked the client.'
+      respond_to do |format|
+        format.html { redirect_to @client, notice: 'You liked the client.' }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @client, notice: 'You already liked the client.'
+    respond_to do |format|
+      format.html { redirect_to @client, notice: 'You already liked the client.' }
+      format.json { head :not_modified }
+    end
   end
 
   # PATCH/PUT /like
@@ -99,7 +132,10 @@ class ClientsController < ApplicationController
       current_user.save
     end
 
-    redirect_to @client, notice: "You're not liking the client."
+    respond_to do |format|
+      format.html { redirect_to @client, notice: "You're not liking the client." }
+      format.json { head :created }
+    end
   end
 
   private

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe DashboardController, type: :controller do
+RSpec.describe CardsController, type: :controller do
   let(:permission_acls) do
     [
-      build(:permission_acl, model: 'dashboard', action: 'index')
+      build(:permission_acl, model: 'card', action: 'index'),
     ]
   end
   let(:permission_roles) { [double(permission_acls: permission_acls)] }
@@ -16,9 +16,13 @@ RSpec.describe DashboardController, type: :controller do
   end
 
   describe 'GET #index' do
-    it 'renders the :index template' do
-      get :index
-      expect(response).to render_template('index')
+    it 'assigns @cards' do
+      clients      = create_list(:client, 5)
+      people       = create_list(:person, 5)
+      projects     = create_list(:project, 5)
+      technologies = create_list(:technology, 5)
+      get :index, format: :json
+      expect(assigns(:cards)).to have(20).items
     end
   end
 end

@@ -38,6 +38,25 @@ RSpec.describe PeopleController, type: :controller do
     end
   end
 
+  describe 'GET #cards' do
+    it 'assigns @people' do
+      create_list(:person, 10)
+      get :cards, format: :json
+      expect(assigns(:people)).to have(10).items
+    end
+  end
+
+  describe 'GET #card' do
+    before do
+      @person = create :person
+    end
+
+    it 'renders the :card serialized' do
+      get :card, id: @person.id, format: :json
+      expect(assigns(:person)).to eq(@person)
+    end
+  end
+
   describe 'GET #new' do
     it 'renders the :new template' do
       get :new

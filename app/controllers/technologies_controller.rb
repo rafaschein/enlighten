@@ -1,5 +1,5 @@
 class TechnologiesController < ApplicationController
-  before_action :set_technology, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_technology, only: [:card, :show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
   # GET /technologies
   def index
@@ -7,9 +7,27 @@ class TechnologiesController < ApplicationController
     authorize :technology, :index?
   end
 
+  # GET /technologies/cards.json
+  def cards
+    @technologies = paginate Card::Technology.all(current_user)
+
+    respond_to do |format|
+      format.json { render json: @technologies, each_serializer: CardSerializer }
+    end
+  end
+
   # GET /technologies/1
   def show
     authorize @technology, :show?
+  end
+
+  # GET /technologies/1/card.json
+  def card
+    respond_to do |format|
+      format.json do
+        render json: Card::Technology.new(@technology, current_user), serializer: CardSerializer
+      end
+    end
   end
 
   # GET /technologies/new
@@ -60,10 +78,16 @@ class TechnologiesController < ApplicationController
     current_user.followed_technologies << @technology
 
     if current_user.save
-      redirect_to @technology, notice: "You're following the technology."
+      respond_to do |format|
+        format.html { redirect_to @technology, notice: "You're following the technology." }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @technology, notice: "You're already following the technology."
+    respond_to do |format|
+      format.html { redirect_to @technology, notice: "You're already following the technology." }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /follow
@@ -75,7 +99,10 @@ class TechnologiesController < ApplicationController
       current_user.save
     end
 
-    redirect_to @technology, notice: "You're not following the technology."
+    respond_to do |format|
+      format.html { redirect_to @technology, notice: "You're not following the technology." }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -84,10 +111,16 @@ class TechnologiesController < ApplicationController
     current_user.liked_technologies << @technology
 
     if current_user.save
-      redirect_to @technology, notice: 'You liked the technology.'
+      respond_to do |format|
+        format.html { redirect_to @technology, notice: 'You liked the technology.' }
+        format.json { head :created }
+      end
     end
   rescue ActiveRecord::RecordNotUnique
-    redirect_to @technology, notice: 'You already liked the technology.'
+    respond_to do |format|
+      format.html { redirect_to @technology, notice: 'You already liked the technology.' }
+      format.json { head :created }
+    end
   end
 
   # PATCH/PUT /like
@@ -99,7 +132,10 @@ class TechnologiesController < ApplicationController
       current_user.save
     end
 
-    redirect_to @technology, notice: "You're not liking the technology."
+    respond_to do |format|
+      format.html { redirect_to @technology, notice: "You're not liking the technology." }
+      format.json { head :created }
+    end
   end
 
   private

@@ -39,6 +39,25 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
+  describe 'GET #cards' do
+    it 'assigns @projects' do
+      create_list(:project, 10)
+      get :cards, format: :json
+      expect(assigns(:projects)).to have(10).items
+    end
+  end
+
+  describe 'GET #card' do
+    before do
+      @project = create :project
+    end
+
+    it 'renders the :card serialized' do
+      get :card, id: @project.id, format: :json
+      expect(assigns(:project)).to eq(@project)
+    end
+  end
+
   describe 'GET #new' do
     it 'renders the :new template' do
       get :new

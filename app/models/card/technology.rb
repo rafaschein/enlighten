@@ -1,9 +1,5 @@
 class Card::Technology
-  attr_reader :path, :title, :subtitle, :informations
-
-  def initialize(model)
-    @model = model
-  end
+  include Card
 
   def path
     "Conhecimentos"
@@ -18,7 +14,7 @@ class Card::Technology
   end
 
   def informations
-    [
+    @informations << [
       {
         icn: 'icons/cards/icn-posts.svg',
         title: "#{@model.activities.count} publicações"
@@ -28,20 +24,7 @@ class Card::Technology
         title: "#{@model.projects.count} projectos"
       }
     ]
-  end
 
-  def statistics
-    [
-      {
-        icn: 'icons/cards/icn-likers.svg',
-        link: '#',
-        title: @model.likers.count
-      },
-      {
-        icn: 'icons/cards/icn-followers.svg',
-        link: '#',
-        title: @model.followers.count
-      }
-    ]
+    super
   end
 end

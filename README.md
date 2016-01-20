@@ -12,6 +12,7 @@
 [<img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Ruby_on_Rails_logo.svg" width="100" height="100">](http://rubyonrails.org/)
 [<img src="https://raw.githubusercontent.com/rspec/rspec.github.io/source/source/images/logo.png" width="100" height="100">](http://rspec.info/)
 [<img src="https://avatars2.githubusercontent.com/u/320565?v=3&s=200" width="100" height="100">](https://cucumber.io/)
+[<img src="https://avatars3.githubusercontent.com/u/3709251?v=3&s=200" width="100" height="100">](https://github.com/bower)
 
 ## Usage
 
@@ -42,6 +43,7 @@ We appreciate any contribution to Enlighten, so check out our [CONTRIBUTING.md](
 
 ```bash
 # install the dependencies
+bower install
 bundle install
 
 # run tests
@@ -50,6 +52,9 @@ rake
 # create database and execute migrations
 rake db:create
 rake db:migrate
+
+# create permission seed
+rake db:seed
 
 # create seed records for development environment on the database
 rake db:seed:development

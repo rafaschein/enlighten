@@ -1,6 +1,6 @@
 {
   "name": "enlighten",
   "dependencies": {
-    "lightweight": "git@github.com:CWISoftware/lightweight.git#v1-dev"
+    "lightweight": "https://github.com/CWISoftware/lightweight.git#v1-dev"
   }
 }

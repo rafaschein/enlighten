@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   has_paper_trail
 
-  before_create :assigns_default_permission_roles
+  before_create :creates_person_to_ldap_authentication, :assigns_default_permission_roles
 
   has_one :person
 
@@ -65,6 +65,29 @@ class User < ActiveRecord::Base
                           association_foreign_key: 'permission_role_id'
 
   private
+
+  def ldap_attribute(attribute)
+    Devise::LDAP::Adapter.get_ldap_param(self.email, attribute)
+  end
+
+  def creates_person_to_ldap_authentication
+    if LDAP.enabled?
+      attributes = {}
+
+      # name
+      attributes[:name] = ldap_attribute('displayName').first unless ldap_attribute('displayName').nil?
+
+      # image
+      unless ldap_attribute('thumbnailPhoto').nil?
+        attributes[:image] = StringIO.new(ldap_attribute('thumbnailPhoto').first)
+      else
+        attributes[:image] = Gravatar.new(self.email).image_data
+      end
+
+      # save
+      self.person = Person.create(attributes)
+    end
+  end
 
   def assigns_default_permission_roles
     Permission::Role.where(default: true).each do |permission_role|

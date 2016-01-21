@@ -20,7 +20,7 @@ html lang="en"
               img.geometry.geometry--circle src="#{current_user.person.try(:image_url)}" width="30" height="30"
             div.navbar__brand
               = link_to root_path
-                = image_tag 'enlighten.svg', width: "94", height: "32"
+                = image_tag 'enlighten.svg', width: '94', height: '32'
           ul.navbar__container.navbar__container--right
             li.dropdown
               a.dropdown__toggle
@@ -29,7 +29,7 @@ html lang="en"
               ul.dropdown__menu
                 li
                   a
-                    = link_to("Perfil", person_path(current_user.person))
+                    = link_to('Perfil', person_path(current_user.person))
                 li
                   a
                     = link_to('Sair', destroy_user_session_path, method: :delete)
@@ -55,7 +55,7 @@ html lang="en"
             .row
               .footer__links__brand
                 = image_tag 'enlighten.svg'
-                span 
+                span
                   = t('company.copyright')
               .footer__links__navigation
                 .container
@@ -67,7 +67,7 @@ html lang="en"
                       = link_to('Projetos', projects_path, class: 'footer__links__navigation__container__page')
                       = link_to('Clientes', clients_path, class: 'footer__links__navigation__container__page')
                     .footer__links__navigation__container.footer__links__navigation__container--right
-                      .footer__links__navigation__container__title 
+                      .footer__links__navigation__container__title
                         = t('company.social_networks_title')
                       - t('company.social_networks').each do |social_network|
                         a.footer__links__navigation__container__social href="#{social_network[:link]}" target='_blank'

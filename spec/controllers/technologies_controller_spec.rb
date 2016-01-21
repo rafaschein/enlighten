@@ -42,7 +42,7 @@ RSpec.describe TechnologiesController, type: :controller do
     it 'assigns @technologies' do
       create_list(:technology, 10)
       get :cards, format: :json
-      expect(assigns(:technologies)).to have(10).items
+      expect(JSON.parse(response.body).count).to eq(10)
     end
   end
 

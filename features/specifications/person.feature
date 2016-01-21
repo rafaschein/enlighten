@@ -39,7 +39,7 @@ Feature: Person
     Given a "person"
     And  I am on its url
     When I click on "Like"
-    Then I should see "You liked the person"
+    Then I should see "You're liking the person"
     And  I should see "Unlike"
 
   Scenario: Unlike person

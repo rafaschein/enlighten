@@ -42,7 +42,7 @@ RSpec.describe ClientsController, type: :controller do
     it 'assigns @clients' do
       create_list(:client, 10)
       get :cards, format: :json
-      expect(assigns(:clients)).to have(10).items
+      expect(JSON.parse(response.body).count).to eq(10)
     end
   end
 

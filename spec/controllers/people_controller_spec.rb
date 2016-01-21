@@ -42,7 +42,7 @@ RSpec.describe PeopleController, type: :controller do
     it 'assigns @people' do
       create_list(:person, 10)
       get :cards, format: :json
-      expect(assigns(:people)).to have(10).items
+      expect(JSON.parse(response.body).count).to eq(10)
     end
   end
 

@@ -1,5 +1,9 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:card, :show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_person, only: [:show, :edit, :update, :destroy]
+
+  include Cardable
+  include Likable
+  include Followable
 
   # GET /people
   def index
@@ -7,27 +11,9 @@ class PeopleController < ApplicationController
     authorize :person, :index?
   end
 
-  # GET /people/cards.json
-  def cards
-    @people = paginate Card::Person.all(current_user)
-
-    respond_to do |format|
-      format.json { render json: @people, each_serializer: CardSerializer }
-    end
-  end
-
   # GET /people/1
   def show
     authorize @person, :show?
-  end
-
-  # GET /people/1/card.json
-  def card
-    respond_to do |format|
-      format.json do
-        render json: Card::Person.new(@person, current_user), serializer: CardSerializer
-      end
-    end
   end
 
   # GET /people/new
@@ -70,72 +56,6 @@ class PeopleController < ApplicationController
     @person.destroy
 
     redirect_to people_url, notice: 'Person was successfully destroyed.'
-  end
-
-  # PATCH/PUT /follow
-  def follow
-    authorize @person, :follow?
-    current_user.followed_people << @person
-
-    if current_user.save
-      respond_to do |format|
-        format.html { redirect_to @person, notice: "You're following the person." }
-        format.json { head :created }
-      end
-    end
-  rescue ActiveRecord::RecordNotUnique
-    respond_to do |format|
-      format.html { redirect_to @person, notice: "You're already following the person." }
-      format.json { head :not_modified }
-    end
-  end
-
-  # PATCH/PUT /follow
-  def unfollow
-    authorize @person, :unfollow?
-
-    if current_user.followed_people.include?(@person)
-      current_user.followed_people.delete(@person)
-      current_user.save
-    end
-
-    respond_to do |format|
-      format.html { redirect_to @person, notice: "You're not following the person." }
-      format.json { head :created }
-    end
-  end
-
-  # PATCH/PUT /like
-  def like
-    authorize @person, :like?
-    current_user.liked_people << @person
-
-    if current_user.save
-      respond_to do |format|
-        format.html { redirect_to @person, notice: 'You liked the person.' }
-        format.json { head :created }
-      end
-    end
-  rescue ActiveRecord::RecordNotUnique
-    respond_to do |format|
-      format.html { redirect_to @person, notice: 'You already liked the person.' }
-      format.json { head :created }
-    end
-  end
-
-  # PATCH/PUT /like
-  def unlike
-    authorize @person, :unlike?
-
-    if current_user.liked_people.include?(@person)
-      current_user.liked_people.delete(@person)
-      current_user.save
-    end
-
-    respond_to do |format|
-      format.html { redirect_to @person, notice: "You're not liking the person." }
-      format.json { head :created }
-    end
   end
 
   private

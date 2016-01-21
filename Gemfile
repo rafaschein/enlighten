@@ -83,7 +83,7 @@ gem 'pundit'
 gem 'figaro'
 
 # jQuery Plugin to Build Pinterest Grid
-gem 'jquery-masonry-rails' 
+gem 'jquery-masonry-rails'
 
 # Pagination
 gem 'kaminari'

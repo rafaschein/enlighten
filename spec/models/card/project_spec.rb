@@ -8,7 +8,7 @@ RSpec.describe Card::Project, type: :model do
 
   describe '#path' do
     it 'receives path' do
-      expect(subject.path).to eq("Projetos")
+      expect(subject.path).to eq('Projetos')
     end
   end
 

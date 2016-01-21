@@ -1,22 +1,21 @@
-class Card::Client
-  include Card
+module Card
+  class Client
+    include Card
 
-  def path
-    "Clientes"
-  end
+    def path
+      'Clientes'
+    end
 
-  def title
-    @model.name
-  end
+    def title
+      @model.name
+    end
 
-  def informations
-    @informations << [
-      {
-        icn: 'icons/cards/icn-project.svg',
-        title: "#{@model.projects.count} projetos"
-      }
-    ]
+    def informations
+      @informations << [
+        { icn: 'icons/cards/icn-project.svg', title: "#{@model.projects.count} projetos" }
+      ]
 
-    super
+      super
+    end
   end
 end

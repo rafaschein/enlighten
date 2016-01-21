@@ -151,7 +151,7 @@ RSpec.describe Card, type: :model do
   end
 
   describe '#likeable' do
-    subject { @class.send(:likeable) }
+    subject { @class.send(:likable) }
 
     context 'when is not a likeable' do
       it 'receives empty statistics' do
@@ -255,7 +255,7 @@ RSpec.describe Card, type: :model do
 
     before do
       allow(model.class).to receive(:name) { 'person' }
-      allow(model).to receive(:id)         { 12345 }
+      allow(model).to receive(:id)         { '12345' }
     end
 
     it 'receives path' do

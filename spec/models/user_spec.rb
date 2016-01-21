@@ -161,7 +161,7 @@ RSpec.describe User, type: :model do
     subject { user.send(:creates_person_to_ldap_authentication) }
 
     context 'when ldap enabled' do
-      let(:ldap_param) { [ 'xxx' ] }
+      let(:ldap_param) { ['xxx'] }
 
       before do
         allow(LDAP).to receive(:enabled?) { true }
@@ -201,6 +201,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-
 end

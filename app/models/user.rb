@@ -67,26 +67,24 @@ class User < ActiveRecord::Base
   private
 
   def ldap_attribute(attribute)
-    Devise::LDAP::Adapter.get_ldap_param(self.email, attribute)
+    Devise::LDAP::Adapter.get_ldap_param(email, attribute)
+  end
+
+  def ldap_attribute_name
+    ldap_attribute('displayName').nil? ? email : ldap_attribute('displayName').first
+  end
+
+  def ldap_attribute_image
+    if ldap_attribute('thumbnailPhoto').nil?
+      Gravatar.new(email).image_data
+    else
+      StringIO.new(ldap_attribute('thumbnailPhoto').first)
+    end
   end
 
   def creates_person_to_ldap_authentication
-    if LDAP.enabled?
-      attributes = {}
-
-      # name
-      attributes[:name] = ldap_attribute('displayName').first unless ldap_attribute('displayName').nil?
-
-      # image
-      unless ldap_attribute('thumbnailPhoto').nil?
-        attributes[:image] = StringIO.new(ldap_attribute('thumbnailPhoto').first)
-      else
-        attributes[:image] = Gravatar.new(self.email).image_data
-      end
-
-      # save
-      self.person = Person.create(attributes)
-    end
+    return unless LDAP.enabled?
+    self.person = Person.create(name: ldap_attribute_name, image: ldap_attribute_image)
   end
 
   def assigns_default_permission_roles

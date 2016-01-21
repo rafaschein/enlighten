@@ -1,3 +1,7 @@
+Given(/^I have LDAP disabled$/) do
+  allow(LDAP).to receive(:enabled?) { false }
+end
+
 Given(/^I am on the home page$/) do
   visit '/'
 end
@@ -43,6 +47,10 @@ end
 
 When(/^I click(?:ed)? on "(.*?)"$/) do |link|
   click_link(link)
+end
+
+When(/^I open navigation bar$/) do
+  find(:css, '.navbar ul.navbar__container').click
 end
 
 When(/^I type "(.*?)" on "(.*?)"$/) do |input_text, field_name|

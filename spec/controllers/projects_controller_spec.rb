@@ -43,7 +43,7 @@ RSpec.describe ProjectsController, type: :controller do
     it 'assigns @projects' do
       create_list(:project, 10)
       get :cards, format: :json
-      expect(assigns(:projects)).to have(10).items
+      expect(JSON.parse(response.body).count).to eq(10)
     end
   end
 

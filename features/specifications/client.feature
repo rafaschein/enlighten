@@ -41,7 +41,7 @@ Feature: Client
     Given a "client"
     And  I am on its url
     When I click on "Like"
-    Then I should see "You liked the client"
+    Then I should see "You're liking the client"
     And  I should see "Unlike"
 
   Scenario: Unlike client

@@ -1,32 +1,28 @@
-class Card::Person
-  include Card
+module Card
+  class Person
+    include Card
 
-  def path
-    "Pessoas"
-  end
+    def path
+      'Pessoas'
+    end
 
-  def title
-    @model.name
-  end
+    def title
+      @model.name
+    end
 
-  def informations
-    @informations << [
-      {
-        icn: 'icons/cards/icn-role.svg',
-        title: last_membership.role.name
-      },
-      {
-        icn: 'icons/cards/icn-project.svg',
-        title: last_membership.project.name
-      }
-    ] unless last_membership.nil?
+    def informations
+      @informations << [
+        { icn: 'icons/cards/icn-role.svg', title: last_membership.role.name },
+        { icn: 'icons/cards/icn-project.svg', title: last_membership.project.name }
+      ] unless last_membership.nil?
 
-    super
-  end
+      super
+    end
 
-  private
+    private
 
-  def last_membership
-    @model.memberships.last unless @model.memberships.nil?
+    def last_membership
+      @model.memberships.last unless @model.memberships.nil?
+    end
   end
 end

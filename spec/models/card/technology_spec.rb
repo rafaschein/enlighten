@@ -8,7 +8,7 @@ RSpec.describe Card::Technology, type: :model do
 
   describe '#path' do
     it 'receives path' do
-      expect(subject.path).to eq("Conhecimentos")
+      expect(subject.path).to eq('Conhecimentos')
     end
   end
 

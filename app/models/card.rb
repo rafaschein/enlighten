@@ -35,7 +35,7 @@ module Card
   end
 
   def statistics
-    likeable
+    likable
     followable
 
     (@statistics.flatten || []).map do |statistic|
@@ -52,7 +52,7 @@ module Card
   end
 
   def read_attribute_for_serialization(attribute)
-    self.send(attribute)
+    send(attribute)
   end
 
   def helpers
@@ -61,53 +61,53 @@ module Card
 
   module ClassMethods
     def all(current_user)
-      name.demodulize.constantize.order([ updated_at: :desc ]).map do |model|
+      name.demodulize.constantize.order([updated_at: :desc]).map do |model|
         new(model, current_user)
       end
     end
   end
 
   def self.all(current_user)
-    [ ::Person.all | ::Client.all | ::Technology.all | ::Project.all ].flatten.map do |model|
+    [::Person.all | ::Client.all | ::Technology.all | ::Project.all].flatten.map do |model|
       "Card::#{model.class.name}".constantize.new(model, current_user)
     end
   end
 
   private
 
-  def likeable
-    if @current_user.respond_to?("liked_#{@model.class.name.pluralize.downcase}".to_sym)
-      @statistics << if @current_user.send("liked_#{@model.class.name.pluralize.downcase}").include?(@model)
-        {
-          icn: 'icons/cards/icn-likers-selected.svg',
-          link: "#{model_path}/unlike.json",
-          title: @model.likers.count
-        }
-      else
-        {
-          icn: 'icons/cards/icn-likers.svg',
-          link: "#{model_path}/like.json",
-          title: @model.likers.count
-        }
-      end
+  def likable?
+    @current_user.respond_to?("liked_#{@model.class.name.pluralize.downcase}".to_sym)
+  end
+
+  def liked?
+    @current_user.send("liked_#{@model.class.name.pluralize.downcase}").include?(@model)
+  end
+
+  def followable?
+    @current_user.respond_to?("followed_#{@model.class.name.pluralize.downcase}".to_sym)
+  end
+
+  def followed?
+    @current_user.send("followed_#{@model.class.name.pluralize.downcase}").include?(@model)
+  end
+
+  def likable
+    return unless likable?
+
+    if liked?
+      @statistics << { icn: 'icons/cards/icn-likers-selected.svg', link: "#{model_path}/unlike.json", title: @model.likers.count }
+    else
+      @statistics << { icn: 'icons/cards/icn-likers.svg', link: "#{model_path}/like.json", title: @model.likers.count }
     end
   end
 
   def followable
-    if @current_user.respond_to?("followed_#{@model.class.name.pluralize.downcase}".to_sym)
-      @statistics << if @current_user.send("followed_#{@model.class.name.pluralize.downcase}").include?(@model)
-        {
-          icn: 'icons/cards/icn-followers-selected.svg',
-          link: "#{model_path}/unfollow.json",
-          title: @model.followers.count
-        }
-      else
-        {
-          icn: 'icons/cards/icn-followers.svg',
-          link: "#{model_path}/follow.json",
-          title: @model.followers.count
-        }
-      end
+    return unless followable?
+
+    if followed?
+      @statistics << { icn: 'icons/cards/icn-followers-selected.svg', link: "#{model_path}/unfollow.json", title: @model.followers.count }
+    else
+      @statistics << { icn: 'icons/cards/icn-followers.svg', link: "#{model_path}/follow.json", title: @model.followers.count }
     end
   end
 

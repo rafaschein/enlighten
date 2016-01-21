@@ -1,15 +1,15 @@
 @charset 'utf-8';
 
-@import "vendor/normalize";
+@import 'vendor/normalize';
 
-@import "lightweight/sass/lightweight";
-@import "layout";
+@import 'lightweight/sass/lightweight';
+@import 'layout';
 
-@import "pages/overrides/dropdown";
-@import "pages/overrides/navbar";
-@import "pages/settings";
-@import "pages/dashboard";
-@import "pages/login";
+@import 'pages/overrides/dropdown';
+@import 'pages/overrides/navbar';
+@import 'pages/settings';
+@import 'pages/dashboard';
+@import 'pages/login';
 
 .container {
   min-height: 100%;

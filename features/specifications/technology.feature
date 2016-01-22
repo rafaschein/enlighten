@@ -41,7 +41,7 @@ Feature: Technology
     Given a "technology"
     And  I am on its url
     When I click on "Like"
-    Then I should see "You liked the technology"
+    Then I should see "You're liking the technology"
     And  I should see "Unlike"
 
   Scenario: Unlike technology

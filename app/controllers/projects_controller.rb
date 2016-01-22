@@ -1,5 +1,9 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+
+  include Cardable
+  include Likable
+  include Followable
 
   # GET /projects
   def index
@@ -52,54 +56,6 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     redirect_to projects_url, notice: 'Project was successfully destroyed.'
-  end
-
-  # PATCH/PUT /follow
-  def follow
-    authorize @project, :follow?
-    current_user.followed_projects << @project
-
-    if current_user.save
-      redirect_to @project, notice: "You're following the project."
-    end
-  rescue ActiveRecord::RecordNotUnique
-    redirect_to @project, notice: "You're already following the project."
-  end
-
-  # PATCH/PUT /follow
-  def unfollow
-    authorize @project, :unfollow?
-
-    if current_user.followed_projects.include?(@project)
-      current_user.followed_projects.delete(@project)
-      current_user.save
-    end
-
-    redirect_to @project, notice: "You're not following the project."
-  end
-
-  # PATCH/PUT /like
-  def like
-    authorize @project, :like?
-    current_user.liked_projects << @project
-
-    if current_user.save
-      redirect_to project_path, notice: 'You liked the project.'
-    end
-  rescue ActiveRecord::RecordNotUnique
-    redirect_to @project, notice: 'You already liked the project.'
-  end
-
-  # PATCH/PUT /like
-  def unlike
-    authorize @project, :unlike?
-
-    if current_user.liked_projects.include?(@project)
-      current_user.liked_projects.delete(@project)
-      current_user.save
-    end
-
-    redirect_to @project, notice: "You're not liking the project."
   end
 
   private

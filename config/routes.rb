@@ -79,19 +79,31 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :projects, concerns: [:followable, :likable] do
+  concern :cardable do
+    collection do
+      get :cards
+    end
+
+    member do
+      get :card
+    end
+  end
+
+  resources :projects, concerns: [:followable, :likable, :cardable] do
     resources :activities, path: 'activities/:type', only: [:show, :create], defaults: { owner: 'project' }
   end
 
-  resources :people, concerns: [:followable, :likable] do
+  resources :people, concerns: [:followable, :likable, :cardable] do
     resources :activities, path: 'activities/:type', only: [:show, :create], defaults: { owner: 'person' }
   end
 
-  resources :technologies, concerns: [:followable, :likable] do
+  resources :technologies, concerns: [:followable, :likable, :cardable] do
     resources :activities, path: 'activities/:type', only: [:show, :create], defaults: { owner: 'technology' }
   end
 
-  resources :clients, concerns: [:followable, :likable]
+  resources :clients, concerns: [:followable, :likable, :cardable]
+
+  resources :cards, only: [:index]
 
   devise_for :users
 end

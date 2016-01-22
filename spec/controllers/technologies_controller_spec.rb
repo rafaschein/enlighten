@@ -38,6 +38,25 @@ RSpec.describe TechnologiesController, type: :controller do
     end
   end
 
+  describe 'GET #cards' do
+    it 'assigns @technologies' do
+      create_list(:technology, 10)
+      get :cards, format: :json
+      expect(JSON.parse(response.body).count).to eq(10)
+    end
+  end
+
+  describe 'GET #card' do
+    before do
+      @technology = create :technology
+    end
+
+    it 'renders the :card serialized' do
+      get :card, id: @technology.id, format: :json
+      expect(assigns(:technology)).to eq(@technology)
+    end
+  end
+
   describe 'GET #new' do
     it 'renders the :new template' do
       get :new

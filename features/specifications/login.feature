@@ -1,4 +1,7 @@
 Feature: Login
+  Background:
+    Given I have LDAP disabled
+  
   Scenario: User signs in successfully
     Given a user with email "test@test.com" and password "123456"
       And I have permissions with the following data:

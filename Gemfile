@@ -95,6 +95,9 @@ gem 'active_model_serializers'
 # Gravatar
 gem 'gravatar-ultimate'
 
+# Bower
+gem 'bower-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

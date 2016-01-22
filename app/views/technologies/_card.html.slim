@@ -8,16 +8,14 @@
     - if current_user.followed_technologies.include?(technology)
       - if policy(technology).unfollow?
         = counter_link('Unfollow', technology.followers.count, unfollow_technology_path(technology))
-    - else
-      - if policy(technology).follow?
-        = counter_link('Follow', technology.followers.count, follow_technology_path(technology))
+    - elsif policy(technology).follow?
+      = counter_link('Follow', technology.followers.count, follow_technology_path(technology))
 
     - if current_user.liked_technologies.include?(technology)
       - if policy(technology).unlike?
         = counter_link('Unlike', technology.likers.count, unlike_technology_path(technology))
-    - else
-      - if policy(technology).like?
-        = counter_link('Like', technology.likers.count, like_technology_path(technology))
+    - elsif policy(technology).like?
+      = counter_link('Like', technology.likers.count, like_technology_path(technology))
 
     h1.card--profile__name = link_to technology do
       = technology.name

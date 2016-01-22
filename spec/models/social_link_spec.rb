@@ -67,10 +67,10 @@ RSpec.describe SocialLink, type: :model do
     end
 
     it do
-      expect(subject). to eq([
-        { provider: 'github', url: 'https://github.com/#identifier' },
-        { provider: 'twitter', url: 'https://twitter.com/#identifier' }
-      ])
+      expect(subject).to eq(
+        [{ provider: 'github', url: 'https://github.com/#identifier' },
+         { provider: 'twitter', url: 'https://twitter.com/#identifier' }]
+      )
     end
   end
 

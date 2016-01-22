@@ -11,16 +11,14 @@ aside
       - if current_user.followed_clients.include?(@client)
         - if policy(@client).unfollow?
           = counter_link('Unfollow', @client.followers.count, unfollow_client_path(@client))
-      - else
-        - if policy(@client).follow?
-          = counter_link('Follow', @client.followers.count, follow_client_path(@client))
+      - elsif policy(@client).follow?
+        = counter_link('Follow', @client.followers.count, follow_client_path(@client))
 
       - if current_user.liked_clients.include?(@client)
         - if policy(@client).unlike?
           = counter_link('Unlike', @client.likers.count, unlike_client_path(@client))
-      - else
-        - if policy(@client).like?
-          = counter_link('Like', @client.likers.count, like_client_path(@client))
+      - elsif policy(@client).like?
+        = counter_link('Like', @client.likers.count, like_client_path(@client))
 
       h1.card--profile__name = link_to @client do
         = @client.name

@@ -86,9 +86,7 @@ RSpec.describe Card, type: :model do
 
       it 'returns informations array with assets sprockets converted path' do
         expect(helpers).to receive(:image_url).with(informations.first[:icn])
-        expect(subject).to eq([
-          { title: 'project', icn: '/xxx', link: '/xxxx' }
-        ])
+        expect(subject).to eq([{ title: 'project', icn: '/xxx', link: '/xxxx' }])
       end
     end
   end
@@ -120,9 +118,7 @@ RSpec.describe Card, type: :model do
 
       it 'returns informations array with assets sprockets converted path' do
         expect(helpers).to receive(:image_url).with(statistics.first[:icn])
-        expect(subject).to eq([
-          { title: 'project', icn: '/xxx', link: '/xxxx' }
-        ])
+        expect(subject).to eq([{ title: 'project', icn: '/xxx', link: '/xxxx' }])
       end
     end
   end
@@ -175,26 +171,14 @@ RSpec.describe Card, type: :model do
 
         it 'receives like statistics selected' do
           subject
-          expect(@class.instance_variable_get(:@statistics)).to eq([
-            {
-              icn: 'icons/cards/icn-likers-selected.svg',
-              link: '/xxx/unlike.json',
-              title: 10
-            }
-          ])
+          expect(@class.instance_variable_get(:@statistics)).to eq([{ icn: 'icons/cards/icn-likers-selected.svg', link: '/xxx/unlike.json', title: 10 }])
         end
       end
 
       context 'when current_user not liked' do
         it 'receives like statistics unselected' do
           subject
-          expect(@class.instance_variable_get(:@statistics)).to eq([
-            {
-              icn: 'icons/cards/icn-likers.svg',
-              link: '/xxx/like.json',
-              title: 10
-            }
-          ])
+          expect(@class.instance_variable_get(:@statistics)).to eq([{ icn: 'icons/cards/icn-likers.svg', link: '/xxx/like.json', title: 10 }])
         end
       end
     end
@@ -225,26 +209,14 @@ RSpec.describe Card, type: :model do
 
         it 'receives follow statistics selected' do
           subject
-          expect(@class.instance_variable_get(:@statistics)).to eq([
-            {
-              icn: 'icons/cards/icn-followers-selected.svg',
-              link: '/xxx/unfollow.json',
-              title: 10
-            }
-          ])
+          expect(@class.instance_variable_get(:@statistics)).to eq([{ icn: 'icons/cards/icn-followers-selected.svg', link: '/xxx/unfollow.json', title: 10 }])
         end
       end
 
       context 'when current_user not followed' do
         it 'receives follow statistics unselected' do
           subject
-          expect(@class.instance_variable_get(:@statistics)).to eq([
-            {
-              icn: 'icons/cards/icn-followers.svg',
-              link: '/xxx/follow.json',
-              title: 10
-            }
-          ])
+          expect(@class.instance_variable_get(:@statistics)).to eq([{ icn: 'icons/cards/icn-followers.svg', link: '/xxx/follow.json', title: 10 }])
         end
       end
     end

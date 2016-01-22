@@ -8,16 +8,14 @@
     - if current_user.followed_people.include?(person)
       - if policy(person).unfollow?
         = counter_link('Unfollow', person.followers.count, unfollow_person_path(person))
-    - else
-      - if policy(person).follow?
-        = counter_link('Follow', person.followers.count, follow_person_path(person))
+    - elsif policy(person).follow?
+      = counter_link('Follow', person.followers.count, follow_person_path(person))
 
     - if current_user.liked_people.include?(person)
       - if policy(person).unlike?
         = counter_link('Unlike', person.likers.count, unlike_person_path(person))
-    - else
-      - if policy(person).like?
-        = counter_link('Like', person.likers.count, like_person_path(person))
+    - elsif policy(person).like?
+      = counter_link('Like', person.likers.count, like_person_path(person))
 
     h1.card--profile__name = link_to person do
       = person.name

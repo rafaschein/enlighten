@@ -94,21 +94,21 @@ module Card
   def likable
     return unless likable?
 
-    if liked?
-      @statistics << { icn: 'icons/cards/icn-likers-selected.svg', link: "#{model_path}/unlike.json", title: @model.likers.count }
-    else
-      @statistics << { icn: 'icons/cards/icn-likers.svg', link: "#{model_path}/like.json", title: @model.likers.count }
-    end
+    @statistics << if liked?
+                     { icn: 'icons/cards/icn-likers-selected.svg', link: "#{model_path}/unlike.json", title: @model.likers.count }
+                   else
+                     { icn: 'icons/cards/icn-likers.svg', link: "#{model_path}/like.json", title: @model.likers.count }
+                   end
   end
 
   def followable
     return unless followable?
 
-    if followed?
-      @statistics << { icn: 'icons/cards/icn-followers-selected.svg', link: "#{model_path}/unfollow.json", title: @model.followers.count }
-    else
-      @statistics << { icn: 'icons/cards/icn-followers.svg', link: "#{model_path}/follow.json", title: @model.followers.count }
-    end
+    @statistics << if followed?
+                     { icn: 'icons/cards/icn-followers-selected.svg', link: "#{model_path}/unfollow.json", title: @model.followers.count }
+                   else
+                     { icn: 'icons/cards/icn-followers.svg', link: "#{model_path}/follow.json", title: @model.followers.count }
+                   end
   end
 
   def model_path

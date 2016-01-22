@@ -1,5 +1,9 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+  before_action :set_person, only: [:show, :edit, :update, :destroy]
+
+  include Cardable
+  include Likable
+  include Followable
 
   # GET /people
   def index
@@ -52,54 +56,6 @@ class PeopleController < ApplicationController
     @person.destroy
 
     redirect_to people_url, notice: 'Person was successfully destroyed.'
-  end
-
-  # PATCH/PUT /follow
-  def follow
-    authorize @person, :follow?
-    current_user.followed_people << @person
-
-    if current_user.save
-      redirect_to @person, notice: "You're following the person."
-    end
-  rescue ActiveRecord::RecordNotUnique
-    redirect_to @person, notice: "You're already following the person."
-  end
-
-  # PATCH/PUT /follow
-  def unfollow
-    authorize @person, :unfollow?
-
-    if current_user.followed_people.include?(@person)
-      current_user.followed_people.delete(@person)
-      current_user.save
-    end
-
-    redirect_to @person, notice: "You're not following the person."
-  end
-
-  # PATCH/PUT /like
-  def like
-    authorize @person, :like?
-    current_user.liked_people << @person
-
-    if current_user.save
-      redirect_to person_path, notice: 'You liked the person.'
-    end
-  rescue ActiveRecord::RecordNotUnique
-    redirect_to @person, notice: 'You already liked the person.'
-  end
-
-  # PATCH/PUT /like
-  def unlike
-    authorize @person, :unlike?
-
-    if current_user.liked_people.include?(@person)
-      current_user.liked_people.delete(@person)
-      current_user.save
-    end
-
-    redirect_to @person, notice: "You're not liking the person."
   end
 
   private

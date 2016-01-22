@@ -1,10 +1,10 @@
 Given(/^a user with email "(.*?)" and password "(.*?)"$/) do |email, password|
-  @user = create(:user, email: email, password: password)
+  @user = create(:user, :with_person, email: email, password: password)
 end
 
 Given(/^I am logged in$/) do
   user_data = { email: 'test@test.com', password: 'password' }
-  person = create(:person, user: create(:user, user_data))
+  person = create(:person, name: 'Test', user: create(:user, user_data))
   @user = person.user
 
   step 'I access "/users/sign_in"'

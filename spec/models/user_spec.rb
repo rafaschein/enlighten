@@ -143,7 +143,51 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.assigns_default_permission_roles' do
+  describe '#ldap_attribute' do
+    let(:user) { create(:user) }
+    let(:attribute) { 'displayName' }
+
+    subject { user.send(:ldap_attribute, attribute) }
+
+    it 'receives ldap query parameter' do
+      expect(Devise::LDAP::Adapter).to receive(:get_ldap_param).with(user.email, attribute)
+      subject
+    end
+  end
+
+  describe '#creates_person_to_ldap_authentication' do
+    let(:user) { create(:user) }
+
+    subject { user.send(:creates_person_to_ldap_authentication) }
+
+    context 'when ldap enabled' do
+      let(:ldap_param) { ['xxx'] }
+
+      before do
+        allow(LDAP).to receive(:enabled?) { true }
+        allow_any_instance_of(User).to receive(:ldap_attribute) { ldap_param }
+        allow(Person).to receive(:create)
+      end
+
+      context 'when ldap have picture' do
+        it 'receives StringIO image' do
+          expect(StringIO).to receive(:new).exactly(2).times.with(ldap_param.first)
+          subject
+        end
+      end
+
+      context 'when ldap not have picture' do
+        let(:ldap_param) { nil }
+
+        it 'receives Gravatar image' do
+          expect(Gravatar).to receive(:new).with(user.email) { double(image_data: nil) }
+          subject
+        end
+      end
+    end
+  end
+
+  describe '#assigns_default_permission_roles' do
     let(:permission_acls)  { [create(:permission_acl)] }
     let(:permission_roles) { create :permission_role, default: true, permission_acls: permission_acls }
 

@@ -5,15 +5,12 @@ rvm:
   - 2.2.2
 before_script:
   - npm install -g bower
-  - bower install
+  - bundle exec rake bower:install
   - psql -c 'create database enlighten_test' -U postgres
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rake
-before_deploy:
-  - npm install -g bower
-  - bower install
 deploy:
   provider: heroku
   on: master

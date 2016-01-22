@@ -12,7 +12,7 @@ gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
-gem 'compass-rails'
+gem 'compass-rails', '2.0.5'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'

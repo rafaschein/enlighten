@@ -46,8 +46,13 @@ screenshots_folder = Rails.root.join('screenshots')
 screenshots_folder.children.each(&:unlink) if screenshots_folder.exist?
 
 screenshot_count = 0
+scenario_name = ''
 
-AfterStep do |scenario|
-  page.save_screenshot screenshots_folder.join("scr-#{screenshot_count}-#{scenario.title.parameterize}.png")
+Before do |scenario|
+  scenario_name = scenario.name.parameterize
+end
+
+AfterStep do
+  page.save_screenshot screenshots_folder.join("scr-#{screenshot_count}-#{scenario_name}.png")
   screenshot_count += 1
 end

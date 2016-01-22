@@ -12,6 +12,7 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'vendor/**/*'
+  TargetRubyVersion: 2.2
 
 # Offense count: 115
 # Configuration parameters: AllowURI, URISchemes.

@@ -8,16 +8,14 @@
     - if current_user.followed_projects.include?(project)
       - if policy(project).unfollow?
         = counter_link('Unfollow', project.followers.count, unfollow_project_path(project))
-    - else
-      - if policy(project).follow?
-        = counter_link('Follow', project.followers.count, follow_project_path(project))
+    - elsif policy(project).follow?
+      = counter_link('Follow', project.followers.count, follow_project_path(project))
 
     - if current_user.liked_projects.include?(project)
       - if policy(project).unlike?
         = counter_link('Unlike', project.likers.count, unlike_project_path(project))
-    - else
-      - if policy(project).like?
-        = counter_link('Like', project.likers.count, like_project_path(project))
+    - elsif policy(project).like?
+      = counter_link('Like', project.likers.count, like_project_path(project))
 
     h1.card--profile__name = link_to project do
       = project.name

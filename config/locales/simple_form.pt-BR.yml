@@ -7,3 +7,29 @@ pt-BR:
       mark: '*'
     error_notification:
       default_message: "Alguns erros foram encontrados, por favor verifique:"
+    labels:
+      defaults:
+        description: 'Descrição'
+        image: 'Imagem'
+        name: 'Nome'
+        person_id: 'Pessoa'
+        role_id: 'Função'
+        period_start: 'Período inicial'
+        period_end: 'Período final'
+        client: 'Cliente'
+        technologies: 'Tecnologias'
+        scm_type: 'Tipo de SCM'
+        scm_reference: 'Referência do SCM'
+  helpers:
+    submit:
+      project:
+        create: 'Criar projeto'
+        update: 'Atualizar projeto'
+  add_screenshots: 'Adicionar captura de tela'
+  add_members: 'Adicionar membros'
+  show: 'Visualizar'
+  back: 'Voltar'
+  editing_project: 'Editando projeto'
+  members: 'Membros'
+  new_project: 'Novo Projeto'
+  screenshots: 'Captura de tela'

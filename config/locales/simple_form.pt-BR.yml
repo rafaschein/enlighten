@@ -20,16 +20,18 @@ pt-BR:
         technologies: 'Tecnologias'
         scm_type: 'Tipo de SCM'
         scm_reference: 'Referência do SCM'
+        website: 'Site'
   helpers:
     submit:
-      project:
-        create: 'Criar projeto'
-        update: 'Atualizar projeto'
+      create: 'Criar'
+      update: 'Atualizar'
   add_screenshots: 'Adicionar captura de tela'
   add_members: 'Adicionar membros'
   show: 'Visualizar'
   back: 'Voltar'
   editing_project: 'Editando projeto'
+  editing_client: 'Editando cliente'
   members: 'Membros'
+  new_client: 'Novo Cliente'
   new_project: 'Novo Projeto'
   screenshots: 'Captura de tela'

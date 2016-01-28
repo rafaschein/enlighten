@@ -12,22 +12,22 @@
 
   .form-group
     fieldset
-      legend Social accounts
+      legend = I18n.t(:social_accounts)
 
       #social_links
         = f.simple_fields_for :social_links do |social_link|
           = render 'social_link_fields', f: social_link
         .links
-          = link_to_add_association 'add social link', f, :social_links, class: 'button'
+          = link_to_add_association I18n.t(:add_social_link), f, :social_links, class: 'button'
 
   .form-group
     fieldset
-      legend Technologies
+      legend = I18n.t(:technologies)
 
       #technologies
         = f.simple_fields_for :technologies do |technology|
           = render 'technology_fields', f: technology
         .links
-          = link_to_add_association 'add technology', f, :technologies, class: 'button'
+          = link_to_add_association I18n.t(:add_technology), f, :technologies, class: 'button'
 
   = f.button :submit
